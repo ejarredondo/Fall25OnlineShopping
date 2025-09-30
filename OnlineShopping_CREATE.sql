@@ -1,3 +1,4 @@
+
 create table Catalog(
 ProductID int NOT NULL,
 ProductName varchar(255) NOT NULL,
@@ -12,4 +13,15 @@ Brand varchar(255),
 QuantityofItem smallint
 );
 
+
+
+CREATE TABLE Store (
+	StoreID INT,
+	Address VARCHAR(30) NOT NULL,
+	Inventory XML,
+	DepartmentID INT NOT NULL,
+	Department VARCHAR(20) NOT NULL,
+	Employee INT NOT NULL,
+	PRIMARY KEY (StoreID)
+);
 
