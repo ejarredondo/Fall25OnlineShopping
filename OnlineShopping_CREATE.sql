@@ -1,4 +1,3 @@
-
 CREATE TABLE Supplier(
 	SupplierName VARCHAR(255) Unique NOT NULL,
 	SupplierID INT PRIMARY KEY,
