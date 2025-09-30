@@ -35,3 +35,15 @@ CREATE TABLE Store (
 	PRIMARY KEY (StoreID)
 );
 
+
+CREATE TABLE Employee (
+	Name VARCHAR(100),
+	StartDate DATE,
+	PayRate DECIMAL(8, 2),
+	Position VARCHAR(50),
+	Availability BOOLEAN,
+	BankRoutingInformation VARCHAR(9),
+	CheckingAccountNumber VARCHAR(17),
+	EmailAddress VARCHAR(250),
+);
+
