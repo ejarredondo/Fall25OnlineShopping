@@ -1,4 +1,3 @@
-
 CREATE TABLE Supplier(
 SupplierName VARCHAR(255) Unique NOT NULL,
 SupplierID INT PRIMARY KEY,
@@ -7,7 +6,6 @@ NumeItems INT,
 StoreAdress VARCHAR(255) Unique NOT NUll,
 STOREID INT
 );
-
 
 create table Catalog(
 ProductID int NOT NULL,
@@ -24,7 +22,6 @@ QuantityofItem smallint
 );
 
 
-
 CREATE TABLE Store (
 	StoreID INT,
 	Address VARCHAR(30) NOT NULL,
@@ -34,4 +31,3 @@ CREATE TABLE Store (
 	Employee INT NOT NULL,
 	PRIMARY KEY (StoreID)
 );
-
