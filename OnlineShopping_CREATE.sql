@@ -46,3 +46,28 @@ CREATE TABLE Employee (
 	EmailAddress VARCHAR(250),
 );
 
+CREATE TABLE Customer (
+	Name	VARCHAR(30), 
+	Preferences	XML
+);
+
+CREATE TABLE CustomerTransaction (
+	CustomerID	INT NOT NULL PRIMARY KEY,
+	TransactionID	INT NOT NULL PRIMARY KEY,
+	ShippingAddress	VARCHAR(30),
+	CardInfo	VARCHAR(30) UNIQUE,
+	EmailAddress	VARCHAR(30) UNIQUE,
+	TransactionAmount	DECIMAL(5,2),
+	ItemsPurchased	SMALL INT
+);
+	
+CREATE TABLE Transaction (
+	Cashier			VARCHAR(30) PRIMARY KEY,
+	IncomingOrOutgoing	VARCHAR(1) PRIMARY KEY
+);
+
+CREATE TABLE EmployeeTransaction (
+	EmployeeID	SMALL INT PRIMARY KEY,
+	TransactionID	SMALL INT PRIMARY KEY,
+	StoreID		SMALL INT REQUIRED
+);
