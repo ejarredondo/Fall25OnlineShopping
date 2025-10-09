@@ -1,4 +1,4 @@
-CREATE TABLE Supplier(
+cd CREATE TABLE Supplier(
 	SupplierName VARCHAR(255) Unique NOT NULL,
 	SupplierID INT PRIMARY KEY,
 	ItemsSupplied XML,
@@ -9,7 +9,7 @@ CREATE TABLE Supplier(
 
 
 CREATE TABLE Catalog(
-	ProductID INT NOT NULL,
+	ProductID INT NOT NULL PRIMARY KEY,
 	ProductName VARCHAR(255) NOT NULL,
 	Category VARCHAR(255)NOT NULL,	
 	SKU int NOT NULL,
