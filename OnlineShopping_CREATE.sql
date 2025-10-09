@@ -1,3 +1,7 @@
+DROP SCHEMA IF EXISTS OnlineShopping;
+CREATE DATABASE OnlineShopping;
+USE Online Shopping;
+
 CREATE TABLE Supplier(
 	SupplierName VARCHAR(255) Unique NOT NULL,
 	SupplierID INT PRIMARY KEY,
