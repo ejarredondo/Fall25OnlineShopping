@@ -1,27 +1,28 @@
 DROP SCHEMA IF EXISTS OnlineShopping;
 CREATE DATABASE OnlineShopping;
-USE Online Shopping;
+USE OnlineShopping;
 
 CREATE TABLE Supplier(
 	SupplierName VARCHAR(255) Unique NOT NULL,
-	SupplierID INT PRIMARY KEY,
+	SupplierID INT Unique PRIMARY KEY AUTO_INCREMENT NOT NULL,
 	ItemsSupplied XML,
-	NumeItems INT,
-	StoreAdress VARCHAR(255) Unique NOT NUll,
-	STOREID INT
+	NumItems INT,
+	StoreAdress VARCHAR(255) Unique NOT NULL,
+	STOREID INT,
+    FOREIGN KEY (STOREID) REFERENCES Store (StoreID) ON DELETE RESTRICT
 );
 
 
 CREATE TABLE Catalog(
-	ProductID INT NOT NULL PRIMARY KEY,
+	ProductID INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	ProductName VARCHAR(255) NOT NULL,
 	Category VARCHAR(255)NOT NULL,	
-	SKU int NOT NULL,
+	SKU INT NOT NULL UNIQUE,
 	Weight DECIMAL(5,2),
-	BasePrice DECIMAL(5,2) NOT NULL,
-	SalePrice DECIMAL(5,2),
+	BasePrice DECIMAL(7,2) NOT NULL CHECK (BasePrice >= 0),
+	SalePrice DECIMAL(7,2),
 	DietaryInformation XML,
-	SoldByWeightorUnit VARCHAR(7) NOT NULL,
+	SoldByWeightorUnit ENUM('Weight', 'Unit') NOT NULL,
 	Brand VARCHAR(255),
 	QuantityofItem SMALLINT
 );
@@ -40,14 +41,15 @@ CREATE TABLE Store (
 
 
 CREATE TABLE Employee (
-	Name VARCHAR(100),
+    EmployeeID INT NOT NULL PRIMARY KEY AUTO_INCREMENT UNIQUE,
+	Name VARCHAR(100) NOT NULL,
 	StartDate DATE,
-	PayRate DECIMAL(8, 2),
+	PayRate DECIMAL(8, 2) CHECK (PayRate >=0) NOT NULL,
 	Position VARCHAR(50),
 	Availability BOOLEAN,
-	BankRoutingInformation VARCHAR(9),
-	CheckingAccountNumber VARCHAR(17),
-	EmailAddress VARCHAR(250),
+	BankRoutingInformation VARCHAR(9) NOT NULL,
+	CheckingAccountNumber VARCHAR(17) NOT NULL,
+	EmailAddress VARCHAR(250)
 );
 
 CREATE TABLE Customer (
