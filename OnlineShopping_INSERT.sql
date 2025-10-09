@@ -16,3 +16,12 @@ VALUES ('Premium Steak', 'Meats', 4002, 7.00, 5.00, 'Weight', 'Cattle Co.', 20);
 
 INSERT INTO Catalog (ProductName, Category, SKU, BasePrice, SoldByWeightOrUnit, QuantityofItem)
 VALUES ('Sourdough Bread', 'Bakery', 4003, 5.00, 'Unit', 30);
+
+INSERT INTO Employee (Name, StartDate, PayRate, Position, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
+VALUES ('Jane Doe', '2023-08-15', 35.50, 'Manager', TRUE, '123456789', '98765432101234567', 'jane.doe@company.com');
+
+INSERT INTO Employee (Name, StartDate, PayRate, Position, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
+VALUES ('John Smith', '2024-01-20', 18.00, 'Associate', FALSE, '987654321', '111222333444555', 'john.smith@company.com');
+
+INSERT INTO Employee (Name, StartDate, PayRate, Position, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
+VALUES ('Clive Staples', '2024-03-30', 18.50, 'Associate', TRUE, '582084442', '322202939490293', 'clive.staples@company.com');
