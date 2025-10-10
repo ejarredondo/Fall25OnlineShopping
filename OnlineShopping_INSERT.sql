@@ -25,3 +25,30 @@ VALUES ('John Smith', '2024-01-20', 18.00, 'Associate', FALSE, '987654321', '111
 
 INSERT INTO Employee (Name, StartDate, PayRate, Position, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
 VALUES ('Clive Staples', '2024-03-30', 18.50, 'Associate', TRUE, '582084442', '322202939490293', 'clive.staples@company.com');
+
+INSERT INTO Store (Address) 
+VALUES ('120 Publix Avenue, Seattle, WA');
+
+INSERT INTO Store (Address) 
+VALUES ('350 Kroger Street, Seattle, WA');
+
+INSERT INTO Store (Address) 
+VALUES ('894 Aldi Circle, Seattle, WA');
+
+INSERT INTO Department (DepartmentName, EmployeeTotal) 
+VALUES ('Sales', 60);
+
+INSERT INTO Department (DepartmentName, EmployeeTotal) 
+VALUES ('Stock', 25);
+
+INSERT INTO Department (DepartmentName, EmployeeTotal) 
+VALUES ('Accounting', 30);
+
+INSERT INTO Transaction (Cashier, IncomingOrOutgoing, TransactionAmount) 
+VALUES ('Jeremy', 'I', 26.87);
+
+INSERT INTO Transaction (Cashier, IncomingOrOutgoing, TransactionAmount) 
+VALUES ('Sarah', 'O', 257.50);
+
+INSERT INTO Transaction (Cashier, IncomingOrOutgoing, TransactionAmount) 
+VALUES ('Lily', 'I', 21.67);
