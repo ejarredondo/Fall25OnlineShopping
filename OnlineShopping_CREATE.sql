@@ -20,7 +20,7 @@ CREATE TABLE ItemSupplied (
 	FOREIGN KEY (ProductID) REFERENCES Catalog (ProductID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
-	FOREIGN KEY (TransactionID) REFERENCES Transaction(TransactionID)
+	FOREIGN KEY (TransactionID) REFERENCES Transaction (TransactionID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
 	FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
@@ -49,6 +49,18 @@ CREATE TABLE Catalog(
 );
 
 
+CREATE TABLE DietaryInformation(
+ProductID INT NOT NULL PRIMARY KEY NOT NULL,
+ProductName VARCHAR(255) NOT NULL,
+Restriction enum('DairyFree', 'GlutenFree', 'vegetarian', 'vegan', 'kosher', 'keto', 'SugarFree', 'LowCarb', 'PorkFree', 'NutFree', 'ShellfishFree', 'SoyFree')
+
+FOREIGN KEY (ProductID) REFERENCES Catalog (ProductID)
+    ON DELETE Restrict
+    ON UPDATE Cascade,
+FOREIGN KEY (ProductName) References Catalog (Prodcut Name)
+    ON DELETE Restrict
+    ON UPDATE Cascade,
+    );
 
 CREATE TABLE Store (
 	StoreID 		INT PRIMARY KEY AUTO_INCREMENT,
