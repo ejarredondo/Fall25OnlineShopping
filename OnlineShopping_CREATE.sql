@@ -42,7 +42,6 @@ CREATE TABLE Catalog(
 	Weight 			DECIMAL(5,2),
 	BasePrice 		DECIMAL(7,2) NOT NULL CHECK (BasePrice >= 0),
 	SalePrice 		DECIMAL(7,2) NOT NULL CHECK (SalePrice >= 0),
-	DietaryInformation 	XML,
 	SoldByWeightorUnit 	ENUM('Weight', 'Unit') NOT NULL,
 	Brand 			VARCHAR(255),
 	QuantityofItem 		SMALLINT
@@ -98,17 +97,28 @@ CREATE TABLE Employee (
 CREATE TABLE Customer (
 	CustomerID		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	FirstName		VARCHAR(30),
-	LastName		VARCHAR(30), 
-	Preferences		XML
+	LastName		VARCHAR(30)
 );
 
 CREATE TABLE CustomerPurchaseHistory (
-	CustomerID
-	TransactionID
-	AmountSpent
-	DatePurchased		DATE
-	TimePurchased		TIME
+	CustomerID		INT NOT NULL,
+	TransactionID		INT NOT NULL,
+	AmountSpent		DECIMAL(5, 2) NOT NULL,
+	DatePurchased		DATE,
+	TimePurchased		TIME,
+	FOREIGN KEY (CustomerID) REFERENCES Cusomter (CustomerID)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE,
+	FOREIGN KEY (TransactionID) REFERENCES Transaction (TransactionID)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE,	
+	FOREIGN KEY (AmountSpent) REFERENCES Transaction (TransactionAmount)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE,
 	FOREIGN KEY (DatePurchased) REFERENCES Transaction (TransactionDate)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE
+);	
 	
 
 CREATE TABLE CustomerTransaction (
