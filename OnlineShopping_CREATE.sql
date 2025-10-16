@@ -91,9 +91,12 @@ CREATE TABLE CustomerTransaction (
 	
 CREATE TABLE Transaction (
 	TransactionID		SMALLINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	Cashier			VARCHAR(30) PRIMARY KEY,
+	CashierEmployeeID	INT NOT NULL PRIMARY KEY,
 	IncomingOrOutgoing	VARCHAR(1) PRIMARY KEY,
-	TransactionAmount	DECIMAL(5,2) NOT NULL CHECK (TransactionAmount >= 0)
+	TransactionAmount	DECIMAL(5,2) NOT NULL CHECK (TransactionAmount >= 0),
+	FOREIGN KEY (CashierEmployeeID) REFERENCES Employee(EmployeeID)
+		ON DELETE RESTRICT
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE EmployeeTransaction (
