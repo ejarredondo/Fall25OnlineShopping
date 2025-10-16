@@ -1,6 +1,9 @@
 CREATE TABLE Supplier(
 	SupplierName 		VARCHAR(255) Unique NOT NULL,
-	SupplierID 		INT PRIMARY KEY AUTO_INCREMENT NOT NULL,	
+	SupplierID 		INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+	SupplierAddressCity	VARCHAR(20),
+	SupplierAddressState	VARCHAR(2),
+	SupplierAddressZip	VARCHAR(5),
 	ItemsSupplied 		XML,
 	NumItems 		INT,
 	STOREID 		INT,
