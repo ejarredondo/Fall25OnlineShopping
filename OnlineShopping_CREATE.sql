@@ -1,5 +1,5 @@
 CREATE TABLE Supplier(
-	SupplierName VARCHAR(255) Unique NOT NULL,
+	SupplierName 		VARCHAR(255) Unique NOT NULL,
 	SupplierID 		INT PRIMARY KEY AUTO_INCREMENT NOT NULL,	
 	SupplierName 		VARCHAR(255) UNIQUE NOT NULL,
 	ItemsSupplied 		XML,
@@ -54,8 +54,9 @@ CREATE TABLE Department (
 
 
 CREATE TABLE Employee (
-    EmployeeID 		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	Name 			VARCHAR(100) NOT NULL,
+    	EmployeeID 		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FirstName 		VARCHAR(100) NOT NULL,
+	LastName		VARCHAR(100) NOT NULL,
 	StartDate 		DATE,
 	PayRate 		DECIMAL(8, 2) CHECK (PayRate >=0) NOT NULL,
 	Position 		VARCHAR(50),
@@ -67,7 +68,8 @@ CREATE TABLE Employee (
 
 CREATE TABLE Customer (
 	CustomerID		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	Name			VARCHAR(30), 
+	FirstName		VARCHAR(30),
+	LastName		VARCHAR(30), 
 	Preferences		XML
 );
 
