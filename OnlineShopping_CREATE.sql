@@ -30,19 +30,11 @@ CREATE TABLE Catalog(
 CREATE TABLE Store (
 	StoreID 		INT PRIMARY KEY AUTO_INCREMENT,
 	StreetAddress 		VARCHAR(30) NOT NULL,
-    City VARCHAR(30) NOT NULL,
-    State VARCHAR(2) NOT NULL,
-    Zip VARCHAR(5) NOT NULL,
+    	City 			VARCHAR(30) NOT NULL,
+    	State 			VARCHAR(2) NOT NULL,
+    	Zip 			VARCHAR(5) NOT NULL,
 	Inventory 		XML,
-	DepartmentID 		INT NOT NULL,
-	Department 		VARCHAR(20) NOT NULL,
 	EmployeeNumber		INT NOT NULL,
-	FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
-		ON DELETE RESTRICT
-		ON UPDATE CASCADE,
-	FOREIGN KEY (Department) REFERENCES Department(DepartmentName)
-		ON DELETE RESTRICT
-		ON UPDATE CASCADE,
 	FOREIGN KEY (EmployeeNumber) REFERENCES Department(EmployeeTotal)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
@@ -78,7 +70,10 @@ CREATE TABLE Customer (
 CREATE TABLE CustomerTransaction (
 	CustomerID		INT NOT NULL PRIMARY KEY AUTO INCREMENT,
 	TransactionID		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	ShippingAddress		VARCHAR(30),
+	ShippingAddressStreet	VARCHAR(30),
+	ShippingAddressCity	VARCHAR(30),
+	ShippingAddressState	VARCHAR(2),
+	ShippingAddressZip	VARCHAR(5),
 	CardInfo		VARCHAR(30) UNIQUE,
 	EmailAddress		VARCHAR(30) UNIQUE,
 	TransactionAmount	DECIMAL(5,2) NOT NULL,
