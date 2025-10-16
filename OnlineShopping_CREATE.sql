@@ -37,7 +37,7 @@ CREATE TABLE ItemSupplied (
 CREATE TABLE Catalog(
 	ProductID 		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	ProductName		VARCHAR(255) NOT NULL,
-	Category 		VARCHAR(255)NOT NULL,	
+	Category 		VARCHAR(255) NOT NULL,	
 	SKU 			INT NOT NULL UNIQUE,
 	Weight 			DECIMAL(5,2),
 	BasePrice 		DECIMAL(7,2) NOT NULL CHECK (BasePrice >= 0),
@@ -51,8 +51,7 @@ CREATE TABLE Catalog(
 CREATE TABLE DietaryInformation(
 	ProductID 		INT NOT NULL PRIMARY KEY NOT NULL,
 	ProductName 		VARCHAR(255) NOT NULL,
-	Restriction 		enum('DairyFree', 'GlutenFree', 'vegetarian', 'vegan', 'kosher', 'keto', 'SugarFree', 'LowCarb', 'PorkFree', 'NutFree', 'ShellfishFree', 'SoyFree')
-
+	Restriction 		enum('DairyFree', 'GlutenFree', 'Vegetarian', 'Vegan', 'Kosher', 'Keto', 'SugarFree', 'LowCarb', 'PorkFree', 'NutFree', 'ShellfishFree', 'SoyFree'),
 	FOREIGN KEY (ProductID) REFERENCES Catalog (ProductID)
     		ON DELETE Restrict
     		ON UPDATE Cascade,
@@ -86,13 +85,14 @@ CREATE TABLE Employee (
 	FirstName 		VARCHAR(100) NOT NULL,
 	LastName		VARCHAR(100) NOT NULL,
 	StartDate 		DATE,
-	PayRate 		DECIMAL(8, 2) CHECK (PayRate >=0) NOT NULL,
+	PayRate 		DECIMAL(8, 2) CHECK (PayRate >= 0) NOT NULL,
 	Position 		VARCHAR(50),
 	Availability 		BOOLEAN,
 	BankRoutingInformation 	VARCHAR(9) NOT NULL,
 	CheckingAccountNumber 	VARCHAR(17) NOT NULL,
 	EmailAddress 		VARCHAR(250)
 );
+
 
 CREATE TABLE Customer (
 	CustomerID		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -134,7 +134,7 @@ CREATE TABLE CustomerTransaction (
 	ItemsPurchased		SMALL INT,
 	FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 		ON DELETE RESTRICT
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE,
 	FOREIGN KEY (TransactionAmount) REFERENCES Transaction(TrasactionAmount)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
