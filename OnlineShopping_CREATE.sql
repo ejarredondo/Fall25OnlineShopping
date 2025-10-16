@@ -3,16 +3,12 @@ CREATE TABLE Supplier(
 	SupplierID 		INT PRIMARY KEY AUTO_INCREMENT NOT NULL,	
 	ItemsSupplied 		XML,
 	NumItems 		INT,
-	StoreAddress 		VARCHAR(255) UNIQUE NOT NULL,
 	STOREID 		INT,
     	FOREIGN KEY (STOREID) REFERENCES Store (StoreID) 
 		ON DELETE RESTRICT
-		ON UPDATE CASCADE,
-        
-        FOREIGN KEY (StoreAddress) References Store (Address)
-        ON DELETE RESTRICT
-        ON UPDATE CASCADE
+		ON UPDATE CASCADE
 );
+
 
 
 CREATE TABLE Catalog(
