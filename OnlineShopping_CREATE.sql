@@ -1,14 +1,17 @@
 CREATE TABLE Supplier(
 	SupplierName 		VARCHAR(255) Unique NOT NULL,
 	SupplierID 		INT PRIMARY KEY AUTO_INCREMENT NOT NULL,	
-	SupplierName 		VARCHAR(255) UNIQUE NOT NULL,
 	ItemsSupplied 		XML,
 	NumItems 		INT,
 	StoreAddress 		VARCHAR(255) UNIQUE NOT NULL,
 	STOREID 		INT,
     	FOREIGN KEY (STOREID) REFERENCES Store (StoreID) 
 		ON DELETE RESTRICT
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE,
+        
+        FOREIGN KEY (StoreAddress) References Store (Address)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
 
 
@@ -30,7 +33,10 @@ CREATE TABLE Catalog(
 
 CREATE TABLE Store (
 	StoreID 		INT PRIMARY KEY AUTO_INCREMENT,
-	Address 		VARCHAR(30) NOT NULL,
+	StreetAddress 		VARCHAR(30) NOT NULL,
+    City VARCHAR(30) NOT NULL,
+    State VARCHAR(2) NOT NULL,
+    Zip VARCHAR(5) NOT NULL,
 	Inventory 		XML,
 	DepartmentID 		INT NOT NULL,
 	Department 		VARCHAR(20) NOT NULL,
