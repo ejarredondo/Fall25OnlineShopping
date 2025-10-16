@@ -50,16 +50,16 @@ CREATE TABLE Catalog(
 
 
 CREATE TABLE DietaryInformation(
-ProductID INT NOT NULL PRIMARY KEY NOT NULL,
-ProductName VARCHAR(255) NOT NULL,
-Restriction enum('DairyFree', 'GlutenFree', 'vegetarian', 'vegan', 'kosher', 'keto', 'SugarFree', 'LowCarb', 'PorkFree', 'NutFree', 'ShellfishFree', 'SoyFree')
+	ProductID 		INT NOT NULL PRIMARY KEY NOT NULL,
+	ProductName 		VARCHAR(255) NOT NULL,
+	Restriction 		enum('DairyFree', 'GlutenFree', 'vegetarian', 'vegan', 'kosher', 'keto', 'SugarFree', 'LowCarb', 'PorkFree', 'NutFree', 'ShellfishFree', 'SoyFree')
 
-FOREIGN KEY (ProductID) REFERENCES Catalog (ProductID)
-    ON DELETE Restrict
-    ON UPDATE Cascade,
-FOREIGN KEY (ProductName) References Catalog (Prodcut Name)
-    ON DELETE Restrict
-    ON UPDATE Cascade,
+	FOREIGN KEY (ProductID) REFERENCES Catalog (ProductID)
+    		ON DELETE Restrict
+    		ON UPDATE Cascade,
+	FOREIGN KEY (ProductName) References Catalog (Prodcut Name)
+    		ON DELETE Restrict
+    		ON UPDATE Cascade,
     );
 
 CREATE TABLE Store (
@@ -68,12 +68,12 @@ CREATE TABLE Store (
     	City 			VARCHAR(30) NOT NULL,
     	State 			VARCHAR(2) NOT NULL,
     	Zip 			VARCHAR(5) NOT NULL,
-	Inventory 		XML,
 	EmployeeNumber		INT NOT NULL,
 	FOREIGN KEY (EmployeeNumber) REFERENCES Department(EmployeeTotal)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
 );
+
 
 CREATE TABLE Department (
 	DepartmentID		INT PRIMARY KEY AUTO_INCREMENT,
@@ -102,6 +102,15 @@ CREATE TABLE Customer (
 	Preferences		XML
 );
 
+CREATE TABLE CustomerPurchaseHistory (
+	CustomerID
+	TransactionID
+	AmountSpent
+	DatePurchased		DATE
+	TimePurchased		TIME
+	FOREIGN KEY (DatePurchased) REFERENCES Transaction (TransactionDate)
+	
+
 CREATE TABLE CustomerTransaction (
 	CustomerID		INT NOT NULL PRIMARY KEY AUTO INCREMENT,
 	TransactionID		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -126,6 +135,7 @@ CREATE TABLE Transaction (
 	CashierEmployeeID	INT NOT NULL PRIMARY KEY,
 	IncomingOrOutgoing	ENUM('I', 'O') PRIMARY KEY,
 	TransactionAmount	DECIMAL(5,2) NOT NULL CHECK (TransactionAmount >= 0),
+	TransactionDate		DATETIME,
 	FOREIGN KEY (CashierEmployeeID) REFERENCES Employee(EmployeeID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
