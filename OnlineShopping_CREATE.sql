@@ -92,7 +92,7 @@ CREATE TABLE CustomerTransaction (
 CREATE TABLE Transaction (
 	TransactionID		SMALLINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	CashierEmployeeID	INT NOT NULL PRIMARY KEY,
-	IncomingOrOutgoing	VARCHAR(1) PRIMARY KEY,
+	IncomingOrOutgoing	ENUM('I', 'O') PRIMARY KEY,
 	TransactionAmount	DECIMAL(5,2) NOT NULL CHECK (TransactionAmount >= 0),
 	FOREIGN KEY (CashierEmployeeID) REFERENCES Employee(EmployeeID)
 		ON DELETE RESTRICT
