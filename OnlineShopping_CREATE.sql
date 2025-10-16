@@ -1,4 +1,4 @@
-CREATE TABLE Supplier(
+Fallgit CREATE TABLE Supplier(
 	SupplierName VARCHAR(255) Unique NOT NULL,
 	SupplierID 		INT PRIMARY KEY AUTO_INCREMENT NOT NULL,	
 	SupplierName 		VARCHAR(255) UNIQUE NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE CustomerTransaction (
 	FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
-	FOREIGN KEY (TransactionAmount) REFERENCES Transaction(TrasactionAmount)
+	FOREIGN KEY (TransactionAmount) REFERENCES Transaction(TransactionAmount)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
 );
