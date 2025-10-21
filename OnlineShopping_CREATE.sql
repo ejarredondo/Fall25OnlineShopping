@@ -167,6 +167,7 @@ CREATE TABLE EmployeeTransaction (
 	EmployeeID		SMALL INT NOT NULL,
 	TransactionID		SMALL INT NOT NULL,
 	StoreID			SMALL INT NOT NULL,
+	PRIMARY KEY( EmployeeID, TransactionID)
 	FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
