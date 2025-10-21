@@ -1,11 +1,3 @@
-
-CREATE TABLE Supplier(
-	SupplierName VARCHAR(255) Unique NOT NULL,
-	SupplierID 		INT PRIMARY KEY AUTO_INCREMENT NOT NULL,	
-	SupplierName 		VARCHAR(255) UNIQUE NOT NULL,
-	ItemsSupplied 		XML,
-	NumItems 		INT,
-
 CREATE TABLE Supplier(
 	SupplierName 		VARCHAR(255) Unique NOT NULL,
 	SupplierID 		INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
@@ -24,8 +16,8 @@ CREATE TABLE ItemSupplied (
 	SupplierID		INT NOT NULL,
 	StoreID			INT NOT NULL,
 	ProductName		VARCHAR(255),
-	ItemQuantity		SMALL INT NOT NULL,
-	PRIMARY KEY( ProductID, TransactionID)
+	ItemQuantity		SMALLINT NOT NULL,
+	PRIMARY KEY( ProductID, TransactionID),
 	FOREIGN KEY (ProductID) REFERENCES Catalog (ProductID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
@@ -60,15 +52,14 @@ CREATE TABLE Catalog(
 CREATE TABLE DietaryInformation(
 	ProductID 	INT NOT NULL PRIMARY KEY NOT NULL,
 	ProductName 	VARCHAR(255) NOT NULL,
-	Restriction 	enum('DairyFree', 'GlutenFree', 'vegetarian', 'vegan', 'kosher', 'keto', 'SugarFree', 'LowCarb', 'PorkFree', 'NutFree', 'ShellfishFree', 'SoyFree')
-
+	Restriction 	enum('DairyFree', 'GlutenFree', 'vegetarian', 'vegan', 'kosher', 'keto', 'SugarFree', 'LowCarb', 'PorkFree', 'NutFree', 'ShellfishFree', 'SoyFree'),
 	FOREIGN KEY (ProductID) REFERENCES Catalog (ProductID)
     		ON DELETE Restrict
     		ON UPDATE Cascade,
-	FOREIGN KEY (ProductName) References Catalog (Product Name)
-    		ON DELETE Restrict
-    		ON UPDATE Cascade,
-    );
+	FOREIGN KEY (ProductName) References Catalog (ProductName)
+    		ON DELETE RESTRICT
+    		ON UPDATE CASCADE
+);
 
 CREATE TABLE Store (
 	StoreID 		INT PRIMARY KEY AUTO_INCREMENT,
@@ -95,7 +86,7 @@ CREATE TABLE Employee (
 	FirstName 		VARCHAR(100) NOT NULL,
 	LastName		VARCHAR(100) NOT NULL,
 	StartDate 		DATE,
-	PayRate 		DECIMAL(8, 2) CHECK (PayRate >=0) NOT NULL,
+	PayRate 		DECIMAL(8, 2) NOT NULL CHECK (PayRate >= 0),
 	Position 		VARCHAR(50),
 	Availability 		BOOLEAN,
 	BankRoutingInformation 	VARCHAR(9) NOT NULL,
@@ -131,7 +122,7 @@ CREATE TABLE CustomerPurchaseHistory (
 	
 
 CREATE TABLE CustomerTransaction (
-	CustomerID		INT NOT NULL AUTO INCREMENT,
+	CustomerID		INT NOT NULL AUTO_INCREMENT,
 	TransactionID		INT NOT NULL AUTO_INCREMENT,
 	ShippingAddressStreet	VARCHAR(30),
 	ShippingAddressCity	VARCHAR(30),
@@ -140,11 +131,11 @@ CREATE TABLE CustomerTransaction (
 	CardInfo		VARCHAR(30) UNIQUE,
 	EmailAddress		VARCHAR(30) UNIQUE,
 	TransactionAmount	DECIMAL(5,2) NOT NULL,
-	ItemsPurchased		SMALL INT,
+	ItemsPurchased		SMALLINT,
 	PRIMARY KEY(CustomerID, TransactionID),
 	FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 		ON DELETE RESTRICT
-		ON UPDATE CASCADE
+		ON UPDATE CASCADE,
 	FOREIGN KEY (TransactionAmount) REFERENCES Transaction(TransactionAmount)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
@@ -164,10 +155,10 @@ CREATE TABLE Transaction (
 );
 
 CREATE TABLE EmployeeTransaction (
-	EmployeeID		SMALL INT NOT NULL,
-	TransactionID		SMALL INT NOT NULL,
-	StoreID			SMALL INT NOT NULL,
-	PRIMARY KEY( EmployeeID, TransactionID)
+	EmployeeID		SMALLINT NOT NULL,
+	TransactionID		SMALLINT NOT NULL,
+	StoreID			SMALLINT NOT NULL,
+	PRIMARY KEY( EmployeeID, TransactionID),
 	FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,

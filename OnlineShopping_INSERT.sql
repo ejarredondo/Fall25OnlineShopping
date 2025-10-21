@@ -2,7 +2,7 @@ INSERT INTO Supplier (SupplierName, NumItems, StoreAddress, StoreID)
 VALUES ('Global Fresh Produce', 50, '450 Produce Way, Seattle, WA', 100);
 
 INSERT INTO Supplier (SupplierName, NumItems, StoreAddress, StoreID)
-Values ('Tri-State Bakery' 35, '230 Dough Street, Seattle, WA', 100);
+Values ('Tri-State Bakery', 35, '230 Dough Street, Seattle, WA', 100);
 
 INSERT INTO Supplier (SupplierName, NumItems, StoreAddress, StoreID)
 Values ('Meats & Co', 100, '124 Oinkmoo Road, Seattle, WA', 100);
