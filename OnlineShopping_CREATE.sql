@@ -19,12 +19,13 @@ CREATE TABLE Supplier(
 );
 
 CREATE TABLE ItemSupplied (
-	ProductID		INT PRIMARY KEY NOT NULL,
-	TransactionID		INT PRIMARY KEY NOT NULL,	
+	ProductID		INT NOT NULL,
+	TransactionID		INT NOT NULL,	
 	SupplierID		INT NOT NULL,
 	StoreID			INT NOT NULL,
 	ProductName		VARCHAR(255),
 	ItemQuantity		SMALL INT NOT NULL,
+	PRIMARY KEY( ProductID, TransactionID)
 	FOREIGN KEY (ProductID) REFERENCES Catalog (ProductID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
@@ -130,8 +131,8 @@ CREATE TABLE CustomerPurchaseHistory (
 	
 
 CREATE TABLE CustomerTransaction (
-	CustomerID		INT NOT NULL PRIMARY KEY AUTO INCREMENT,
-	TransactionID		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	CustomerID		INT NOT NULL AUTO INCREMENT,
+	TransactionID		INT NOT NULL AUTO_INCREMENT,
 	ShippingAddressStreet	VARCHAR(30),
 	ShippingAddressCity	VARCHAR(30),
 	ShippingAddressState	VARCHAR(2),
@@ -140,6 +141,7 @@ CREATE TABLE CustomerTransaction (
 	EmailAddress		VARCHAR(30) UNIQUE,
 	TransactionAmount	DECIMAL(5,2) NOT NULL,
 	ItemsPurchased		SMALL INT,
+	PRIMARY KEY(CustomerID, TransactionID),
 	FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
@@ -149,20 +151,22 @@ CREATE TABLE CustomerTransaction (
 );
 	
 CREATE TABLE Transaction (
-	TransactionID		SMALLINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	CashierEmployeeID	INT NOT NULL PRIMARY KEY,
-	IncomingOrOutgoing	ENUM('I', 'O') PRIMARY KEY,
+	TransactionID		SMALLINT NOT NULL AUTO_INCREMENT,
+	CashierEmployeeID	INT NOT NULL,
+	IncomingOrOutgoing	ENUM('I', 'O'),
 	TransactionAmount	DECIMAL(5,2) NOT NULL CHECK (TransactionAmount >= 0),
 	TransactionDate		DATETIME,
+	PRIMARY KEY( TransactionID, CashierEmployeeID, IncomingOrOutgoing),
 	FOREIGN KEY (CashierEmployeeID) REFERENCES Employee(EmployeeID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
+	
 );
 
 CREATE TABLE EmployeeTransaction (
-	EmployeeID		SMALL INT REQUIRED,
-	TransactionID		SMALL INT REQUIRED,
-	StoreID			SMALL INT REQUIRED,
+	EmployeeID		SMALL INT NOT NULL,
+	TransactionID		SMALL INT NOT NULL,
+	StoreID			SMALL INT NOT NULL,
 	FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
