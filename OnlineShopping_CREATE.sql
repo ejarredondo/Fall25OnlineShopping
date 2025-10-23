@@ -45,7 +45,8 @@ CREATE TABLE Catalog(
 	SalePrice 		DECIMAL(7,2) NOT NULL CHECK (SalePrice >= 0),
 	SoldByWeightorUnit 	ENUM('Weight', 'Unit') NOT NULL,
 	Brand 			VARCHAR(255),
-	QuantityofItem 		SMALLINT
+	QuantityofItem 		SMALLINT,
+	ExpirationDate		DATE
 );
 
 
