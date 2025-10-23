@@ -45,14 +45,11 @@ CREATE TABLE Catalog(
 	SalePrice 		DECIMAL(7,2) NOT NULL CHECK (SalePrice >= 0),
 	SoldByWeightorUnit 	ENUM('Weight', 'Unit') NOT NULL,
 	Brand 			VARCHAR(255),
-<<<<<<< HEAD
 	QuantityofItem 		SMALLINT
     DepartmentID SMALLINT NOT NULL,
-    Foreign Key (DepartmentID) Refrences Department (DepartmentID)
-=======
 	QuantityofItem 		SMALLINT,
 	ExpirationDate		DATE
->>>>>>> 317c29456ae14871283bd021a8bcb99746521fe8
+    Foreign Key (DepartmentID) Refrences Department (DepartmentID)
 );
 
 
