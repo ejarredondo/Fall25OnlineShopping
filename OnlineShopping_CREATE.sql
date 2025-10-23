@@ -46,6 +46,8 @@ CREATE TABLE Catalog(
 	SoldByWeightorUnit 	ENUM('Weight', 'Unit') NOT NULL,
 	Brand 			VARCHAR(255),
 	QuantityofItem 		SMALLINT
+    DepartmentID SMALLINT NOT NULL,
+    Foreign Key (DepartmentID) Refrences Department (DepartmentID)
 );
 
 
