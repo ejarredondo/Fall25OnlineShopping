@@ -1,3 +1,5 @@
+USE OnlineShopping;
+
 INSERT INTO Supplier (SupplierName, SupplierAddressStreet, SupplierAddressCity, SupplierAddressState, SupplierAddressZip, StoreID) 
 VALUES ('Global Fresh Produce', '450 Produce Way’, ‘Seattle’, ‘WA', ‘98115’, 100);
 
