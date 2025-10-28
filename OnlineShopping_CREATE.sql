@@ -74,7 +74,7 @@ CREATE TABLE Transaction (
 	IncomingOrOutgoing	ENUM('I', 'O'),
 	TransactionAmount	DECIMAL(5,2) NOT NULL CHECK (TransactionAmount >= 0),
 	TransactionDate		DATETIME,
-	PRIMARY KEY( TransactionID, CashierEmployeeID, IncomingOrOutgoing),
+	PRIMARY KEY (TransactionID),
 	FOREIGN KEY (CashierEmployeeID) REFERENCES Employee(EmployeeID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
