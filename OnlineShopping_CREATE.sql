@@ -3,23 +3,28 @@ CREATE DATABASE OnlineShopping;
 USE OnlineShopping;
 
 CREATE TABLE Department (
-	DepartmentID		INT PRIMARY KEY AUTO_INCREMENT,
-	DepartmentName		VARCHAR(20) NOT NULL,
-	EmployeeTotal		INT NOT NULL
+	DepartmentID			INT PRIMARY KEY AUTO_INCREMENT,
+	DepartmentName			VARCHAR(20) NOT NULL,
+	EmployeeTotal			INT NOT NULL
 );
 
+CREATE TABLE Customer (
+	CustomerID				INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FirstName				VARCHAR(30),
+	LastName				VARCHAR(30)
+);
 
 CREATE TABLE Employee (
-    	EmployeeID 		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	FirstName 		VARCHAR(100) NOT NULL,
-	LastName		VARCHAR(100) NOT NULL,
-	StartDate 		DATE,
-	PayRate 		DECIMAL(8, 2) NOT NULL CHECK (PayRate >= 0),
-	Position 		VARCHAR(50),
-	Availability 		BOOLEAN,
+	EmployeeID 				INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	FirstName 				VARCHAR(100) NOT NULL,
+	LastName				VARCHAR(100) NOT NULL,
+	StartDate 				DATE,
+	PayRate 				DECIMAL(8, 2) NOT NULL CHECK (PayRate >= 0),
+	Position 				VARCHAR(50),
+	Availability 			BOOLEAN,
 	BankRoutingInformation 	VARCHAR(9) NOT NULL,
 	CheckingAccountNumber 	VARCHAR(17) NOT NULL,
-	EmailAddress 		VARCHAR(250)
+	EmailAddress 			VARCHAR(250)
 );
 
 
@@ -113,12 +118,6 @@ CREATE TABLE DietaryInformation(
     		ON UPDATE CASCADE
 );
 
-
-CREATE TABLE Customer (
-	CustomerID		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	FirstName		VARCHAR(30),
-	LastName		VARCHAR(30)
-);
 
 CREATE TABLE CustomerPurchaseHistory (
 	CustomerID		INT NOT NULL,
