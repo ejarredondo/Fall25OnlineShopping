@@ -1,13 +1,40 @@
 USE OnlineShopping;
 
-INSERT INTO Supplier (SupplierName, SupplierAddressStreet, SupplierAddressCity, SupplierAddressState, SupplierAddressZip, StoreID) 
-VALUES ('Global Fresh Produce', '450 Produce Way’, ‘Seattle’, ‘WA', ‘98115’, 100);
+INSERT INTO Employee (FirstName, LastName, StartDate, PayRate, Position, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
+VALUES ('Jane', 'Doe', '2023-08-15', 35.50, 'Manager', TRUE, '123456789', '98765432101234567', 'jane.doe@company.com');
 
-INSERT INTO Supplier (SupplierName, NumItems, StoreAddress, StoreID)
-Values ('Tri-State Bakery', '230 Dough Street', 'Seattle', 'WA', '98115', 100);
+INSERT INTO Employee (FirstName, LastName, StartDate, PayRate, Position, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
+VALUES ('John', 'Smith', '2024-01-20', 18.00, 'Associate', FALSE, '987654321', '111222333444555', 'john.smith@company.com');
 
-INSERT INTO Supplier (SupplierName, NumItems, StoreAddress, StoreID)
-Values ('Meats & Co', '124 Oinkmoo Road', 'Seattle', 'WA', '98115', 100);
+INSERT INTO Employee (FirstName, LastName, StartDate, PayRate, Position, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
+VALUES ('Clive', 'Staples', '2024-03-30', 18.50, 'Associate', TRUE, '582084442', '322202939490293', 'clive.staples@company.com');
+
+INSERT INTO Department (DepartmentName, EmployeeTotal) 
+VALUES ('Sales', 60);
+
+INSERT INTO Department (DepartmentName, EmployeeTotal) 
+VALUES ('Stock', 25);
+
+INSERT INTO Department (DepartmentName, EmployeeTotal) 
+VALUES ('Accounting', 30);
+
+INSERT INTO Store (StreetAddress, City, State, Zip, EmployeeNumber) 
+VALUES ('120 Publix Avenue', 'Seattle', 'WA', '98115', 30);
+
+INSERT INTO Store (StreetAddress, City, State, Zip, EmployeeNumber) 
+VALUES ('350 Kroger Street', 'Seattle', 'WA', '98115', 25);
+
+INSERT INTO Store (StreetAddress, City, State, Zip, EmployeeNumber) 
+VALUES ('894 Aldi Circle', 'Seattle', 'WA', '98115', 60);
+
+INSERT INTO Supplier (SupplierName, SupplierAddressStreet, SupplierAddressCity, SupplierAddressState, SupplierAddressZip, STOREID) 
+VALUES ('Global Fresh Produce', '450 Produce Way', 'Seattle', 'WA', '98115', 152);
+
+INSERT INTO Supplier (SupplierName, SupplierAddressStreet, SupplierAddressCity, SupplierAddressState, SupplierAddressZip, STOREID) 
+Values ('Tri-State Bakery', '230 Dough Street', 'Seattle', 'WA', '98115', 78);
+
+INSERT INTO Supplier (SupplierName, SupplierAddressStreet, SupplierAddressCity, SupplierAddressState, SupplierAddressZip, STOREID) 
+Values ('Meats & Co', '124 Oinkmoo Road', 'Seattle', 'WA', '98115', 89);
 
 INSERT INTO ItemSupplied (ProductID, TransactionID, SupplierID, StoreID, ProductName, ItemQuantity)
 Values (12, 15, 6, 100, 'Honeycrisp Apple', 15);
@@ -35,33 +62,6 @@ Values (79, 'Soy Milk', ‘DairyFree’);
 
 INSERT INTO DietaryInformation (ProductID, ProductName, Restriction)
 Values (46, 'Coke Zero', ‘SugarFree’);
-
-INSERT INTO Employee (FirstName, LastName, StartDate, PayRate, Position, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
-VALUES ('Jane’, ‘Doe', '2023-08-15', 35.50, 'Manager', TRUE, '123456789', '98765432101234567', 'jane.doe@company.com');
-
-INSERT INTO Employee (FirstName, LastName, StartDate, PayRate, Position, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
-VALUES ('John’, ‘Smith', '2024-01-20', 18.00, 'Associate', FALSE, '987654321', '111222333444555', 'john.smith@company.com');
-
-INSERT INTO Employee (FirstName, LastName, StartDate, PayRate, Position, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
-VALUES ('Clive’, ‘Staples', '2024-03-30', 18.50, 'Associate', TRUE, '582084442', '322202939490293', 'clive.staples@company.com');
-
-INSERT INTO Store (StreetAddress, City, State, Zip, EmployeeNumber) 
-VALUES ('120 Publix Avenue’, ‘Seattle’, ‘WA', ‘98115’, 152);
-
-INSERT INTO Store (StreetAddress, City, State, Zip, EmployeeNumber) 
-VALUES ('350 Kroger Street’, ‘Seattle’, ‘WA', ‘98115’, 78);
-
-INSERT INTO Store (StreetAddress, City, State, Zip, EmployeeNumber) 
-VALUES ('894 Aldi Circle’, ‘Seattle’, ‘WA', ‘98115’, 89);
-
-INSERT INTO Department (DepartmentName, EmployeeTotal) 
-VALUES ('Sales', 60);
-
-INSERT INTO Department (DepartmentName, EmployeeTotal) 
-VALUES ('Stock', 25);
-
-INSERT INTO Department (DepartmentName, EmployeeTotal) 
-VALUES ('Accounting', 30);
 
 INSERT INTO Transaction (CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate) 
 VALUES (5, 'I', 26.87, 2023-12-04 15:45:36);
