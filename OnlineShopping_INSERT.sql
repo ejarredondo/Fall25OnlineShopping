@@ -55,13 +55,13 @@ INSERT INTO Catalog (ProductName, Category, SKU, BasePrice, SoldByWeightOrUnit, 
 VALUES ('Sourdough Bread', 'Bakery', 4003, 5.00, 'Unit', 30);
 
 INSERT INTO DietaryInformation (ProductID, ProductName, Restriction)
-Values (86, 'Corn Tortillas', ‘GlutenFree’);
+Values (86, 'Corn Tortillas', 'GlutenFree');
 
 INSERT INTO DietaryInformation (ProductID, ProductName, Restriction)
-Values (79, 'Soy Milk', ‘DairyFree’);
+Values (79, 'Soy Milk', 'DairyFree');
 
 INSERT INTO DietaryInformation (ProductID, ProductName, Restriction)
-Values (46, 'Coke Zero', ‘SugarFree’);
+Values (46, 'Coke Zero', 'SugarFree');
 
 INSERT INTO Transaction (CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate) 
 VALUES (5, 'I', 26.87, 2023-12-04 15:45:36);
