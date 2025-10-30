@@ -1,8 +1,8 @@
 #What products do we have the least of (per department and overall)?
 
-SELECT ProductName, ProductId, MIN(QuantityofItem)
+SELECT DepartmentID, ProductID, ProductName, MIN(QuantityofItem)
 FROM Catalog
-GROUP BY DepartmentID;
+GROUP BY DepartmentID, ProductID, ProductName;
 
 #What products are expiring soonest?
 
