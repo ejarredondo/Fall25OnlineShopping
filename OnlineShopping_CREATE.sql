@@ -48,15 +48,11 @@ CREATE TABLE Store (
 	StreetAddress 		VARCHAR(30) NOT NULL,
 	City 				VARCHAR(30) NOT NULL,
 	State 				VARCHAR(2) NOT NULL,
-	Zip 				VARCHAR(5) NOT NULL,
-	EmployeeNumber		INT NOT NULL,
-	FOREIGN KEY (EmployeeNumber) REFERENCES Department(DepartmentID)
-		ON DELETE RESTRICT
-		ON UPDATE CASCADE
+	Zip 				VARCHAR(5) NOT NULL
 );
 
 CREATE TABLE Supplier(
-	SupplierName 			VARCHAR(255) Unique NOT NULL,
+	SupplierName 			VARCHAR(255) UNIQUE NOT NULL,
 	SupplierID 				INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     SupplierAddressStreet	VARCHAR(255),
 	SupplierAddressCity		VARCHAR(20),
@@ -124,6 +120,7 @@ CREATE TABLE CustomerPurchaseHistory (
 );	
 
 CREATE TABLE CustomerTransaction (
+	CustomerTransactionID	INT NOT NULL AUTO_INCREMENT,
 	CustomerID				INT NOT NULL AUTO_INCREMENT,
 	TransactionID			SMALLINT NOT NULL,
 	ShippingAddressStreet	VARCHAR(30),
@@ -133,7 +130,7 @@ CREATE TABLE CustomerTransaction (
 	CardInfo				VARCHAR(30) UNIQUE,
 	EmailAddress			VARCHAR(30) UNIQUE,
 	ItemsPurchased			SMALLINT,
-	PRIMARY KEY(CustomerID, TransactionID),
+	PRIMARY KEY(CustomerTransactionID),
 	FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
