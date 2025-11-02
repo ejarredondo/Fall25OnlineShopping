@@ -70,7 +70,7 @@ INSERT INTO ItemSupplied (ProductID, TransactionID, SupplierID, StoreID, ItemQua
 Values (2, 3, 2, 2, 20);
 
 INSERT INTO ItemSupplied (ProductID, TransactionID, SupplierID, StoreID, ItemQuantity)
-Values (3, 4, 3, 3, 45);
+Values (3, 1, 3, 3, 45);
 
 INSERT INTO DietaryInformation (ProductID, Restriction)
 Values (1, 'Keto');
@@ -88,7 +88,7 @@ INSERT INTO EmployeeTransaction (EmployeeID, TransactionID, StoreID)
 VALUES (2, 3, 2);
 
 INSERT INTO EmployeeTransaction (EmployeeID, TransactionID, StoreID)
-VALUES (3, 4, 3);
+VALUES (3, 1, 3);
 
 INSERT INTO CustomerPurchaseHistory (CustomerID, TransactionID, Amountspent, DatePurchased, TimePurchased)
 VALUES (1, 2, 34.50, '2025-05-06', '10:25:46');

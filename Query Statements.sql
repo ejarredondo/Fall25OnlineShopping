@@ -14,5 +14,6 @@ ORDER BY ExpirationDate ASC;
 #What product was sold the most/least during a given month?
 
 
+
 #Average customer spend and item quantity?
 

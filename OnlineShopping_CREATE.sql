@@ -121,7 +121,7 @@ CREATE TABLE CustomerPurchaseHistory (
 
 CREATE TABLE CustomerTransaction (
 	CustomerTransactionID	INT NOT NULL AUTO_INCREMENT,
-	CustomerID				INT NOT NULL AUTO_INCREMENT,
+	CustomerID				INT NOT NULL,
 	TransactionID			SMALLINT NOT NULL,
 	ShippingAddressStreet	VARCHAR(30),
 	ShippingAddressCity		VARCHAR(30),
