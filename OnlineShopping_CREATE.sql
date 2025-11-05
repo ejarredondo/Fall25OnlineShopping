@@ -106,7 +106,8 @@ CREATE TABLE DietaryInformation(
 );
 
 CREATE TABLE CustomerPurchaseHistory (
-	CustomerID		INT NOT NULL,
+	CustomerPurchaseHistoryID	INT AUTO_INCREMENT PRIMARY KEY,
+    CustomerID		INT NOT NULL,
 	TransactionID		SMALLINT NOT NULL,
 	AmountSpent		DECIMAL(5, 2) NOT NULL,
 	DatePurchased		DATE,
