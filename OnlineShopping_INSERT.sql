@@ -54,13 +54,13 @@ VALUES ('Premium Steak', 'Meats', 4002, 5.62, 7.00, 5.00, 'Weight', 'Cattle Co.'
 INSERT INTO Catalog (ProductName, Category, SKU, BasePrice, SalePrice, SoldByWeightOrUnit, Brand, QuantityofItem, DepartmentID, ExpirationDate)
 VALUES ('Sourdough Bread', 'Bakery', 4003, 5.00, 5.00, 'Unit', 'The French Baker', 30, 3, '2026-01-18');
 
-INSERT INTO Transaction (CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate) 
+INSERT INTO Transac (CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate) 
 VALUES (1, 'I', 26.87, '2023-12-04 15:45:36');
 
-INSERT INTO Transaction (CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate)
+INSERT INTO Transac (CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate)
 VALUES (2, 'O', 257.50, '2024-05-16 08:36:57');
 
-INSERT INTO Transaction (CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate) 
+INSERT INTO Transac (CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate) 
 VALUES (3, 'I', 21.67, '2025-10-15 10:32:26');
 
 INSERT INTO ItemSupplied (ProductID, TransactionID, SupplierID, StoreID, ItemQuantity)
@@ -97,7 +97,7 @@ INSERT INTO CustomerPurchaseHistory (CustomerID, TransactionID, Amountspent, Dat
 VALUES (2, 3, 24.57, '2025-10-23', '15:46:12');
 
 INSERT INTO CustomerPurchaseHistory (CustomerID, TransactionID, Amountspent, DatePurchased, TimePurchased)
-VALUES (3, 4, 123.56, '2025-08-17', '12:56:28');
+VALUES (3, 1, 123.56, '2025-08-17', '12:56:28');
 
 INSERT INTO CustomerTransaction (CustomerID, TransactionID, ShippingAddressStreet, ShippingAddressCity, ShippingAddressState, ShippingAddressZip, CardInfo, EmailAddress, ItemsPurchased)
 VALUES (1, 2, '123 Leaf Avenue', 'Seattle', 'WA', '98115', '1234567890123456', 'joesmith@gmail.com', 15);
