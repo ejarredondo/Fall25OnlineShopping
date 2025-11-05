@@ -40,3 +40,15 @@ LIMIT 1;
 
 #Average customer spend and item quantity?
 
+SELECT C.CustomerID, C.FirstName, C.LastName, 
+SUM (CPH.AmountSpent) AS Totalspent,
+Sum (IS.ItemQuantity) AS TotalItemsPurchased, 
+Avg(CPH.AmountSpent) AS AvgSpendtPerTransaction,
+Avg(IS.ItemQuantity) AS AvgItemsPerTransaction
+FROM Customer C
+JOIN CustomerPurchaseHistory CPH ON C.CustomerID = CPH.CustomerID
+JOIN Transaction T ON CPH.TransactionID = T.TransactionID
+JOIN ItemsSupplied IS ON T.TransactionID = IS.TransactionID
+WhHERE T.IncomingOrOutgoing = 'O'
+GROPU BY C.CustomerID, C.FirstName, C.LastName
+ORDER BY AvgSpentPerTransaction DESC;
