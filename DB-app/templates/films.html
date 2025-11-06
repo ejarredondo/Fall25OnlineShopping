@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Index Page</title>
+</head>
+<body>
+	<h3>Films</h3>
+	<a href="/add_films">ADD</a>
+      <br>
+      <table style="border-spacing: 30px;">
+         <thead style="padding:15px">
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Last Update</th>
+            <th>#</th>
+         </thead>
+         {% for data in films %}
+         <tbody style="padding-right:15px">
+            <td>{{data.film_id}}</td>
+            <td>{{data.title}}</td>
+            <td>{{data.description}}</td>
+            <td>{{data.release_year}}</td>
+            <td>{{data.last_update}}</td>
+            <td><a href="/delete_film/{{data.film_id}}" type="button">Delete</a></td>
+            <td><a href="/get_film_actors/{{data.film_id}}" type="button">Actors</a></td>
+         </tbody>
+         {% endfor%}
+      </table>
+</body>
+</html>

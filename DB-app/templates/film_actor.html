@@ -1,0 +1,24 @@
+<html>
+<head>
+	<title>{{film.title}}</title>
+</head>
+<body>
+	<h3>{{film.title}}</h3>
+    <a href="/get_actors_not_in_film/{{film.film_id}}">Add Actor</a>
+      <br>
+      <table style="border-spacing: 30px;">
+         <thead style="padding:15px">
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+         </thead>
+         {% for data in film_actors %}
+         <tbody style="padding-right:15px">
+            <td>{{data.actor_id}}</td>
+            <td>{{data.first_name}}</td>
+            <td>{{data.last_name}}</td>
+         </tbody>
+         {% endfor%}
+      </table>
+</body>
+</html>
