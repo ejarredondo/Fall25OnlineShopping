@@ -64,7 +64,7 @@ CREATE TABLE Supplier(
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE Transaction (
+CREATE TABLE Transac (
 	TransactionID		SMALLINT NOT NULL AUTO_INCREMENT,
 	CashierEmployeeID	INT NOT NULL,
 	IncomingOrOutgoing	ENUM('I', 'O'),
@@ -86,7 +86,7 @@ CREATE TABLE ItemSupplied (
 	FOREIGN KEY (ProductID) REFERENCES Catalog (ProductID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
-	FOREIGN KEY (TransactionID) REFERENCES Transaction (TransactionID)
+	FOREIGN KEY (TransactionID) REFERENCES Transac (TransactionID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
 	FOREIGN KEY (SupplierID) REFERENCES Supplier (SupplierID)
@@ -106,7 +106,8 @@ CREATE TABLE DietaryInformation(
 );
 
 CREATE TABLE CustomerPurchaseHistory (
-	CustomerID		INT NOT NULL,
+	CustomerPurchaseHistoryID	INT AUTO_INCREMENT PRIMARY KEY,
+    CustomerID		INT NOT NULL,
 	TransactionID		SMALLINT NOT NULL,
 	AmountSpent		DECIMAL(5, 2) NOT NULL,
 	DatePurchased		DATE,
@@ -114,7 +115,7 @@ CREATE TABLE CustomerPurchaseHistory (
 	FOREIGN KEY (CustomerID) REFERENCES Customer (CustomerID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
-	FOREIGN KEY (TransactionID) REFERENCES Transaction (TransactionID)
+	FOREIGN KEY (TransactionID) REFERENCES Transac (TransactionID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
 );	
@@ -134,7 +135,7 @@ CREATE TABLE CustomerTransaction (
 	FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
-	FOREIGN KEY (TransactionID) REFERENCES Transaction(TransactionID)
+	FOREIGN KEY (TransactionID) REFERENCES Transac(TransactionID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
 );
@@ -147,7 +148,7 @@ CREATE TABLE EmployeeTransaction (
 	FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
-	FOREIGN KEY (TransactionID) REFERENCES Transaction(TransactionID)
+	FOREIGN KEY (TransactionID) REFERENCES Transac(TransactionID)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
 	FOREIGN KEY (StoreID) REFERENCES Store(StoreID)

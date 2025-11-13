@@ -1,0 +1,29 @@
+<html>
+<head>
+	<title>Index Page</title>
+</head>
+<body>
+	<h3>Average Rental Duration and Revenue Per Store</h3>
+      <br>
+      <table style="border-spacing: 30px;">
+         <thead style="padding:15px">
+            <th>Store Id</th>
+            <th>Store Location</th>
+            <th>Totals Rentals</th>
+            <th>Average Rental Days</th>
+            <th>Total Revenue</th>
+            <th>Average Revenue Per Rental</th>
+         </thead>
+         {% for data in avg_rental %}
+         <tbody style="padding-right:15px">
+            <td>{{data.store_id}}</td>
+            <td>{{data.store_location}}</td>
+            <td>{{data.total_rentals}}</td>
+            <td>{{data.avg_rental_days}}</td>
+            <td>{{data.total_revenue}}</td>
+            <td>{{data.avg_revenue_per_rental}}</td>
+        </tbody>
+         {% endfor%}
+      </table>
+</body>
+</html>
