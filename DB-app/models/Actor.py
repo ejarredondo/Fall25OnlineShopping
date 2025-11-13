@@ -1,21 +1,21 @@
 
 from sqlalchemy import func
-from models.schemas import Actor
+from models.schemas import Department #change table names
 from core import ma, db
 
-def get_actors(): 
-    all_actors = Actor.query.all()
+def get_department(): 
+    all_departments = departments.query.all()
     return actors_schema.dump(all_actors)
 
-def add_actor(first_name, last_name):
-    a = Actor(first_name=first_name, last_name=last_name, last_update=func.now())
-    db.session.add(a)
+def add_department(DepartmentName, EmployeeTotal):
+    d = Department(DepartmentName=DepartmentName, EmployeeTotal=EmployeeTotal, last_update=func.now())
+    db.session.add(d)
     db.session.commit()
 
-def delete_actor(id):
+def delete_department(id):
 	# Deletes the data on the basis of unique id and 
 	# redirects to home page
-	data = Actor.query.get(id)
+	data = department.query.get(id)
 	db.session.delete(data)
 	db.session.commit()
      
