@@ -19,10 +19,10 @@ def delete_department(id):
 	db.session.delete(data)
 	db.session.commit()
      
-class ActorSchema(ma.SQLAlchemyAutoSchema):
+class DepartmentSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Actor
+        model = Department
 
-actor_schema = ActorSchema()
-actors_schema = ActorSchema(many=True)
+actor_schema = DepartmentSchema()
+actors_schema = DepartmentSchema(many=True)
 
