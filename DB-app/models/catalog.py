@@ -7,7 +7,7 @@ def get_catalogs():
     all_catalogs = catalog.query.all()
     return catalogs_schema.dump(all_catalogs)
 
-def add_actor(productname, category, SKU, weight, 
+def add_catalog(productname, category, SKU, weight, 
               baseprice, saleprice, soldbyweightorunit, 
               brand, quantityofitem, departmentid, expirationdate):
     a = catalog(productname=productname, category = category, 
