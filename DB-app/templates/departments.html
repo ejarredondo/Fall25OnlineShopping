@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Departments</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="nav">
+        <header>
+            <h1>🌿 GreenGrocer Online - Departments</h1>
+        </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="tables.html">Tables List</a>
+            <a href="add_tables.html">Add to Tables</a>
+        </div>
+    </div>
+
+    <div class="table-actions">
+        <a class="add" href="add_department.html">Add Department</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Department ID</th>
+                <th>Name</th>
+                <th>Employees</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data in department %}
+            <tr>
+                <td>{{ data.department_id }}</td>
+                <td>{{ data.department_name }}</td>
+                <td>{{ data.employee_total }}</td>
+                <td><a href="/delete_department/{{ data.department_id }}" class="delete">Delete</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">No departments available.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
