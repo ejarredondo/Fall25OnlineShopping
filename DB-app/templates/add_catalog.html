@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Product</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+        <div id="nav">
+        <header>
+            <h1>🌿 GreenGrocer Online - Add Product Form</h1>
+        </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="tables.html">Tables List</a>
+            <a href="add_tables.html">Add to Tables</a>
+        </div>
+    </div>
+    <h4>* = Required</h4>
+	<form action="/add" method="POST">
+		<label>Product Name*:</label>
+		        <input type="text" name="product_name" placeholder="product name..." required><br>
+		<label>Category*:</label>
+		        <input type="text" name= "category" placeholder="category..." required><br>
+        <label>SKU*:</label>
+                <input type = "text" name = "sku" placeholder = "SKU..." required><br>
+        <label>Weight*:</label>
+                <input type = "number" name = "weight" placeholder = "weight..."><br>
+        <label>Base Price*:</label>
+                <input type = "number" min = 0 name = "base_price" placeholder = "base price..." required><br>
+        <label>Sale Price*:</label>
+                <input type = "number" min = 0 name = "sale_price" placeholder = "sale price..." required><br>
+        <label for = "weight_or_unit">Sold by Weight or Unit*:</label>
+                    <select id = "weight_or_unit" name = "weight_or_unit">
+                        <option value = "weight">weight</option>
+                        <option value = "unit">unit</option>
+                    </select><br>
+        <label>Brand:</label>
+                <input type = "text" name = "brand" placeholder = "brand..."><br>
+        <label>Quantity of Item:</label>
+                <input type = "number" min = 0 name = "quantity_of_item" placeholder = "item quantity..."><br>
+        <label>Department ID*:</label>
+                <!--check what format for HTML with foreign key attribute is!! 
+                 might need to change type-->
+                <input type = "text" name = "department_id" placeholder = "departmend ID..." required><br>
+        <label>Expiration Date:</label>
+                <input type = "date" name = "expiration_date" placeholder = "expiration date..."><br>
+
+		<button class = "reset" type = "reset">Reset</button>
+		<button class = "add" type = "submit">Add</button>
+	</form>
+</body>
+</html>

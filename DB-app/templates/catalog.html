@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>Catalog</title>
+    <link rel="stylesheet" href = "styles.css">
+</head>
+<body>
+       <div id="nav">
+        <header>
+            <h1>🌿 GreenGrocer Online - Catalog Items</h1>
+        </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="tables.html">Tables List</a>
+            <a href="add_tables.html">Add to Tables</a>
+        </div>
+    </div>
+	<a href="/add_catalogs">ADD</a>
+      <br>
+      <table>
+         <thead>
+            <th>Id</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>SKU</th>
+            <th>Weight</th>
+            <th>Base Price</th>
+            <th>Sale Price</th>
+            <th>Sold by Weight or Unit</th>
+            <th>Brand</th>
+            <th>Quantity of Item</th>
+            <th>Department ID</th>
+            <th>Expiration Date</th>
+            <th>Last Update</th>
+         </thead>
+         {% for data in catalogs %}
+         <tbody>
+            <td>{{data.catalog_id}}</td>
+            <td>{{data.product_name}}</td>
+            <td>{{data.category}}</td>
+            <td>{{data.sku}}</td>
+            <td>{{data.weight}}</td>
+            <td>{{data.base_price}}</td>
+            <td>{{data.sale_price}}</td>
+            <td>{{data.sold_by_weight_or_unit}}</td>
+            <td>{{data.brand}}</td>
+            <td>{{data.quantity_of_item}}</td>
+            <td>{{data.department_id}}</td>
+            <td>{{data.expiration_date}}</td>
+            <td>{{data.last_update}}</td>
+            <td><a href="/delete_catalog/{{data.catalog_id}}" type="button">Delete</a></td>
+         </tbody>
+         {% endfor%}
+      </table>
+</body>
+</html>

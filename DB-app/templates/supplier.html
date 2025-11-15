@@ -1,0 +1,44 @@
+<html>
+<head>
+	<title>Suppliers</title>
+    <link rel="stylesheet" href = "styles.css">
+</head>
+<body>
+       <div id="nav">
+        <header>
+            <h1>🌿 GreenGrocer Online - Suppliers</h1>
+        </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="tables.html">Tables List</a>
+            <a href="add_tables.html">Add to Tables</a>
+        </div>
+    </div>
+	<a href="/add_suppliers">ADD</a>
+      <br>
+      <table>
+         <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Street Address</th>
+            <th>State</th>
+            <th>Zip</th>
+            <th>Store ID</th>
+            <th>Last Update</th>
+            <th>#</th>
+         </thead>
+         {% for data in stores %}
+         <tbody>
+            <td>{{data.supplier_id}}</td>
+            <td>{{data.supplier_name}}</td>
+            <td>{{data.supplier_address_street}}</td>
+            <td>{{data.supplier_address_city}}</td>
+            <td>{{data.supplier_address_state}}</td>
+            <td>{{data.supplier_address_zip}}</td>
+            <td>{{data.last_update}}</td>
+            <td><a href="/delete_supplier/{{data.supplier_id}}" type="button">Delete</a></td>
+         </tbody>
+         {% endfor%}
+      </table>
+</body>
+</html>
