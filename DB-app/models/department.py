@@ -1,14 +1,14 @@
 
 from sqlalchemy import func
-from models.schemas import Department #change table names
+from models.schemas import department #change table names
 from core import ma, db
 
 def get_department(): 
-    all_departments = departments.query.all()
-    return actors_schema.dump(all_actors)
+    all_departments = department.query.all()
+    return department_schema.dump(all_departments)
 
 def add_department(DepartmentName, EmployeeTotal):
-    d = Department(DepartmentName=DepartmentName, EmployeeTotal=EmployeeTotal, last_update=func.now())
+    d = department(DepartmentName=DepartmentName, EmployeeTotal=EmployeeTotal, last_update=func.now())
     db.session.add(d)
     db.session.commit()
 
@@ -19,10 +19,10 @@ def delete_department(id):
 	db.session.delete(data)
 	db.session.commit()
      
-class DepartmentSchema(ma.SQLAlchemyAutoSchema):
+class departmentSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Department
+        model = department
 
-actor_schema = DepartmentSchema()
-actors_schema = DepartmentSchema(many=True)
+actor_schema = departmentSchema()
+actors_schema = departmentSchema(many=True)
 
