@@ -1,42 +1,42 @@
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Stores</title>
-    <link rel="stylesheet" href = "styles.css">
+    <title>Stores - GreenGrocer Online</title>
+    <link rel = "stylesheet" href = "styles.css">
 </head>
 <body>
-       <div id="nav">
+    <div id = "nav">
         <header>
-            <h1>🌿 GreenGrocer Online - Stores</h1>
+            <h1>Tables - GreenGrocer Online</h1>
         </header>
-        <div class="nav-links">
-            <a href="home.html">Home</a>
-            <a href="tables.html">Tables List</a>
-            <a href="add_tables.html">Add to Tables</a>
+        <div class = "nav-links">
+            <a href = "home.html">Home</a>
+            <a href = "tables.html">Tables List</a>
+            <a href = "add_tables.html">Edit Tables</a>
         </div>
-    </div>
-	<a href="/add_stores">ADD</a>
-      <br>
-      <table>
-         <thead>
-            <th>Id</th>
+    </div> 
+    <a href = "/add_stores">ADD</a>
+        <br>
+        <table>
+        <thead>
+            <th>ID</th>
             <th>Street Address</th>
             <th>City</th>
             <th>State</th>
             <th>Zip</th>
             <th>Last Update</th>
-            <th>#</th>
-         </thead>
-         {% for data in stores %}
-         <tbody>
+        </thead>
+        {% for data in stores %}
+        <tbody>
             <td>{{data.store_id}}</td>
             <td>{{data.street_address}}</td>
             <td>{{data.city}}</td>
             <td>{{data.state}}</td>
             <td>{{data.zip}}</td>
             <td>{{data.last_update}}</td>
-            <td><a href="/delete_store/{{data.store_id}}" type="button">Delete</a></td>
-         </tbody>
-         {% endfor%}
-      </table>
+            <td><a href = "/delete_store/{{data.store_id}}" type = "button">Delete</a></td>
+        </tbody>
+        {% endfor%}
+    </table>
 </body>
 </html>

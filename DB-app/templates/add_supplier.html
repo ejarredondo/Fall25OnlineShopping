@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Add Supplier</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Add Supplier - GreenGrocer Online</title>
+    <link rel = "stylesheet" href = "styles.css">
 </head>
 <body>
-        <div id="nav">
+    <div id = "nav">
         <header>
-            <h1>🌿 GreenGrocer Online - Add Supplier Form</h1>
+            <h1>Tables - GreenGrocer Online</h1>
         </header>
-        <div class="nav-links">
-            <a href="home.html">Home</a>
-            <a href="tables.html">Tables List</a>
-            <a href="add_tables.html">Add to Tables</a>
+        <div class = "nav-links">
+            <a href = "home.html">Home</a>
+            <a href = "tables.html">Tables List</a>
+            <a href = "add_tables.html">Edit Tables</a>
         </div>
     </div>
-    <h4>* = Required</h4>
-	<form action="/add" method="POST">
+<h4>* = Required</h4>
+    <form action = "/add" method = "POST">
         <label>Supplier Name*:</label>
             <input type = "text" name = "supplier_name" placeholder = "supplier name..." required><br>
-		<label>Street Address*:</label>
-		        <input type="text" name="street_address" placeholder = "street address..." required><br>
+        <label>Street Address*:</label>
+            <input type = "text" name = "supplier_street_address" placeholder = "street address..." required><br>
         <label>City:</label>
-            <input type = "text" name = "supplier_address_city" placeholder = "city..."><br>
+            <input type = "text" name = "supplier_address_city" place holder = "city..."><br>
         <label for = "state">State:</label>
                 <select id = "state" name="state">
                     <option value = "AL">AL</option>
@@ -79,10 +79,10 @@
             <label>Zip:</label>
                 <input type = "text" name = "supplier_address_zip" placeholder = "zipcode..."><br>
             <label>StoreID:</label>
-                <input type = "text" name = "STOREID" placeholder = "store id ..."><br>
-            <!--figure out how to add foreign key thing here like with add_catalog.html-->
-		<button class = "reset" type = "reset">Reset</button>
-		<button class = "add" type = "submit">Add</button>
-	</form>
+                <input type = "text" name = "STOREID" placeholder = "storeid..."><br>
+                <!--figure out how to add foreign key thing here-->
+            <button class = reset type = "reset">Reset</button>
+            <button class = "add" type = "submit">Add</button>
+    </form>
 </body>
-</html>
+</html> 
