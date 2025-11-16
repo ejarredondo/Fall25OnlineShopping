@@ -1,7 +1,7 @@
 from core import app
 from flask import redirect, request, url_for 
 from flask.templating import render_template
-from models import Actor, Film, FilmActor, Queries
+from models import Actor, Film, FilmActor, Queries, customer
 
 # A decorator used to tell the application 
 # which URL is associated with which function 
@@ -94,6 +94,34 @@ def delete_film(id):
 	Film.delete_film(id)
 	return redirect('/')
 
+# APP ROUTES FOR CUSTOMER TABLE
+@app.route('/customers', methods=['GET'])
+def get_customers():
+	customers = customer.get_customers()
+	return render_template('customer.html', customers=customers)
+
+
+@app.route('/customers/add', methods=['GET'])
+def add_customer_form():
+	return render_template('add_customer.html')
+
+
+@app.route('/customers', methods=['POST'])
+def add_customer():
+	first_name = (request.form.get("first_name") or "").strip()
+	last_name = (request.form.get("last_name") or "").strip()
+
+	if first_name and last_name:
+		customer.add_customer(first_name, last_name)
+
+	return redirect(url_for('get_customers'))
+
+
+@app.route('/customers/<int:customer_id>/delete', methods=['GET'])
+def delete_customer(customer_id):
+	customer.delete_customer(customer_id)
+	return redirect(url_for('get_customers'))
+
 # APP ROUTE TO GET RESULTS FOR FILM QUERY 
 @app.route('/get_queries', methods=['GET']) 
 def get_queries(): 
@@ -113,5 +141,4 @@ def get_avg_rental():
 
 if __name__=='__main__': 
     app.run(port=8001, debug=True) 
-
 

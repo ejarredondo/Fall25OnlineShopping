@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Customer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="nav">
+        <header>
+            <h1>🌿 GreenGrocer Online - Add Customer</h1>
+        </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="tables.html">Tables List</a>
+            <a href="add_tables.html">Add to Tables</a>
+        </div>
+    </div>
+
+    <h4>* = Required</h4>
+    <form action="/customers" method="POST">
+        <label for="first_name">First Name*:</label>
+        <input id="first_name" type="text" name="first_name" placeholder="first name..." required><br>
+
+        <label for="last_name">Last Name*:</label>
+        <input id="last_name" type="text" name="last_name" placeholder="last name..." required><br>
+
+        <button class="reset" type="reset">Reset</button>
+        <button class="add" type="submit">Add</button>
+    </form>
+</body>
+</html>
