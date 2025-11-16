@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add ItemSupplied - GreenGrocer Online</title>
+    <link rel = "stylesheet" href = "styles.css">
+</head>
+<body>
+    <div id = "nav">
+        <header>
+            <h1>Tables - GreenGrocer Online</h1>
+        </header>
+        <div class = "nav-links">
+            <a href = "home.html">Home</a>
+            <a href = "tables.html">Tables List</a>
+            <a href = "add_tables.html">Edit Tables</a>
+        </div>
+    </div>
+    <h4>* = Required</h4>
+    <form action = "/add" method = "POST">
+        <label>TransactionID*:</label> <!--<foreign key> -->
+            <input type = "text" name = "transaction_id" placeholder = "transaction id..." required><br>
+        <label>SupplierID*:</label> <!--<foreign key> -->
+            <input type = "text" name = "supplier_id" placeholder = "supplier id..." required><br>
+        <label>StoreID*:</label> <!--<foreign key> -->
+            <input type = "text" name = "store_id" placeholder = "store id..." required><br>
+        <label>ItemQuantity*:</label>
+            <input type = "number" name = "item_quantity" placeholder = "item quantity..." required><br>
+        <button class = reset type = "reset">Reset</button>
+        <button class = "add" type = "submit">Add</button>
+    </form>
+</body>
+</html>

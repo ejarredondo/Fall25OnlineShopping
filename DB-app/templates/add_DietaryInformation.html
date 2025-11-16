@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Restriction - GreenGrocer Online</title>
+    <link rel = "stylesheet" href = "styles.css">
+</head>
+<body>
+    <div id = "nav">
+        <header>
+            <h1>Tables - GreenGrocer Online</h1>
+        </header>
+        <div class = "nav-links">
+            <a href = "home.html">Home</a>
+            <a href = "tables.html">Tables List</a>
+            <a href = "add_tables.html">Edit Tables</a>
+        </div>
+    </div>
+    <h4>* = Required</h4>
+    <form action = "/add" method = "POST">
+        <label for = "restriction">Restriction*:</label>
+                <select ProductID = "restriction" name="restriction">
+                    <option value = "DiaryFree">Diary Free</option>
+                    <option value = "GlutenFree">Gluten Free</option>
+                    <option value = "Vegetarian">Vegetarian</option>
+                    <option value = "Vegan">Vegan</option>
+                    <option value = "Kosher">Kosher</option>
+                    <option value = "Keto">Keto</option>
+                    <option value = "SugarFree">Sugar Free</option>
+                    <option value = "LowCarb">Low Carb</option>
+                    <option value = "PorkFree">Pork Free</option>
+                    <option value = "NutFree">Nut Free</option>
+                    <option value = "ShellfishFree">Shellfish Free</option>
+                    <option value = "SoyFree">Soy Free</option>
+ </select><br>
+        <button class = reset type = "reset">Reset</button>
+        <button class = "add" type = "submit">Add</button>
+    </form>
+</body>
+</html>
