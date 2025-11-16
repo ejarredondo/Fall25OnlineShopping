@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Department</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="nav">
+        <header>
+            <h1>🌿 GreenGrocer Online - Add Department Form</h1>
+        </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="tables.html">Tables List</a>
+            <a href="add_tables.html">Add to Tables</a>
+        </div>
+    </div>
+
+    <h4>* = Required</h4>
+    <form action="/add_department" method="POST">
+        <label for="department_name">Department Name*:</label>
+        <input id="department_name" type="text" name="department_name" placeholder="department name..." required><br>
+
+        <label for="employee_total">Employee Total*:</label>
+        <input id="employee_total" type="number" min="0" name="employee_total" placeholder="number of employees..." required><br>
+
+        <button class="reset" type="reset">Reset</button>
+        <button class="add" type="submit">Add</button>
+    </form>
+</body>
+</html>

@@ -10,7 +10,14 @@ def get_film_actors(id):
     return actors
 
 def get_actors_not_in_film(id): 
-    subquery = db.session.query(FilmActor.film_id
+    subquery = db.session.query(Actor).outerjion(
+        FilmActor, 
+        and_ ( 
+            FilmActor.actor_id == Actor.actor_id, 
+            FilmActor.film_id == film_id
+            ))
+    
+    (FilmActor.film_id
                 ).filter(FilmActor.film_id == id
                 ).subquery()
     actors = db.session.query(Actor
