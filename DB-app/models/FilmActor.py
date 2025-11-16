@@ -9,19 +9,16 @@ def get_film_actors(id):
     
     return actors
 
-def get_actors_not_in_film(id): 
-    subquery = db.session.query(Actor).outerjion(
-        FilmActor, 
-        and_ ( 
-            FilmActor.actor_id == Actor.actor_id, 
-            FilmActor.film_id == film_id
-            ))
-    
-    (FilmActor.film_id
-                ).filter(FilmActor.film_id == id
-                ).subquery()
-    actors = db.session.query(Actor
-        ).filter(FilmActor.film_id.not_in(select(subquery)))
+def get_actors_not_in_film(film_id): 
+    actors = db.session.query(Actor).outerjoin(
+                FilmActor,
+                and_(
+                    FilmActor.actor_id == Actor.actor_id,
+                    FilmActor.film_id == film_id
+                )
+                ).filter(FilmActor.actor_id.is_(None)
+                ).all()
+
     return actors
 
 def add_actor_to_film(film_id, actor_id):
