@@ -11,8 +11,8 @@ def get_store(id):
     store = Store.query.get(id)
     return store
 
-def add_store(street_address, City, State, Zip):
-    a = Store(street_address = street_address, City = City, State = State, Zip = Zip, last_update=func.now())
+def add_store(supplier_name, street_address, City, State, Zip):
+    a = Store(supplier_name = supplier_name, street_address = street_address, City = City, State = State, Zip = Zip, last_update=func.now())
     db.session.add(a)
     db.session.commit()
 
