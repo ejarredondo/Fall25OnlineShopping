@@ -109,6 +109,7 @@ class ItemSupplied(db.Model):
     transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transac.transaction_id', ondelete='RESTRICT', onupdate='CASCADE'),  primary_key=True, nullable=False)
     supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.supplier_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
     store_id = db.Column(db.Integer, db.ForeignKey('store.store_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    item_quantity = db.Column(db.SmallInteger, nullable=False)
 
 
 
