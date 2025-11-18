@@ -118,7 +118,8 @@ class DietaryInformation(db.Model):
 
 class CustomerPurchaseHistory(db.Model):
 
-    
+    customer_purchase_history_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+
 
 
 
