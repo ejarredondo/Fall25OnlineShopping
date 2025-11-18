@@ -1,7 +1,9 @@
 from core import app
+from decimal import Decimal, InvalidOperation
+from datetime import datetime
 from flask import redirect, request, url_for 
 from flask.templating import render_template
-from models import Actor, Film, FilmActor, Queries, customer
+from models import Actor, Film, FilmActor, Queries, customer, employee
 
 # A decorator used to tell the application 
 # which URL is associated with which function 
@@ -122,6 +124,75 @@ def delete_customer(customer_id):
 	customer.delete_customer(customer_id)
 	return redirect(url_for('get_customers'))
 
+# APP ROUTES FOR EMPLOYEE TABLE
+@app.route('/employees', methods=['GET'])
+def get_employees():
+	employees = employee.get_employees()
+	return render_template('employee.html', employees=employees)
+
+
+@app.route('/employees/add', methods=['GET'])
+def add_employee_form():
+	return render_template('add_employee.html')
+
+
+@app.route('/employees', methods=['POST'])
+def create_employee():
+	first_name = (request.form.get("first_name") or "").strip()
+	last_name = (request.form.get("last_name") or "").strip()
+	start_date_raw = (request.form.get("start_date") or "").strip()
+	pay_rate_raw = (request.form.get("pay_rate") or "").strip()
+	position = (request.form.get("position") or "").strip() or None
+	availability_raw = request.form.get("availability", "").strip().lower()
+	bank_routing_information = (request.form.get("bank_routing_information") or "").strip()
+	checking_account_number = (request.form.get("checking_account_number") or "").strip()
+	email_address = (request.form.get("email_address") or "").strip() or None
+
+	start_date = None
+	if start_date_raw:
+		try:
+			start_date = datetime.strptime(start_date_raw, "%Y-%m-%d").date()
+		except ValueError:
+			start_date = None
+
+	pay_rate = None
+	if pay_rate_raw:
+		try:
+			pay_rate = Decimal(pay_rate_raw)
+		except InvalidOperation:
+			pay_rate = None
+
+	availability = None
+	if availability_raw in ("true", "false"):
+		availability = availability_raw == "true"
+
+	if (
+		first_name
+		and last_name
+		and pay_rate is not None
+		and bank_routing_information
+		and checking_account_number
+	):
+		employee.add_employee(
+			first_name,
+			last_name,
+			start_date,
+			pay_rate,
+			position,
+			availability,
+			bank_routing_information,
+			checking_account_number,
+			email_address,
+		)
+
+	return redirect(url_for('get_employees'))
+
+
+@app.route('/employees/<int:employee_id>/delete', methods=['GET'])
+def delete_employee(employee_id):
+	employee.delete_employee(employee_id)
+	return redirect(url_for('get_employees'))
+
 # APP ROUTE TO GET RESULTS FOR FILM QUERY 
 @app.route('/get_queries', methods=['GET']) 
 def get_queries(): 
@@ -141,4 +212,3 @@ def get_avg_rental():
 
 if __name__=='__main__': 
     app.run(port=8001, debug=True) 
-

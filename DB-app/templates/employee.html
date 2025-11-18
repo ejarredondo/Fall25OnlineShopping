@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employees - GreenGrocer Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="nav">
+        <header>
+            <h1></h1> GreenGrocer Online - Employees</h1>
+        </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="tables.html">Tables List</a>
+            <a href="add_tables.html">Add to Tables</a>
+        </div>
+    </div>
+
+    <div class="table-actions">
+        <a class="add" href="/employees/add">Add Employee</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Employee ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Start Date</th>
+                <th>Pay Rate</th>
+                <th>Position</th>
+                <th>Availability</th>
+                <th>Bank Routing #</th>
+                <th>Account #</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data in employees %}
+            <tr>
+                <td>{{ data.employee_id }}</td>
+                <td>{{ data.first_name }}</td>
+                <td>{{ data.last_name }}</td>
+                <td>{{ data.start_date or "—" }}</td>
+                <td>{{ data.pay_rate }}</td>
+                <td>{{ data.position or "—" }}</td>
+                <td>
+                    {% if data.availability is none %}
+                        —
+                    {% elif data.availability %}
+                        Available
+                    {% else %}
+                        Unavailable
+                    {% endif %}
+                </td>
+                <td>{{ data.bank_routing_information }}</td>
+                <td>{{ data.checking_account_number }}</td>
+                <td>{{ data.email_address or "—" }}</td>
+                <td><a href="/employees/{{ data.employee_id }}/delete" class="delete">Delete</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">No employees available.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="nav">
+        <header>
+            <h1>🌿 GreenGrocer Online - Add Employee</h1>
+        </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="tables.html">Tables List</a>
+            <a href="add_tables.html">Add to Tables</a>
+        </div>
+    </div>
+
+    <h4>* = Required</h4>
+    <form action="/employees" method="POST">
+        <label for="first_name">First Name*:</label>
+        <input id="first_name" type="text" name="first_name" placeholder="first name..." required><br>
+
+        <label for="last_name">Last Name*:</label>
+        <input id="last_name" type="text" name="last_name" placeholder="last name..." required><br>
+
+        <label for="start_date">Start Date:</label>
+        <input id="start_date" type="date" name="start_date"><br>
+
+        <label for="pay_rate">Pay Rate*:</label>
+        <input id="pay_rate" type="number" min="0" step="0.01" name="pay_rate" placeholder="hourly rate..." required><br>
+
+        <label for="position">Position:</label>
+        <input id="position" type="text" name="position" placeholder="role or title..."><br>
+
+        <label for="availability">Availability:</label>
+        <select id="availability" name="availability">
+            <option value="">Select availability</option>
+            <option value="true">Available</option>
+            <option value="false">Unavailable</option>
+        </select><br>
+
+        <label for="bank_routing_information">Bank Routing Number*:</label>
+        <input id="bank_routing_information" type="text" name="bank_routing_information" inputmode="numeric" pattern="\d{9}" placeholder="9-digit routing number..." required><br>
+
+        <label for="checking_account_number">Checking Account Number*:</label>
+        <input id="checking_account_number" type="text" name="checking_account_number" inputmode="numeric" pattern="\d{4,17}" placeholder="account number..." required><br>
+
+        <label for="email_address">Email:</label>
+        <input id="email_address" type="email" name="email_address" placeholder="email address..."><br>
+
+        <button class="reset" type="reset">Reset</button>
+        <button class="add" type="submit">Add</button>
+    </form>
+</body>
+</html>
