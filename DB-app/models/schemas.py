@@ -106,7 +106,7 @@ class Transac(db.Model):
 class ItemSupplied(db.Model):
 
     product_id = db.Column(db.Integer, db.ForeignKey('catalog.product_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
-    
+    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transac.transaction_id', ondelete='RESTRICT', onupdate='CASCADE'),  primary_key=True, nullable=False)
 
 
 
