@@ -134,6 +134,7 @@ class CustomerTransaction(db.Model):
     shipping_address_city = db.Column(db.String(30))
     shipping_address_state = db.Column(db.String(2))
     shipping_address_zip = db.Column(db.String(5))
+    card_info = db.Column(db.String(30), unique=True)
 
 
 
