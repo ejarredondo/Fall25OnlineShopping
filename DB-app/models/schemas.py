@@ -84,6 +84,10 @@ class Store(db.Model):
     state = db.Column(db.String(2), nullable=False)
     zip = db.Column(db.String(5), nullable=False)
 
+class Supplier(db.Model):
+
+    
+
 
 
 
