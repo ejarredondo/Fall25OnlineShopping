@@ -6,6 +6,14 @@ def get_DietaryInformation():
     all_DietaryInformation = DietaryInformation.query.all()
     return DietaryInformation_schema.dump(all_DietaryInformation)
 
+def get_DietaryInformation(product_id): 
+    DietaryInformation_item = db.session.query(DietaryInformation
+                ).join(Catalog, DietaryInformation.ProductId == Catalog.Product_ID
+                ).filter(DietaryInformation.ProductId == product_id
+                ).first()
+
+    return DietaryInformation_item
+
 def get_all_DietaryInformation_by_Catalog(Product_id):
     catalogs = db.session.query(DietaryInformation
             ).join(Catalog, DietaryInformation.ProductId == Catalog.Product_ID
