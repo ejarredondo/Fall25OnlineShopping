@@ -122,6 +122,7 @@ class CustomerPurchaseHistory(db.Model):
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.customer_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
     transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transac.transaction_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
     amount_spent = db.Column(db.Numeric(5, 2), nullable=False)
+    date_purchased = db.Column(db.Date)
 
 
 
