@@ -111,7 +111,9 @@ class ItemSupplied(db.Model):
     store_id = db.Column(db.Integer, db.ForeignKey('store.store_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
     item_quantity = db.Column(db.SmallInteger, nullable=False)
 
+class DietaryInformation(db.Model):
 
+    
 
 
 
