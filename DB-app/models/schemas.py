@@ -80,6 +80,7 @@ class Store(db.Model):
 
     store_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     street_address = db.Column(db.String(30), nullable=False)
+    city = db.Column(db.String(30), nullable=False)
 
 
 
