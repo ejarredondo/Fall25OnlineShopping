@@ -138,6 +138,8 @@ class CustomerTransaction(db.Model):
     email_address = db.Column(db.String(30), unique=True)
     items_purchased = db.Column(db.SmallInteger)
 
+class EmployeeTransaction(db.Model):
+
 
 
 
