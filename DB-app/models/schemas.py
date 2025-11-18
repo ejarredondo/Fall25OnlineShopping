@@ -98,6 +98,7 @@ class Transac(db.Model):
 
     transaction_id = db.Column(db.SmallInteger, primary_key=True, autoincrement=True, nullable=False)
     cashier_employee_id = db.Column(db.Integer, db.ForeignKey('employee.employee_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    incoming_or_outgoing = db.Column(db.Enum('I', 'O'))
 
 
 
