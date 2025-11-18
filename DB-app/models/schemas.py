@@ -103,6 +103,9 @@ class Transac(db.Model):
     transaction_amount = db.Column(db.Numeric(5, 2), CheckConstraint('transaction_amount >= 0'), nullable=False)
     transaction_date = db.Column(db.DateTime)
 
+class ItemSupplied(db.Model):
+
+
 
 
 
