@@ -87,6 +87,8 @@ class Store(db.Model):
 class Supplier(db.Model):
 
     supplier_name = db.Column(db.String(255), unique=True, nullable=False)
+    supplier_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+
 
 
 
