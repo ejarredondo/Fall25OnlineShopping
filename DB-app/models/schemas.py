@@ -89,6 +89,7 @@ class Supplier(db.Model):
     supplier_name = db.Column(db.String(255), unique=True, nullable=False)
     supplier_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     supplier_address_street = db.Column(db.String(255))
+    supplier_address_city = db.Column(db.String(20))
 
 
 
