@@ -101,6 +101,7 @@ class Transac(db.Model):
     incoming_or_outgoing = db.Column(db.Enum('I', 'O'))
     incoming_or_outgoing = db.Column(db.Enum('I', 'O'))
     transaction_amount = db.Column(db.Numeric(5, 2), CheckConstraint('transaction_amount >= 0'), nullable=False)
+    transaction_date = db.Column(db.DateTime)
 
 
 
