@@ -126,8 +126,10 @@ class CustomerPurchaseHistory(db.Model):
     time_purchased = db.Column(db.Time)
 
 class CustomerTransaction(db.Model):
-
     
+    customer_transaction_id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True)
+
+
 
 
 
