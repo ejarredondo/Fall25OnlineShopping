@@ -86,7 +86,8 @@ class Store(db.Model):
 
 class Supplier(db.Model):
 
-    
+    supplier_name = db.Column(db.String(255), unique=True, nullable=False)
+
 
 
 
