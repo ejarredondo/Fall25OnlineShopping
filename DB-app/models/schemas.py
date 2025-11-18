@@ -116,6 +116,9 @@ class DietaryInformation(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('catalog.product_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
     restriction = db.Column(db.Enum('DairyFree', 'GlutenFree', 'vegetarian', 'vegan', 'kosher', 'keto', 'SugarFree', 'LowCarb', 'PorkFree', 'NutFree', 'ShellfishFree', 'SoyFree'))
 
+class CustomerPurchaseHistory(db.Model):
+
+    
 
 
 
