@@ -96,7 +96,8 @@ class Supplier(db.Model):
 
 class Transac(db.Model):
 
-    
+    transaction_id = db.Column(db.SmallInteger, primary_key=True, autoincrement=True, nullable=False)
+
 
 
 
