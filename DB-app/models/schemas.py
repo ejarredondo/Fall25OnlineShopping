@@ -128,6 +128,7 @@ class CustomerPurchaseHistory(db.Model):
 class CustomerTransaction(db.Model):
     
     customer_transaction_id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.customer_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
 
 
 
