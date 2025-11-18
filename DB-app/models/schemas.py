@@ -94,7 +94,9 @@ class Supplier(db.Model):
     supplier_address_zip = db.Column(db.String(5))
     store_id = db.Column(db.Integer, db.ForeignKey('store.store_id', ondelete='RESTRICT', onupdate='CASCADE'))
 
+class Transac(db.Model):
 
+    
 
 
 
