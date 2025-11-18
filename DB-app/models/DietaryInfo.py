@@ -1,13 +1,21 @@
-from sqlalchemy import DietaryInformation
-from models.schemas import DietaryInformation
+from sqlalchemy import func
+from models.schemas import DietaryInformation, Catalog
 from core import ma, db
 
 def get_DietaryInformation(): 
     all_DietaryInformation = DietaryInformation.query.all()
     return DietaryInformation_schema.dump(all_DietaryInformation)
 
-def add_DietaryInformation(Restriction):
-    DI = DietaryInformation(Restriction=Restriction, last_update=func.now())
+def get_all_DietaryInformation_by_Catalog(Product_id):
+    catalogs = db.session.query(DietaryInformation
+            ).join(Catalog, DietaryInformation.ProductId == Catalog.Product_ID
+            ).filter(Catalog.Product_ID == Product_id
+            ).all()
+     
+    return catalogs
+
+def add_DietaryInformation(ProductId, Restriction):
+    DI = DietaryInformation(ProductId=ProductId, Restriction=Restriction, last_update=func.now())
     db.session.add(DI)
     db.session.commit()
 
