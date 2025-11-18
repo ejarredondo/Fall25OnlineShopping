@@ -140,6 +140,7 @@ class CustomerTransaction(db.Model):
 
 class EmployeeTransaction(db.Model):
 
+    employee_id = db.Column(db.Integer, db.ForeignKey('employee.employee_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
 
 
 
