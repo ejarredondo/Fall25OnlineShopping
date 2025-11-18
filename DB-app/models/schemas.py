@@ -82,6 +82,8 @@ class Store(db.Model):
     street_address = db.Column(db.String(30), nullable=False)
     city = db.Column(db.String(30), nullable=False)
     state = db.Column(db.String(2), nullable=False)
+    zip = db.Column(db.String(5), nullable=False)
+
 
 
 
