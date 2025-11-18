@@ -125,6 +125,9 @@ class CustomerPurchaseHistory(db.Model):
     date_purchased = db.Column(db.Date)
     time_purchased = db.Column(db.Time)
 
+class CustomerTransaction(db.Model):
+
+    
 
 
 
