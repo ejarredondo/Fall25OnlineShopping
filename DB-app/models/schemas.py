@@ -91,6 +91,8 @@ class Supplier(db.Model):
     supplier_address_street = db.Column(db.String(255))
     supplier_address_city = db.Column(db.String(20))
     supplier_address_state = db.Column(db.String(2))
+    supplier_address_zip = db.Column(db.String(5))
+
 
 
 
