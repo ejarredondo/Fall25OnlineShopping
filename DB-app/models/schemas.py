@@ -131,6 +131,7 @@ class CustomerTransaction(db.Model):
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.customer_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
     transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transac.transaction_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
     shipping_address_street = db.Column(db.String(30))
+    shipping_address_city = db.Column(db.String(30))
 
 
 
