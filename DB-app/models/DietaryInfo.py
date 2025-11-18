@@ -1,5 +1,5 @@
-from sqlalchemy import ItemSupplied
-from models.schemas import ItemSupllied
+from sqlalchemy import DietaryInformation
+from models.schemas import DietaryInformation
 from core import ma, db
 
 def get_DietaryInformation(): 

@@ -1,5 +1,5 @@
-from sqlalchemy import Transaction
-from models.schemas import ItemSupllied
+from sqlalchemy import func
+from models.schemas import Transaction, Employee
 from core import ma, db
 
 def get_Transaction(): 
@@ -10,10 +10,10 @@ def get_Transaction(ID):
     Transaction = Transaction.query.get(ID)
     return Transaction
 
-def get_all_Transaction_by_Employee(Emplyee_id):
+def get_all_Transaction_by_Employee(CashierEmployee_id):
      Transaction = db.session.query(Transaction
-            ).join(Employee, Transactiom.Employee_id == Employee.Employee_id
-            ).filter(Employee.Employee_id == Employee_id
+            ).join(Employee, Transaction.CashierEmployee_id == Employee.Employee_id
+            ).filter(Employee.Employee_id == CashierEmployee_id
             ).all()
 
      return Transaction
