@@ -16,29 +16,16 @@ def hello():
 def index():
 	return render_template('index.html')
 
-# APP ROUTE TO GET RESULTS FOR SELECT QUERY 
-@app.route('/get_actors', methods=['GET']) 
+# APP ROUTE TO GET RESULTS FOR catalog SELECT QUERY 
+@app.route('/get_catalogs', methods=['GET']) 
 def get_results(): 
-	actors = Actor.get_actors()
-	return render_template('actors.html', actors=actors) 
-
-@app.route('/get_actors_not_in_film/<int:id>', methods=['GET']) 
-def get_actors_not_in_film(id): 
-	actors = FilmActor.get_actors_not_in_film(id)
-	film = Film.get_film(id)
-	return render_template('actors_select.html', film=film, actors=actors)  
-
-@app.route('/get_actors_not_in_film/add_actor_to_film', methods=['POST']) 
-def add_actors_not_in_film(): 
-	actor_id = request.form.get("actor_id")
-	film_id = request.form.get("film_id")
-	FilmActor.add_actor_to_film(film_id, actor_id)
-	return redirect (url_for('get_film_actors', id=film_id))  
+	catalogs = catalog.get_catalogs()
+	return render_template('catalog.html', catalogs=catalogs) 
 
 # APP ROUTE TO RENDER FORM TO ADD ACTOR DATA
-@app.route('/add_actors')
-def add_actors():
-	return render_template('add_actor.html')
+@app.route('/add_catalogs')
+def add_catalogs():
+	return render_template('add_catalog.html')
 
 # APP ROUTE TO CALL FUNCTION TO ADD ACTOR
 @app.route('/add', methods=["POST"])
@@ -49,22 +36,22 @@ def add_actor():
 	# Remember that inside the get the name should
 	# exactly be the same as that in the html
 	# input fields
-	first_name = request.form.get("first_name")
-	last_name = request.form.get("last_name")
+	#first_name = request.form.get("first_name")
+	#last_name = request.form.get("last_name")
 
 	# call model function that will store data as a row in our datatable
-	if first_name != '' and last_name != '':
-		Actor.add_actor(first_name, last_name)
-		return redirect('/')
-	else:
-		return redirect('/')
+	#if first_name != '' and last_name != '':
+	#	catalog.add_catalog(first_name, last_name)
+	#	return redirect('/')
+	#else:
+	#	return redirect('/')
 
 # APP ROUTE TO CALL FUNCTION TO DELETE ACTOR
-@app.route('/delete_actor/<int:id>')
-def delete_actor(id):
+@app.route('/delete_catalog/<int:id>')
+def delete_catalog(id):
 	# Deletes the data on the basis of unique id and 
 	# redirects to home page
-	Actor.delete_actor(id)
+	catalog.delete_catalog(id)
 	return redirect('/')
 
 # APP ROUTE TO GET RESULTS FOR FILM QUERY 
