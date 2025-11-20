@@ -20,23 +20,21 @@ def index():
 # APP ROUTE TO GET RESULTS FOR CATALOG SELECT QUERY 
 @app.route('/get_catalogs', methods=['GET']) 
 def get_results(): 
-	actors = catalog.get_catalogs()
+	catalogs = catalog.get_catalogs()
 	return render_template('catalog.html', catalogs=catalogs) 
 
 @app.route('/get_all_catalogs_by_dept/<int:id>', methods=['GET']) 
 def get_all_catalogs_by_dept(department_id): 
 	catalogs = catalog.get_all_catalogs_by_dept(department_id)
-	department = department.get_film(id)
-	# check this below
-	return render_template('actors_select.html', film=film, actors=actors)  
+	departments = department.get_department(id)
+	return render_template('catalogs_select.html', catalogs = catalogs , departments = departments)  
 
 @app.route('/get_catalogs_without_dept/add_catalog_to_dept', methods=['POST']) 
 def add_catalogs_without_dept(): 
 	product_id = request.form.get("product_id")
 	department_id = request.form.get("department_id")
-	# check this below
 	catalog.add_catalog_to_dept(product_id, department_id)
-	return redirect (url_for('get_film_actors', id=film_id))  
+	return redirect (url_for('get_catalog_dept', id=department_id))  
 
 # APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
 @app.route('/add_catalogs')
@@ -52,15 +50,26 @@ def add_catalog():
 	# Remember that inside the get the name should
 	# exactly be the same as that in the html
 	# input fields
-	#first_name = request.form.get("first_name")
-	#last_name = request.form.get("last_name")
+	product_name = request.form.get("product_name")
+	category = request.form.get("category")
+	sku = request.form.get("sku")
+	weight = request.form.get("weight")
+	base_price = request.form.get("base_price")
+	sale_price = request.form.get("sale_price")
+	sold_by_weight_or_unit = request.form.get("sold_by_weight_or_unit")
+	brand = request.form.get("brand")
+	quantity_of_item = request.form.get("quantity_of_item")
+	department_id = request.form.get("department_id")
+	expiration_date = request.form.get("expiration_date")
 
 	# call model function that will store data as a row in our datatable
-	#if first_name != '' and last_name != '':
-	#	catalog.add_catalog(first_name, last_name)
-	#	return redirect('/')
-	#else:
-	#	return redirect('/')
+	if product_name != '' and category != '' and sku != '' and base_price != '' and sale_price != '' and sold_by_weight_or_unit != '' and department_id != '':
+		catalog.add_catalog(product_name, category, sku, 
+					  weight, base_price, sale_price, sold_by_weight_or_unit,
+					  brand, quantity_of_item, department_id, expiration_date)
+		return redirect('/')
+	else:
+		return redirect('/')
 
 # APP ROUTE TO CALL FUNCTION TO DELETE CATALOG
 @app.route('/delete_catalog/<int:id>')
@@ -80,22 +89,89 @@ def get_results():
 def get_all_suppliers_by_store(store_id): 
 	suppliers = supplier.get_all_suppliers_by_store(store_id)
 	store = store.get_store(id)
-	# check this below
-	return render_template('actors_select.html', film=film, actors=actors)  
+	return render_template('suppliers_select.html', suppliers = suppliers, store = store)  
 
 @app.route('/get_suppliers_without_store/add_suppliers_to_store', methods=['POST']) 
 def add_suppliers_without_store(): 
 	supplier_id = request.form.get("supplier_id")
 	store_id = request.form.get("store_id")
-	# check this below
 	supplier.add_supplier_to_store(supplier_id, store_id)
-	return redirect (url_for('get_film_actors', id=film_id))  
+	return redirect (url_for('get_supplier_store', id=store_id))  
 
-# APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
+# APP ROUTE TO RENDER FORM TO ADD SUPPLIER DATA
 @app.route('/add_suppliers')
 def add_suppliers():
 	return render_template('add_supplier.html')
 
+# APP ROUTE TO CALL FUNCTION TO ADD SUPPLIER
+@app.route('/add', methods=["POST"])
+def add_supplier():
+	
+	# In this function we will input data from the 
+	# form page and store it in our database.
+	# Remember that inside the get the name should
+	# exactly be the same as that in the html
+	# input fields
+	supplier_name = request.form.get("supplier_name")
+	supplier_address_street = request.form.get("supplier_address_street")
+	supplier_address_city = request.form.get("supplier_address_city")
+	supplier_address_state = request.form.get("supplier_address_state")
+	supplier_address_zip = request.form.get("supplier_address_zip")
+	store_id = request.form.get("store_id")
+
+	# call model function that will store data as a row in our datatable
+	if supplier_name != '':
+		supplier.add_supplier(supplier_name, supplier_address_street, supplier_address_city, 
+					  supplier_address_state, supplier_address_zip, store_id)
+		return redirect('/')
+	else:
+		return redirect('/')
+
+@app.route('/delete_supplier/<int:id>')
+def delete_supplier(id):
+	# Deletes the data on the basis of unique id and 
+	# redirects to home page
+	supplier.delete_supplier(id)
+	return redirect('/')
+
+# APP ROUTE TO GET RESULTS FOR STORE SELECT QUERY 
+@app.route('/get_stores', methods=['GET']) 
+def get_results(): 
+	stores = store.get_stores()
+	return render_template('store.html', stores = stores) 
+
+# APP ROUTE TO RENDER FORM TO ADD STORE DATA
+@app.route('/add_stores')
+def add_stores():
+	return render_template('add_store.html')
+
+# APP ROUTE TO CALL FUNCTION TO ADD STORE
+@app.route('/add', methods=["POST"])
+def add_store():
+	
+	# In this function we will input data from the 
+	# form page and store it in our database.
+	# Remember that inside the get the name should
+	# exactly be the same as that in the html
+	# input fields
+	street_address = request.form.get("street_address")
+	city = request.form.get("city")
+	state = request.form.get("state")
+	zip = request.form.get("zip")
+
+	# call model function that will store data as a row in our datatable
+	if street_address!= '' and city != '' and state != '' and zip != '':
+		supplier.add_supplier(street_address, city, state, zip)
+		return redirect('/')
+	else:
+		return redirect('/')
+
+@app.route('/delete_store/<int:id>')
+def delete_store(id):
+	# Deletes the data on the basis of unique id and 
+	# redirects to home page
+	store.delete_store(id)
+	return redirect('/')
 
 # APP ROUTE TO GET RESULTS FOR FILM QUERY 
 @app.route('/get_films', methods=['GET','POST']) 

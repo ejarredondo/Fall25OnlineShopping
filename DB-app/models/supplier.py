@@ -22,8 +22,13 @@ def get_suppliers_without_store():
     suppliers = db.session.query(Supplier).filter(
          Supplier.store_id.is_(None)
     ).all()
-    
+
     return suppliers
+
+def add_supplier_to_store(supplier_id, store_id):
+    a = Supplier(store_id = store_id, supplier_id = supplier_id, last_update = func.now())
+    db.session.add(a)
+    db.session.commit()
 
 def add_supplier(supplier_name, supplier_address_street, supplier_address_city, 
                  supplier_address_state, supplier_address_zip, store_id):
