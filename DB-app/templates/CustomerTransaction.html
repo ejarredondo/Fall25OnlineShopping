@@ -1,53 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Customer Transaction</title>
+    <title>Add CustomerTransaction - GreenGrocer Online</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="nav">
         <header>
-            <h1> GreenGrocer Online - Add Customer Transaction</h1>
+            <h1>Tables - GreenGrocer Online</h1>
         </header>
         <div class="nav-links">
             <a href="home.html">Home</a>
             <a href="tables.html">Tables List</a>
-            <a href="add_tables.html">Add to Tables</a>
+            <a href="add_tables.html">Edit Tables</a>
         </div>
     </div>
 
     <h4>* = Required</h4>
-    <form action="/customer_transactions" method="POST">
+    <form action="/add" method="POST">
 
-        <label for="customer_id">Customer ID*:</label>
-        <input id="customer_id" type="number" min="1" name="customer_id" placeholder="customer id..." required><br>
+        <label>CustomerID*:</label> <!-- <foreign key> -->
+        <input type="text" name="customer_id" placeholder="customer id..." required><br>
 
-        <label for="transaction_id">Transaction ID*:</label>
-        <input id="transaction_id" type="number" min="1" name="transaction_id" placeholder="transaction id..." required><br>
+        <label>TransactionID*:</label> <!-- <foreign key> -->
+        <input type="text" name="transaction_id" placeholder="transaction id..." required><br>
 
-        <label for="shipping_street">Shipping Street:</label>
-        <input id="shipping_street" type="text" name="shipping_street" maxlength="30" placeholder="street address..."><br>
+        <label>ShippingAddressStreet:</label>
+        <input type="text" name="shipping_address_street" placeholder="street address..."><br>
 
-        <label for="shipping_city">Shipping City:</label>
-        <input id="shipping_city" type="text" name="shipping_city" maxlength="30" placeholder="city..."><br>
+        <label>ShippingAddressCity:</label>
+        <input type="text" name="shipping_address_city" placeholder="city..."><br>
 
-        <label for="shipping_state">Shipping State:</label>
-        <input id="shipping_state" type="text" name="shipping_state" maxlength="2"
-               pattern="[A-Za-z]{2}" placeholder="state (2 letters)..."><br>
+        <label>ShippingAddressState:</label>
+        <input type="text" name="shipping_address_state" maxlength="2" placeholder="state (2 letters)..."><br>
 
-        <label for="shipping_zip">Shipping Zip:</label>
-        <input id="shipping_zip" type="text" name="shipping_zip" maxlength="5"
-               pattern="\\d{5}" placeholder="zip code (5 digits)..."><br>
+        <label>ShippingAddressZip:</label>
+        <input type="text" name="shipping_address_zip" maxlength="5" placeholder="zip (5 digits)..."><br>
 
-        <label for="card_info">Card Info:</label>
-        <input id="card_info" type="text" name="card_info" maxlength="30" placeholder="card information..."><br>
+        <label>CardInfo:</label>
+        <input type="text" name="card_info" placeholder="card information..."><br>
 
-        <label for="email_address">Email Address:</label>
-        <input id="email_address" type="email" name="email_address" maxlength="30" placeholder="email..."><br>
+        <label>EmailAddress:</label>
+        <input type="text" name="email_address" placeholder="email address..."><br>
 
-        <label for="items_purchased">Items Purchased:</label>
-        <input id="items_purchased" type="number" min="0" name="items_purchased"
-               placeholder="number of items..."><br>
+        <label>ItemsPurchased:</label>
+        <input type="number" name="items_purchased" placeholder="number of items..."><br>
 
         <button class="reset" type="reset">Reset</button>
         <button class="add" type="submit">Add</button>
