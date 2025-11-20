@@ -3,7 +3,7 @@ from decimal import Decimal, InvalidOperation
 from datetime import datetime
 from flask import redirect, request, url_for 
 from flask.templating import render_template
-from models import Actor, Film, FilmActor, Queries, customer, employee
+from models import catalog, customer, customerpurchasehistory, customertransaction, department, DietaryInfo, employee, employeetransaction, ItemSupllied, store, supplier, Transaction
 
 # A decorator used to tell the application 
 # which URL is associated with which function 
