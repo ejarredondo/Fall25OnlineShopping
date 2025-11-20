@@ -3,8 +3,8 @@ from models.schemas import Transac, Employee
 from core import ma, db
 
 def get_Transac(): 
-    all_Transaction = Transaction.query.all()
-    return Transaction_schema.dump(all_Transaction)
+    all_Transaction = Transac.query.all()
+    return Transac_schema.dump(all_Transaction)
 
 def get_Transac(ID):
     Transaction = Transaction.query.get(ID)
