@@ -12,24 +12,40 @@ def hello():
 	return 'HELLO'
 
 # APP ROUTE TO RENDER HOME PAGE WITH LINKS
+# check this with home.html; might need to delete home.html??
 @app.route('/')
 def index():
 	return render_template('index.html')
 
-# APP ROUTE TO GET RESULTS FOR catalog SELECT QUERY 
+# APP ROUTE TO GET RESULTS FOR CATALOG SELECT QUERY 
 @app.route('/get_catalogs', methods=['GET']) 
 def get_results(): 
-	catalogs = catalog.get_catalogs()
+	actors = catalog.get_catalogs()
 	return render_template('catalog.html', catalogs=catalogs) 
 
-# APP ROUTE TO RENDER FORM TO ADD ACTOR DATA
+@app.route('/get_all_catalogs_by_dept/<int:id>', methods=['GET']) 
+def get_all_catalogs_by_dept(department_id): 
+	catalogs = catalog.get_all_catalogs_by_dept(department_id)
+	department = department.get_film(id)
+	# check this below
+	return render_template('actors_select.html', film=film, actors=actors)  
+
+@app.route('/get_catalogs_without_dept/add_catalog_to_dept', methods=['POST']) 
+def add_catalogs_without_dept(): 
+	product_id = request.form.get("product_id")
+	department_id = request.form.get("department_id")
+	# check this below
+	catalog.add_catalog_to_dept(product_id, department_id)
+	return redirect (url_for('get_film_actors', id=film_id))  
+
+# APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
 @app.route('/add_catalogs')
 def add_catalogs():
 	return render_template('add_catalog.html')
 
-# APP ROUTE TO CALL FUNCTION TO ADD ACTOR
+# APP ROUTE TO CALL FUNCTION TO ADD CATALOG
 @app.route('/add', methods=["POST"])
-def add_actor():
+def add_catalog():
 	
 	# In this function we will input data from the 
 	# form page and store it in our database.
@@ -46,13 +62,40 @@ def add_actor():
 	#else:
 	#	return redirect('/')
 
-# APP ROUTE TO CALL FUNCTION TO DELETE ACTOR
+# APP ROUTE TO CALL FUNCTION TO DELETE CATALOG
 @app.route('/delete_catalog/<int:id>')
 def delete_catalog(id):
 	# Deletes the data on the basis of unique id and 
 	# redirects to home page
 	catalog.delete_catalog(id)
 	return redirect('/')
+
+# APP ROUTE TO GET RESULTS FOR SUPPLIER SELECT QUERY 
+@app.route('/get_suppliers', methods=['GET']) 
+def get_results(): 
+	suppliers = supplier.get_suppliers()
+	return render_template('supplier.html', suppliers = suppliers) 
+
+@app.route('/get_all_suppliers_by_store/<int:id>', methods=['GET']) 
+def get_all_suppliers_by_store(store_id): 
+	suppliers = supplier.get_all_suppliers_by_store(store_id)
+	store = store.get_store(id)
+	# check this below
+	return render_template('actors_select.html', film=film, actors=actors)  
+
+@app.route('/get_suppliers_without_store/add_suppliers_to_store', methods=['POST']) 
+def add_suppliers_without_store(): 
+	supplier_id = request.form.get("supplier_id")
+	store_id = request.form.get("store_id")
+	# check this below
+	supplier.add_supplier_to_store(supplier_id, store_id)
+	return redirect (url_for('get_film_actors', id=film_id))  
+
+# APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
+@app.route('/add_suppliers')
+def add_suppliers():
+	return render_template('add_supplier.html')
+
 
 # APP ROUTE TO GET RESULTS FOR FILM QUERY 
 @app.route('/get_films', methods=['GET','POST']) 
