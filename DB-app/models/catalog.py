@@ -26,6 +26,11 @@ def get_catalogs_without_dept():
     
     return catalogs
 
+def add_catalog_to_dept(product_id, department_id):
+    a = Catalog(product_id = product_id, department_id = department_id, last_update = func.now())
+    db.session.add(a)
+    db.session.commit()
+
 def add_catalog(product_name, category, sku, weight, 
               base_price, sale_price, sold_by_weight_or_unit, 
               brand, quantity_of_item, department_id, expiration_date):

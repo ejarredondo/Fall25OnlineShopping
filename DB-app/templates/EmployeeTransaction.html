@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Employee Transaction</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="nav">
+        <header>
+            <h1> GreenGrocer Online - Add Employee Transaction</h1>
+        </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="tables.html">Tables List</a>
+            <a href="add_tables.html">Add to Tables</a>
+        </div>
+    </div>
+
+    <h4>* = Required</h4>
+    <form action="/employee_transaction" method="POST">
+
+        <label for="employee_id">Employee ID*:</label>
+        <input id="employee_id" type="number" min="1" name="employee_id" placeholder="employee id..." required><br>
+
+        <label for="transaction_id">Transaction ID*:</label>
+        <input id="transaction_id" type="number" min="1" name="transaction_id" placeholder="transaction id..." required><br>
+
+        <label for="store_id">Store ID*:</label>
+        <input id="store_id" type="number" min="1" name="store_id" placeholder="store id..." required><br>
+
+        <button class="reset" type="reset">Reset</button>
+        <button class="add" type="submit">Add</button>
+    </form>
+</body>
+</html>

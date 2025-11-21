@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add CustomerTransaction - GreenGrocer Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="nav">
+        <header>
+            <h1>Tables - GreenGrocer Online</h1>
+        </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="tables.html">Tables List</a>
+            <a href="add_tables.html">Edit Tables</a>
+        </div>
+    </div>
+
+    <h4>* = Required</h4>
+    <form action="/add" method="POST">
+
+        <label>CustomerID*:</label> <!-- <foreign key> -->
+        <input type="text" name="customer_id" placeholder="customer id..." required><br>
+
+        <label>TransactionID*:</label> <!-- <foreign key> -->
+        <input type="text" name="transaction_id" placeholder="transaction id..." required><br>
+
+        <label>ShippingAddressStreet:</label>
+        <input type="text" name="shipping_address_street" placeholder="street address..."><br>
+
+        <label>ShippingAddressCity:</label>
+        <input type="text" name="shipping_address_city" placeholder="city..."><br>
+
+        <label>ShippingAddressState:</label>
+        <input type="text" name="shipping_address_state" maxlength="2" placeholder="state (2 letters)..."><br>
+
+        <label>ShippingAddressZip:</label>
+        <input type="text" name="shipping_address_zip" maxlength="5" placeholder="zip (5 digits)..."><br>
+
+        <label>CardInfo:</label>
+        <input type="text" name="card_info" placeholder="card information..."><br>
+
+        <label>EmailAddress:</label>
+        <input type="text" name="email_address" placeholder="email address..."><br>
+
+        <label>ItemsPurchased:</label>
+        <input type="number" name="items_purchased" placeholder="number of items..."><br>
+
+        <button class="reset" type="reset">Reset</button>
+        <button class="add" type="submit">Add</button>
+    </form>
+</body>
+</html>
