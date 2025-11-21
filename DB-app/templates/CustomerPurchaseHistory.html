@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add CustomerPurchaseHistory - GreenGrocer Online</title>
+    <title>CustomerPurchaseHistory - GreenGrocer Online</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="nav">
-    </header>
-    <div class="nav-links">
-        <a href="home.html">Home</a>
-        <a href="tables.html">Tables List</a>
-        <a href="add_tables.html">Edit Tables</a>
+        <header>
+            <h1>GreenGrocer Online - CustomerPurchaseHistory</h1>
+        </header>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="tables.html">Tables List</a>
+            <a href="add_tables.html">Edit Tables</a>
+        </div>
     </div>
-</div>
 
-<h4>* = Required</h4>
-    <form action="/add" method="POST">
+    <h4>* = Required</h4>
+    <form action="/CustomerPurchaseHistory" method="POST">
 
-        <label>CustomerID*:</label> <!-- <foreign key> -->
-        <input type="text" name="customer_id" placeholder="customer id..." required><br>
+        <label for="customer_id">Customer ID*:</label>
+        <input id="customer_id" type="number" min="1" name="customer_id" placeholder="customer id..." required><br>
 
-        <label>TransactionID*:</label> <!-- <foreign key> -->
-        <input type="text" name="transaction_id" placeholder="transaction id..." required><br>
+        <label for="transaction_id">Transaction ID*:</label>
+        <input id="transaction_id" type="number" min="1" name="transaction_id" placeholder="transaction id..." required><br>
 
-        <label>AmountSpent*:</label>
-        <input type="number" name="amount_spent" step="0.01" placeholder="amount spent..." required><br>
+        <label for="amount_spent">Amount Spent*:</label>
+        <input id="amount_spent" type="number" step="0.01" min="0" name="amount_spent" placeholder="amount spent..." required><br>
 
-        <label>DatePurchased:</label>
-        <input type="date" name="date_purchased"><br>
+        <label for="date_purchased">Date Purchased:</label>
+        <input id="date_purchased" type="date" name="date_purchased"><br>
 
-        <label>TimePurchased:</label>
-        <input type="time" name="time_purchased"><br>
+        <label for="time_purchased">Time Purchased:</label>
+        <input id="time_purchased" type="time" name="time_purchased"><br>
 
         <button class="reset" type="reset">Reset</button>
         <button class="add" type="submit">Add</button>
