@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ItemSupplied - GreenGrocer Online</title>
+    <link rel = "stylesheet" href = "styles.css">
+</head>
+<body>
+    <div id = "nav">
+        <header>
+            <h1>Tables - GreenGrocer Online</h1>
+        </header>
+        <div class = "nav-links">
+            <a href = "home.html">Home</a>
+            <a href = "tables.html">Tables List</a>
+            <a href = "add_tables.html">Edit Tables</a>
+        </div>
+    </div> 
+<a href = "/add_ItemsSupplied">ADD</a>
+        <br>
+        <table>
+        <thead>
+            <th>ProductID</th>
+            <th>TransactionID</th>
+            <th>SupplierID</th>
+            <th>StoreID</th>
+            <th>ItemQuantity</th>
+            <th>Last Update</th>
+        </thead>
+        {% for data in stores %}
+        <tbody>
+            <td>{{data.ItemSupplied_ProductID}}</td>
+            <td>{{data.ItemSupplied_TransactionID}}</td>
+            <td>{{data.ItemSupplied_SupplierID}}</td>
+            <td>{{data.ItemSupplied_StoreID}}</td>
+            <td>{{data.ItemSupplied_ItemQuantity}}</td>
+            <td>{{data.ItemSupplied_LastUpdate}}</td>
+            <td><a href = "/delete_ItemsSupplied/{{data.ItemSupplied_ProductID}}" type = "button">Delete</a></td>
+        </tbody>
+        {% endfor%}
+    </table>
+</body>
+</html>
