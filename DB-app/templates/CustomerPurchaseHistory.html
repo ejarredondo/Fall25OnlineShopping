@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add CustomerPurchaseHistory - GreenGrocer Online</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="nav">
+    </header>
+    <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="tables.html">Tables List</a>
+        <a href="add_tables.html">Edit Tables</a>
+    </div>
+</div>
+
+<h4>* = Required</h4>
+    <form action="/add" method="POST">
+
+        <label>CustomerID*:</label> <!-- <foreign key> -->
+        <input type="text" name="customer_id" placeholder="customer id..." required><br>
+
+        <label>TransactionID*:</label> <!-- <foreign key> -->
+        <input type="text" name="transaction_id" placeholder="transaction id..." required><br>
+
+        <label>AmountSpent*:</label>
+        <input type="number" name="amount_spent" step="0.01" placeholder="amount spent..." required><br>
+
+        <label>DatePurchased:</label>
+        <input type="date" name="date_purchased"><br>
+
+        <label>TimePurchased:</label>
+        <input type="time" name="time_purchased"><br>
+
+        <button class="reset" type="reset">Reset</button>
+        <button class="add" type="submit">Add</button>
+    </form>
+</body>
+</html>
