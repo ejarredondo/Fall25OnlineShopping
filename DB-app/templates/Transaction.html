@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction - GreenGrocer Online</title>
+    <link rel = "stylesheet" href = "styles.css">
+</head>
+<body>
+    <div id = "nav">
+        <header>
+            <h1>Tables - GreenGrocer Online</h1>
+        </header>
+        <div class = "nav-links">
+            <a href = "home.html">Home</a>
+            <a href = "tables.html">Tables List</a>
+            <a href = "add_tables.html">Edit Tables</a>
+        </div>
+    </div> 
+<a href = "/add_Transaction">ADD</a>
+        <br>
+        <table>
+        <thead>
+            <th>TransactionID</th>
+            <th>CashierEmployeeID</th>
+            <th>IncomingOrOutgoing</th>
+            <th>TransactionAmount</th>
+            <th>TransactionDate</th>
+            <th>Last Update</th>
+        </thead>
+        {% for data in stores %}
+        <tbody>
+            <td>{{data.Transaction_ID}}</td>
+            <td>{{data.Transaction_CashierEmployeeID}}</td>
+            <td>{{data.Transaction_IncomingOrOutgoing}}</td>
+            <td>{{data.Transaction_Amount}}</td>
+            <td>{{data.Transaction_Date}}</td>
+            <td>{{data.Transaction_Last_Update}}</td>
+            <td><a href = "/delete_Transaction/{{data.Transaction_ID}}" type = "button">Delete</a></td>
+        </tbody>
+        {% endfor%}
+    </table>
+</body>
+</html>
