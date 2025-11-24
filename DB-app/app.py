@@ -186,6 +186,12 @@ def delete_department(id):
 	# redirects to home page
 	department.delete_department(id)
 	return redirect('/')
+
+@app.route('/department/add', methods=['GET'])
+def add_department_form():
+	return render_template('add_department.html')
+
+
 # APP ROUTE TO GET RESULTS FOR FILM QUERY 
 @app.route('/get_films', methods=['GET','POST']) 
 def get_films(): 
