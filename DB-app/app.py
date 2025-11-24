@@ -3,7 +3,7 @@ from decimal import Decimal, InvalidOperation
 from datetime import datetime
 from flask import redirect, request, url_for 
 from flask.templating import render_template
-from models import catalog, customer, customerpurchasehistory, customertransaction, department, DietaryInfo, employee, employeetransaction, ItemSupllied, store, supplier, Transaction
+from models import catalog, customer, customerpurchasehistory, customertransaction, department, DietaryInformation, employee, employeetransaction, ItemSupllied, store, supplier, Transaction
 
 # A decorator used to tell the application 
 # which URL is associated with which function 
@@ -317,6 +317,112 @@ def create_employee():
 def delete_employee(employee_id):
 	employee.delete_employee(employee_id)
 	return redirect(url_for('get_employees'))
+
+@app.route('/get_DietaryInformation', methods=['GET']) 
+def get_results(): 
+	DietaryInformation = DietaryInformation.get_DietaryInformation()
+	return render_template('DietaryInformation.html', DietaryInformations=DietaryInformation) 
+
+@app.route('/get_all_DietaryInformation_by_dept/<int:id>', methods=['GET']) 
+def get_all_DietaryInformation_by_Catalog(Product_id): 
+	DietaryInformation = DietaryInformation.get_all_DietaryInformation_by_Catalog(Product_id)
+	catalogs = catalog.get_catalog(Product_id)
+	return render_template('catalogs_select.html', catalogs = catalogs , DietaryInformations = DietaryInformation)  
+
+@app.route('/get_DietaryInformation_without_Catalog/add_DietaryInformation_to_Catalog', methods=['POST']) 
+def add_DietaryInformation_without_Catalog(): 
+	product_id = request.form.get("product_id")
+	catalog.add_catalog_to_dept(product_id)
+	return redirect (url_for('get_DietaryInformation_Catalog', id=product_id))  
+
+# APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
+@app.route('/add_DietaryInformations')
+def add_DietaryInformations():
+	return render_template('add_DietaryInformation.html')
+
+# APP ROUTE TO CALL FUNCTION TO ADD CATALOG
+@app.route('/add', methods=["POST"])
+def add_catalog():
+	
+	# In this function we will input data from the 
+	# form page and store it in our database.
+	# Remember that inside the get the name should
+	# exactly be the same as that in the html
+	# input fields
+	product_ID = request.form.get("product_ID")
+	Restriction = request.form.get("Restriction")
+	
+
+	# call model function that will store data as a row in our datatable
+	if product_ID != '' and Restriction != '':
+		DietaryInformation.add_DietaryInformation(product_ID, Restriction)
+		return redirect('/')
+	else:
+		return redirect('/')
+
+# APP ROUTE TO CALL FUNCTION TO DELETE CATALOG
+@app.route('/delete_DietaryInformation/<int:Product_id>')
+def delete_DietaryInformation(Product_id):
+	# Deletes the data on the basis of unique id and 
+	# redirects to home page
+	DietaryInformation.delete_DietaryInformation(Product_id)
+	return redirect('/')
+
+
+@app.route('/get_Transaction', methods=['GET']) 
+def get_results(): 
+	transactions = Transaction.get_Transaction()
+	return render_template('transaction.html', transactions=transactions) 
+
+@app.route('/get_all_Transaction_by_Employee/<int:id>', methods=['GET']) 
+def get_all_Transaction_by_Employee(CashierEmployee_id): 
+	transactions = Transaction.get_all_Transaction_by_Employee(CashierEmployee_id)
+	return render_template('transactions_select.html', transactions=transactions, Employee=employee)  
+
+@app.route('/get_transaction_without_Employee/add_Transaction_to_Employee', methods=['POST']) 
+def add_Transaction_without_Employee(): 
+	Transaction_id = request.form.get("Transaction_id")
+	CashierEmployee_id = request.form.get("CashierEmployee_id")
+	Transaction.add_Transaction_to_Employee(Transaction_id, CashierEmployee_id)
+	return redirect (url_for('get_all_Transaction_by_Employee', id=CashierEmployee_id))  
+
+# APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
+@app.route('/add_Transaction')
+def add_Transaction():
+	return render_template('add_Transaction.html')
+
+# APP ROUTE TO CALL FUNCTION TO ADD CATALOG
+@app.route('/add', methods=["POST"])
+def add_Transaction():
+	
+	# In this function we will input data from the 
+	# form page and store it in our database.
+	# Remember that inside the get the name should
+	# exactly be the same as that in the html
+	# input fields
+	Transaction_ID = request.form.get("Transaction_ID")
+	CashierEmployee_id = request.form.get("CashierEmployee_id")
+	IncomingOrOutgoing = request.form.get("IncomingOrOutgoing")
+	Transaction_amount = request.form.get("Transaction_amount")
+	Transaction_Date = request.form.get("Transaction_Date")
+	
+	# call model function that will store data as a row in our datatable
+	if Transaction_ID != '' and CashierEmployee_id != '' and IncomingOrOutgoing != '' and Transaction_amount != '' and Transaction_Date != '':
+		Transaction.add_Transaction(Transaction_ID, CashierEmployee_id, IncomingOrOutgoing, Transaction_amount, Transaction_Date)
+		return redirect('/')
+	else:
+		return redirect('/')
+
+# APP ROUTE TO CALL FUNCTION TO DELETE CATALOG
+@app.route('/delete_Transaction/<int:id>')
+def delete_Transaction(id):
+	# Deletes the data on the basis of unique id and 
+	# redirects to home page
+	Transaction.delete_Transaction(id)
+	return redirect('/')
+
+
+
 
 # APP ROUTE TO GET RESULTS FOR FILM QUERY 
 @app.route('/get_queries', methods=['GET']) 
