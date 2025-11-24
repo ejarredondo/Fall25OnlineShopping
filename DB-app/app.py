@@ -173,6 +173,19 @@ def delete_store(id):
 	store.delete_store(id)
 	return redirect('/')
 
+# APP ROUTE TO GET RESULTS FOR DEPARTMENT QUERY 
+@app.route('/get_department', methods=['GET','POST']) 
+def get_department(): 
+	department = department.get_department()
+	return render_template('departments.html', department=department)  
+
+# APP ROUTE TO CALL FUNCTION TO DELETE A department
+@app.route('/delete_film/<int:id>')
+def delete_department(id):
+	# Deletes the data on the basis of unique id and 
+	# redirects to home page
+	department.delete_department(id)
+	return redirect('/')
 # APP ROUTE TO GET RESULTS FOR FILM QUERY 
 @app.route('/get_films', methods=['GET','POST']) 
 def get_films(): 
