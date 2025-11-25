@@ -2,9 +2,6 @@ from sqlalchemy import func
 from models.schemas import DietaryInformation, Catalog
 from core import ma, db
 
-def get_DietaryInformation(): 
-    all_DietaryInformation = DietaryInformation.query.all()
-    return DietaryInformation_schema.dump(all_DietaryInformation)
 
 def get_DietaryInformation(product_id): 
     DietaryInformation_item = db.session.query(DietaryInformation
