@@ -3,7 +3,7 @@ from decimal import Decimal, InvalidOperation
 from datetime import datetime
 from flask import redirect, request, url_for 
 from flask.templating import render_template
-from models import catalog, customer, customerpurchasehistory, customertransaction, department, DietaryInformation, employee, employeetransaction, ItemSupllied, store, supplier, Transaction
+from models import catalog, customer, customerpurchasehistory, customertransaction, department, DietaryInformation, employee, employeetransaction, ItemSupllied	, store, supplier, Transaction
 
 # A decorator used to tell the application 
 # which URL is associated with which function 
@@ -427,21 +427,21 @@ def get_results():
 	ItemSupplied = ItemSupplied.get_ItemSupplied()
 	return render_template('ItemSupplied.html', ItemSupplied=ItemSupplied) 
 
-@app.route('/get_all_ItemsSupplied_by_catalog/<int:id>', methods=['GET']) 
-def get_all_ItemsSupplied_by_catalog(Product_id): 
-	ItemSupplied = ItemSupplied.get_all_ItemsSupplied_by_catalog(Product_id)
+@app.route('/get_all_ItemSupplied_by_catalog/<int:id>', methods=['GET']) 
+def get_all_ItemSupplied_by_catalog(Product_id): 
+	ItemSupplied = ItemSupplied.get_all_ItemSupplied_by_catalog(Product_id)
 	return render_template('ItemSupplied_select.html', ItemSupplied=ItemSupplied, catalog=catalog) 
 
-def get_all_ItemsSupplied_by_Transaction(Transaction_id): 
-	ItemSupplied = ItemSupplied.get_all_ItemsSupplied_by_Transaction(Transaction_id)
+def get_all_ItemSupplied_by_Transaction(Transaction_id): 
+	ItemSupplied = ItemSupplied.get_all_ItemSupplied_by_Transaction(Transaction_id)
 	return render_template('ItemSupplied_select.html', ItemSupplied=ItemSupplied, Transaction=Transaction) 
 
-def get_all_ItemsSupplied_by_Supplier(Supplier_id): 
-	ItemSupplied = ItemSupplied.get_all_ItemsSupplied_by_Supplier(Supplier_id)
+def get_all_ItemSupplied_by_Supplier(Supplier_id): 
+	ItemSupplied = ItemSupplied.get_all_ItemSupplied_by_Supplier(Supplier_id)
 	return render_template('ItemSupplied_select.html', ItemSupplied=ItemSupplied, Supplier=supplier)
 
-def get_all_ItemsSupplied_by_Store(Store_id): 
-	ItemSupplied = ItemSupplied.get_all_ItemsSupplied_by_Store(Store_id)
+def get_all_ItemSupplied_by_Store(Store_id): 
+	ItemSupplied = ItemSupplied.get_all_ItemSupplied_by_Store(Store_id)
 	return render_template('ItemSupplied_select.html', ItemSupplied=ItemSupplied, Store=store)
 
 @app.route('/get_ItemSupplied_without_catalog/add_ItemSupplied_to_catalog', methods=['POST']) 
@@ -449,7 +449,28 @@ def add_ItemSupplied_without_catalog():
 	product_id = request.form.get("product_id")
 	catalog_id = request.form.get("catalog_id")
 	ItemSupplied.add_ItemSupplied_to_catalog(product_id, catalog_id)
-	return redirect (url_for('get_ItemSupplied_catalog', id=catalog_id))  
+	return redirect (url_for('get_all_ItemSupplied_by_catalog', id=product_id))
+
+@app.route('/get_ItemSupplied_without_Transaction/add_ItemSupplied_to_Transaction', methods=['POST']) 
+def add_ItemSupplied_without_Transaction(): 
+	product_id = request.form.get("product_id")
+	transaction_id = request.form.get("transaction_id")
+	ItemSupplied.add_ItemSupplied_to_Transaction(product_id, transaction_id)
+	return redirect (url_for('get_all_ItemSupplied_by_Transaction', id=transaction_id))	
+
+@app.route('/get_ItemSupplied_without_Supplier/add_ItemSupplied_to_Supplier', methods=['POST']) 
+def add_ItemSupplied_without_Supplier(): 
+	product_id = request.form.get("product_id")
+	supplier_id = request.form.get("supplier_id")
+	ItemSupplied.add_ItemSupplied_to_Supplier(product_id, supplier_id)
+	return redirect (url_for('get_all_ItemSupplied_by_Supplier', id=supplier_id))
+
+@app.route('/get_ItemSupplied_without_Store/add_ItemSupplied_to_Store', methods=['POST']) 
+def add_ItemSupplied_without_Store(): 
+	product_id = request.form.get("product_id")
+	store_id = request.form.get("store_id")
+	ItemSupplied.add_ItemSupplied_to_Store(product_id, store_id)
+	return redirect (url_for('get_all_ItemSupplied_by_Store', id=store_id))	
 
 # APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
 @app.route('/add_ItemSupplied')
