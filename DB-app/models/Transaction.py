@@ -1,32 +1,29 @@
 from sqlalchemy import func
-from models.schemas import Transac, Employee
+from models.schemas import Transaction, Employee
 from core import ma, db
 
-def get_Transac(): 
-    all_Transaction = Transac.query.all()
-    return Transac_schema.dump(all_Transaction)
 
-def get_Transac(ID):
+def get_Transaction(ID):
     Transaction = Transaction.query.get(ID)
     return Transaction
 
-def get_all_Transac_by_Employee(CashierEmployee_id):
-     Transac = db.session.query(Transac
-            ).join(Employee, Transac.CashierEmployee_id == Employee.Employee_id
+def get_all_Transaction_by_Employee(CashierEmployee_id):
+     Transaction = db.session.query(Transaction
+            ).join(Employee, Transaction.CashierEmployee_id == Employee.Employee_id
             ).filter(Employee.Employee_id == CashierEmployee_id
             ).all()
 
-     return Transac
+     return Transaction
 
-def get_Transac_without_Employee():
-    Transac = db.session.query(Transac).filter(
-         Transac.Employee_id.is_(None)
+def get_Transaction_without_Employee():
+    Transaction = db.session.query(Transaction).filter(
+         Transaction.Employee_id.is_(None)
     ).all()
 
-    return Transac
+    return Transaction
 
 
-def add_Transac(CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate):
+def add_Transaction(CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate):
     T = Transaction(CashierEmployeeID=CashierEmployeeID, IncomingOrOutgoing=IncomingOrOutgoing, TransactionAmount=TransactionAmount, TransactionDate=TransactionDate, last_update=func.now())
     db.session.add(T)
     db.session.commit()
@@ -34,7 +31,7 @@ def add_Transac(CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, Transa
 def delete_Transaction(Transaction_ID):
 	# Deletes the data on the basis of unique id and 
 	# redirects to home page
-	data = Transac.query.get(Transaction_ID)
+	data = Transaction.query.get(Transaction_ID)
 	db.session.delete(data)
 	db.session.commit()
 
