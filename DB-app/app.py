@@ -422,7 +422,57 @@ def delete_Transaction(id):
 	return redirect('/')
 
 
+@app.route('/get_ItemSupplied', methods=['GET']) 
+def get_results(): 
+	ItemSupplied = ItemSupplied.get_ItemSupplied()
+	return render_template('ItemSupplied.html', ItemSupplied=ItemSupplied) 
 
+@app.route('/get_all_ItemsSupplied_by_catalog/<int:id>', methods=['GET']) 
+def get_all_ItemsSupplied_by_catalog(Product_id): 
+	ItemSupplied = ItemSupplied.get_all_ItemsSupplied_by_catalog(Product_id)
+	return render_template('ItemSupplied_select.html', ItemSupplied=ItemSupplied, catalog=catalog)  
+
+@app.route('/get_ItemSupplied_without_catalog/add_ItemSupplied_to_catalog', methods=['POST']) 
+def add_ItemSupplied_without_catalog(): 
+	product_id = request.form.get("product_id")
+	catalog_id = request.form.get("catalog_id")
+	ItemSupplied.add_ItemSupplied_to_catalog(product_id, catalog_id)
+	return redirect (url_for('get_ItemSupplied_catalog', id=catalog_id))  
+
+# APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
+@app.route('/add_ItemSupplied')
+def add_ItemSupplied():
+	return render_template('add_ItemSupplied.html')
+
+# APP ROUTE TO CALL FUNCTION TO ADD CATALOG
+@app.route('/add', methods=["POST"])
+def add_ItemSupplied():
+	
+	# In this function we will input data from the 
+	# form page and store it in our database.
+	# Remember that inside the get the name should
+	# exactly be the same as that in the html
+	# input fields
+	ProductID = request.form.get("ProductID")
+	TransactionID = request.form.get("TransactionID")
+	SupplierID = request.form.get("SupplierID")
+	ItemQuantity = request.form.get("ItemQuantity")
+
+
+	# call model function that will store data as a row in our datatable
+	if ProductID != '' and TransactionID != '' and SupplierID != '' and ItemQuantity != '':
+		ItemSupplied.add_ItemSupplied(ProductID, TransactionID, SupplierID, ItemQuantity)
+		return redirect('/')
+	else:
+		return redirect('/')
+
+# APP ROUTE TO CALL FUNCTION TO DELETE CATALOG
+@app.route('/delete_ItemSupplied/<int:id>')
+def delete_ItemSupplied(id):
+	# Deletes the data on the basis of unique id and 
+	# redirects to home page
+	ItemSupplied.delete_ItemSupplied(id)
+	return redirect('/')
 
 # APP ROUTE TO GET RESULTS FOR FILM QUERY 
 @app.route('/get_queries', methods=['GET']) 
