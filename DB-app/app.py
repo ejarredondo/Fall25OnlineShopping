@@ -430,7 +430,19 @@ def get_results():
 @app.route('/get_all_ItemsSupplied_by_catalog/<int:id>', methods=['GET']) 
 def get_all_ItemsSupplied_by_catalog(Product_id): 
 	ItemSupplied = ItemSupplied.get_all_ItemsSupplied_by_catalog(Product_id)
-	return render_template('ItemSupplied_select.html', ItemSupplied=ItemSupplied, catalog=catalog)  
+	return render_template('ItemSupplied_select.html', ItemSupplied=ItemSupplied, catalog=catalog) 
+
+def get_all_ItemsSupplied_by_Transaction(Transaction_id): 
+	ItemSupplied = ItemSupplied.get_all_ItemsSupplied_by_Transaction(Transaction_id)
+	return render_template('ItemSupplied_select.html', ItemSupplied=ItemSupplied, Transaction=Transaction) 
+
+def get_all_ItemsSupplied_by_Supplier(Supplier_id): 
+	ItemSupplied = ItemSupplied.get_all_ItemsSupplied_by_Supplier(Supplier_id)
+	return render_template('ItemSupplied_select.html', ItemSupplied=ItemSupplied, Supplier=supplier)
+
+def get_all_ItemsSupplied_by_Store(Store_id): 
+	ItemSupplied = ItemSupplied.get_all_ItemsSupplied_by_Store(Store_id)
+	return render_template('ItemSupplied_select.html', ItemSupplied=ItemSupplied, Store=store)
 
 @app.route('/get_ItemSupplied_without_catalog/add_ItemSupplied_to_catalog', methods=['POST']) 
 def add_ItemSupplied_without_catalog(): 
