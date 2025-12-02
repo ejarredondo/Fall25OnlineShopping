@@ -19,7 +19,7 @@ def index()
 
 # APP ROUTE TO GET RESULTS FOR CATALOG SELECT QUERY 
 @app.route('/get_catalogs', methods=['GET']) 
-def get_results(): 
+def get_catalogs(): 
 	catalogs = catalog.get_catalogs()
 	return render_template('catalog.html', catalogs=catalogs) 
 
@@ -81,7 +81,7 @@ def delete_catalog(id):
 
 # APP ROUTE TO GET RESULTS FOR SUPPLIER SELECT QUERY 
 @app.route('/get_suppliers', methods=['GET']) 
-def get_results(): 
+def get_suppliers(): 
 	suppliers = supplier.get_suppliers()
 	return render_template('supplier.html', suppliers = suppliers) 
 
@@ -136,7 +136,7 @@ def delete_supplier(id):
 
 # APP ROUTE TO GET RESULTS FOR STORE SELECT QUERY 
 @app.route('/get_stores', methods=['GET']) 
-def get_results(): 
+def get_stores(): 
 	stores = store.get_stores()
 	return render_template('store.html', stores = stores) 
 
@@ -421,7 +421,7 @@ def delete_employee(employee_id):
 	return redirect(url_for('get_employees'))
 
 @app.route('/get_DietaryInformation', methods=['GET']) 
-def get_results(): 
+def get_DietaryInformation(): 
 	DietaryInformation = DietaryInformation.get_DietaryInformation()
 	return render_template('DietaryInformation.html', DietaryInformations=DietaryInformation) 
 
@@ -472,7 +472,7 @@ def delete_DietaryInformation(Product_id):
 
 
 @app.route('/get_Transaction', methods=['GET']) 
-def get_results(): 
+def get_Transaction(): 
 	transaction = Transaction.get_Transaction()
 	return render_template('transaction.html', transactions=transactions) 
 
@@ -525,7 +525,7 @@ def delete_Transaction(id):
 
 
 @app.route('/get_ItemSupplied', methods=['GET']) 
-def get_results(): 
+def get_ItemSupplied(): 
 	ItemSupplied = ItemSupplied.get_ItemSupplied()
 	return render_template('ItemSupplied.html', ItemSupplied=ItemSupplied) 
 
