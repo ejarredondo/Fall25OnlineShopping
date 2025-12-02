@@ -249,6 +249,40 @@ def delete_customer(customer_id):
 	customer.delete_customer(customer_id)
 	return redirect(url_for('get_customers'))
 
+# APP ROUTES FOR CUSTOMER PURCHASE HISTORY TABLE
+@app.route('/customerpurchasehistory', methods=['GET'])
+def get_customerpurchasehistory():
+    customerpurchasehistory = customerpurchasehistory.get_customerpurchasehistory()
+    return render_template('customerpurchasehistory.html', customerpurchasehistory=customerpurchasehistory)
+
+@app.route('/customerpurchasehistory/add', methods=['GET'])
+def add_customerpurchasehistory_form():
+    return render_template('add_customerpurchasehistory.html')
+
+@app.route('/customerpurchasehistory', methods=['POST'])
+def add_customerpurchasehistory():
+    customer_id = request.form.get("customer_id")
+    transaction_id = request.form.get("transaction_id")
+    amount_spent = request.form.get("amount_spent")
+    date_purchased = request.form.get("date_purchased")
+    time_purchased = request.form.get("time_purchased")
+
+    if customer_id and transaction_id and amount_spent:
+        customerpurchasehistory.add_customerpurchasehistory(
+            customer_id,
+            transaction_id,
+            amount_spent,
+            date_purchased,
+            time_purchased
+        )
+
+    return redirect(url_for('get_customerpurchasehistory'))
+
+@app.route('/customerpurchasehistory/<int:history_id>/delete', methods=['GET'])
+def delete_customerpurchasehistory(history_id):
+    customerpurchasehistory.delete_customerpurchasehistory(history_id)
+    return redirect(url_for('get_customerpurchasehistory'))
+
 # APP ROUTES FOR EMPLOYEETRANSACTION TABLE
 @app.route('/employeetransactions', methods=['GET'])
 def get_employeetransactions():
