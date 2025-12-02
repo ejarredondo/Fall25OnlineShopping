@@ -1,43 +1,43 @@
 from sqlalchemy import func
-from models.schemas import Transaction, Employee
+from models.schemas import Transac, Employee
 from core import ma, db
 
 
 def get_Transaction(ID):
-    Transaction = Transaction.query.get(ID)
-    return Transaction
+    Transaction = Transac.query.get(ID)
+    return Transac
 
 def get_all_Transaction_by_Employee(CashierEmployee_id):
-     Transaction = db.session.query(Transaction
-            ).join(Employee, Transaction.CashierEmployee_id == Employee.Employee_id
+     Transac = db.session.query(Transac
+            ).join(Employee, Transac.CashierEmployee_id == Employee.Employee_id
             ).filter(Employee.Employee_id == CashierEmployee_id
             ).all()
 
      return Transaction
 
 def get_Transaction_without_Employee():
-    Transaction = db.session.query(Transaction).filter(
-         Transaction.Employee_id.is_(None)
+    Transac = db.session.query(Transac).filter(
+         Transac.Employee_id.is_(None)
     ).all()
 
-    return Transaction
+    return Transac
 
 
-def add_Transaction(CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate):
-    T = Transaction(CashierEmployeeID=CashierEmployeeID, IncomingOrOutgoing=IncomingOrOutgoing, TransactionAmount=TransactionAmount, TransactionDate=TransactionDate, last_update=func.now())
+def add_Transac(CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate):
+    T = Transac(CashierEmployeeID=CashierEmployeeID, IncomingOrOutgoing=IncomingOrOutgoing, TransactionAmount=TransactionAmount, TransactionDate=TransactionDate, last_update=func.now())
     db.session.add(T)
     db.session.commit()
 
-def delete_Transaction(Transaction_ID):
+def delete_Transac(Transac_ID):
 	# Deletes the data on the basis of unique id and 
 	# redirects to home page
-	data = Transaction.query.get(Transaction_ID)
+	data = Transac.query.get(Transac_ID)
 	db.session.delete(data)
 	db.session.commit()
 
-class TransactionSchema(ma.SQLAlchemyAutoSchema):
+class TransacSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Transaction
+        model = Transac
 
-transaction_schema = TransactionSchema()
-transactions_schema = TransactionSchema(many=True)
+transaction_schema = TransacSchema()
+transactions_schema = TransacSchema(many=True)
