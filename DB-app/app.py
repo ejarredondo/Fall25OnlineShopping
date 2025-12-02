@@ -12,6 +12,7 @@ def hello():
 	return 'HELLO'
 
 # APP ROUTE TO RENDER HOME PAGE WITH LINKS
+	# check this with home.html; might need to delete home.html??
 @app.route('/')
 def index():
 	return render_template('index.html')
@@ -41,7 +42,7 @@ def add_catalogs():
 	return render_template('add_catalog.html')
 
 # APP ROUTE TO CALL FUNCTION TO ADD CATALOG
-@app.route('/add', methods=["POST"])
+@app.route('/add_catalogs', methods=["POST"])
 def add_catalog():
 	
 	# In this function we will input data from the 
@@ -103,7 +104,7 @@ def add_suppliers():
 	return render_template('add_supplier.html')
 
 # APP ROUTE TO CALL FUNCTION TO ADD SUPPLIER
-@app.route('/add', methods=["POST"])
+@app.route('/add_suppliers', methods=["POST"])
 def add_supplier():
 	
 	# In this function we will input data from the 
@@ -145,7 +146,7 @@ def add_stores():
 	return render_template('add_store.html')
 
 # APP ROUTE TO CALL FUNCTION TO ADD STORE
-@app.route('/add', methods=["POST"])
+@app.route('/add_stores', methods=["POST"])
 def add_store():
 	
 	# In this function we will input data from the 
@@ -179,25 +180,55 @@ def get_department():
 	return render_template('departments.html', department=department)  
 
 # APP ROUTE TO CALL FUNCTION TO DELETE A department
-@app.route('/delete_department/<int:id>') 
+@app.route('/delete_film/<int:id>')
 def delete_department(id):
 	# Deletes the data on the basis of unique id and 
 	# redirects to home page
 	department.delete_department(id)
 	return redirect('/')
 
-@app.route('/department/add', methods=['GET'])
+@app.route('/add_department', methods=['GET'])
 def add_department_form():
 	return render_template('add_department.html')
 
+
+# APP ROUTE TO GET RESULTS FOR FILM QUERY 
+@app.route('/get_films', methods=['GET','POST']) 
+def get_films(): 
+	films = Film.get_films()
+	return render_template('films.html', films=films)  
+
+# APP ROUTE TO GET RESULTS FOR FILM AND ACTORS QUERY 
+@app.route('/get_film_actors/<int:id>', methods=['GET','POST']) 
+def get_film_actors(id): 
+	film = Film.get_film(id)
+	film_actors = FilmActor.get_film_actors(id)
+	return render_template('film_actor.html', film=film, film_actors=film_actors)  
+
+# APP ROUTE TO ADD AN ACTOR TO A FILM 
+#@app.route('/add_actor_to_film/<int:film_id>/<int:actor_id>', methods=['GET','POST']) 
+#def add_actor_to_film(film_id,actor_id): 
+#	FilmActor.add_actor_to_film(film_id,actor_id)
+#	film = Film.get_films(id)
+#	film_actors = FilmActor.get_film_actors(id)
+#	return render_template('film_actor.html', film=film, film_actors=film_actors)  
+
+# APP ROUTE TO CALL FUNCTION TO DELETE A FILM
+@app.route('/delete_film/<int:id>')
+def delete_film(id):
+	# Deletes the data on the basis of unique id and 
+	# redirects to home page
+	Film.delete_film(id)
+	return redirect('/')
+
 # APP ROUTES FOR CUSTOMER TABLE
-@app.route('/customers', methods=['GET'])
+@app.route('/add_customers', methods=['GET'])
 def get_customers():
 	customers = customer.get_customers()
 	return render_template('customer.html', customers=customers)
 
 
-@app.route('/customers/add', methods=['GET'])
+@app.route('/add_customers/add', methods=['GET'])
 def add_customer_form():
 	return render_template('add_customer.html')
 
@@ -213,22 +244,22 @@ def add_customer():
 	return redirect(url_for('get_customers'))
 
 
-@app.route('/customers/<int:customer_id>/delete', methods=['GET'])
+@app.route('/add_customers/<int:customer_id>/delete', methods=['GET'])
 def delete_customer(customer_id):
 	customer.delete_customer(customer_id)
 	return redirect(url_for('get_customers'))
 
 # APP ROUTES FOR CUSTOMER PURCHASE HISTORY TABLE
-@app.route('/customerpurchasehistory', methods=['GET'])
+@app.route('/add_customerpurchasehistory', methods=['GET'])
 def get_customerpurchasehistory():
     customerpurchasehistory = customerpurchasehistory.get_customerpurchasehistory()
     return render_template('customerpurchasehistory.html', customerpurchasehistory=customerpurchasehistory)
 
-@app.route('/customerpurchasehistory/add', methods=['GET'])
-def add_customerpurchasehistory_form():
-    return render_template('add_customerpurchasehistory.html')
+@app.route('/add_customerpurchasehistory/<int:history_id>', methods=['GET'])
+def add_customerpurchasehistory_form(history_id):
+    return render_template('add_customerpurchasehistory.html', history_id=history_id)
 
-@app.route('/customerpurchasehistory', methods=['POST'])
+@app.route('/add_customerpurchasehistory', methods=['POST'])
 def add_customerpurchasehistory():
     customer_id = request.form.get("customer_id")
     transaction_id = request.form.get("transaction_id")
@@ -247,22 +278,22 @@ def add_customerpurchasehistory():
 
     return redirect(url_for('get_customerpurchasehistory'))
 
-@app.route('/customerpurchasehistory/<int:history_id>/delete', methods=['GET'])
+@app.route('/add_customerpurchasehistory/<int:history_id>/delete', methods=['GET'])
 def delete_customerpurchasehistory(history_id):
     customerpurchasehistory.delete_customerpurchasehistory(history_id)
     return redirect(url_for('get_customerpurchasehistory'))
 
 # APP ROUTES FOR EMPLOYEETRANSACTION TABLE
-@app.route('/employeetransactions', methods=['GET'])
+@app.route('/add_employeetransactions', methods=['GET'])
 def get_employeetransactions():
     employeetransactions = employeetransaction.get_employeetransactions()
     return render_template('employeetransactions.html', employeetransactions=employeetransactions)
 
-@app.route('/employeetransactions/add', methods=['GET'])
+@app.route('/add_employeetransactions/add', methods=['GET'])
 def add_employeetransaction_form():
     return render_template('add_employeetransaction.html')
 
-@app.route('/employeetransactions', methods=['POST'])
+@app.route('/add_employeetransactions', methods=['POST'])
 def add_employeetransaction():
     employee_id = request.form.get("employee_id")
     transaction_id = request.form.get("transaction_id")
@@ -440,9 +471,9 @@ def delete_DietaryInformation(Product_id):
 	return redirect('/')
 
 
-@app.route('/get_Transaction', methods=['GET']) 
+@app.route('/get_Transac', methods=['GET']) 
 def get_results(): 
-	transactions = Transaction.get_Transaction()
+	transaction = Transac.get_Transac()
 	return render_template('transaction.html', transactions=transactions) 
 
 @app.route('/get_all_Transaction_by_Employee/<int:id>', methods=['GET']) 
@@ -450,7 +481,7 @@ def get_all_Transaction_by_Employee(CashierEmployee_id):
 	transactions = Transaction.get_all_Transaction_by_Employee(CashierEmployee_id)
 	return render_template('transactions_select.html', transactions=transactions, Employee=employee)  
 
-@app.route('/get_transaction_without_Employee/add_Transaction_to_Employee', methods=['POST']) 
+@app.route('/get_Transaction_without_Employee/add_Transaction_to_Employee', methods=['POST']) 
 def add_Transaction_without_Employee(): 
 	Transaction_id = request.form.get("Transaction_id")
 	CashierEmployee_id = request.form.get("CashierEmployee_id")
@@ -459,12 +490,12 @@ def add_Transaction_without_Employee():
 
 # APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
 @app.route('/add_Transaction')
-def add_Transaction():
+def add_Transac():
 	return render_template('add_Transaction.html')
 
 # APP ROUTE TO CALL FUNCTION TO ADD CATALOG
 @app.route('/add', methods=["POST"])
-def add_Transaction():
+def add_Transac():
 	
 	# In this function we will input data from the 
 	# form page and store it in our database.
@@ -485,7 +516,7 @@ def add_Transaction():
 		return redirect('/')
 
 # APP ROUTE TO CALL FUNCTION TO DELETE CATALOG
-@app.route('/delete_Transaction/<int:id>')
+@app.route('/delete_Transac/<int:id>')
 def delete_Transaction(id):
 	# Deletes the data on the basis of unique id and 
 	# redirects to home page
@@ -527,7 +558,7 @@ def add_ItemSupplied_without_Transaction():
 	product_id = request.form.get("product_id")
 	transaction_id = request.form.get("transaction_id")
 	ItemSupplied.add_ItemSupplied_to_Transaction(product_id, transaction_id)
-	return redirect (url_for('get_all_ItemSupplied_by_Transaction', id=transaction_id))	
+	return redirect (url_for('get_all_ItemSupplied_by_Transaction', id=transaction_id))
 
 @app.route('/get_ItemSupplied_without_Supplier/add_ItemSupplied_to_Supplier', methods=['POST']) 
 def add_ItemSupplied_without_Supplier(): 
