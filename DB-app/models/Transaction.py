@@ -1,5 +1,5 @@
 from sqlalchemy import func
-from models.schemas import Transaction, Employee
+from models.schemas import Transac, Employee
 from core import ma, db
 
 
@@ -35,9 +35,9 @@ def delete_Transaction(Transaction_ID):
 	db.session.delete(data)
 	db.session.commit()
 
-class TransactionSchema(ma.SQLAlchemyAutoSchema):
+class TransacSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Transaction
+        model = Transac
 
-transaction_schema = TransactionSchema()
-transactions_schema = TransactionSchema(many=True)
+transaction_schema = TransacSchema()
+transactions_schema = TransacSchema(many=True)

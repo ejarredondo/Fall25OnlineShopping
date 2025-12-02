@@ -3,8 +3,8 @@ from models.schemas import ItemSupplied, Catalog, Transaction, Supplier, Store
 from core import ma, db
 
 def get_ItemSupplied(): 
-    all_ItemsSupplied = ItemSupplied.query.all()
-    return ItemsSupplied_schema.dump(all_ItemsSupplied)
+    all_ItemSupplied = ItemSupplied.query.all()
+    return ItemSupplied_schema.dump(all_ItemSupplied)
 
 
 
