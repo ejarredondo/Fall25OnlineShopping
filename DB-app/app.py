@@ -14,7 +14,7 @@ def hello():
 # APP ROUTE TO RENDER HOME PAGE WITH LINKS
 	# check this with home.html; might need to delete home.html??
 @app.route('/')
-def index():
+def index()
 	return render_template('index.html')
 
 # APP ROUTE TO GET RESULTS FOR CATALOG SELECT QUERY 
@@ -37,7 +37,7 @@ def add_catalogs_without_dept():
 	return redirect (url_for('get_catalog_dept', id=department_id))  
 
 # APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
-@app.route('/add_catalogs')
+@app.route('/catalogs/add', methods=['GET'])
 def add_catalogs():
 	return render_template('add_catalog.html')
 
@@ -222,18 +222,18 @@ def delete_film(id):
 	return redirect('/')
 
 # APP ROUTES FOR CUSTOMER TABLE
-@app.route('/add_customers', methods=['GET'])
+@app.route('/get_customers', methods=['GET'])
 def get_customers():
 	customers = customer.get_customers()
 	return render_template('customer.html', customers=customers)
 
 
-@app.route('/add_customers/add', methods=['GET'])
+@app.route('/add_customers', methods=['GET'])
 def add_customer_form():
 	return render_template('add_customer.html')
 
 
-@app.route('/customers', methods=['POST'])
+@app.route('/add_customers', methods=['POST'])
 def add_customer():
 	first_name = (request.form.get("first_name") or "").strip()
 	last_name = (request.form.get("last_name") or "").strip()
@@ -244,13 +244,13 @@ def add_customer():
 	return redirect(url_for('get_customers'))
 
 
-@app.route('/add_customers/<int:customer_id>/delete', methods=['GET'])
+@app.route('/delete_customers/<int:customer_id>/delete', methods=['GET'])
 def delete_customer(customer_id):
 	customer.delete_customer(customer_id)
 	return redirect(url_for('get_customers'))
 
 # APP ROUTES FOR CUSTOMER PURCHASE HISTORY TABLE
-@app.route('/add_customerpurchasehistory', methods=['GET'])
+@app.route('/get_customerpurchasehistory', methods=['GET'])
 def get_customerpurchasehistory():
     customerpurchasehistory = customerpurchasehistory.get_customerpurchasehistory()
     return render_template('customerpurchasehistory.html', customerpurchasehistory=customerpurchasehistory)
@@ -278,18 +278,18 @@ def add_customerpurchasehistory():
 
     return redirect(url_for('get_customerpurchasehistory'))
 
-@app.route('/add_customerpurchasehistory/<int:history_id>/delete', methods=['GET'])
+@app.route('/delete_customerpurchasehistory/<int:history_id>/delete', methods=['GET'])
 def delete_customerpurchasehistory(history_id):
     customerpurchasehistory.delete_customerpurchasehistory(history_id)
     return redirect(url_for('get_customerpurchasehistory'))
 
 # APP ROUTES FOR EMPLOYEETRANSACTION TABLE
-@app.route('/add_employeetransactions', methods=['GET'])
+@app.route('/get_employeetransactions', methods=['GET'])
 def get_employeetransactions():
     employeetransactions = employeetransaction.get_employeetransactions()
     return render_template('employeetransactions.html', employeetransactions=employeetransactions)
 
-@app.route('/add_employeetransactions/add', methods=['GET'])
+@app.route('/add_employeetransactions', methods=['GET'])
 def add_employeetransaction_form():
     return render_template('add_employeetransaction.html')
 
@@ -304,22 +304,22 @@ def add_employeetransaction():
 
     return redirect(url_for('get_employeetransactions'))
 
-@app.route('/employeetransactions/<int:employee_id>/<int:transaction_id>/delete', methods=['GET'])
+@app.route('/delete_employeetransactions/<int:employee_id>/<int:transaction_id>/delete', methods=['GET'])
 def delete_employeetransaction(employee_id, transaction_id):
     employeetransaction.delete_employeetransaction(employee_id, transaction_id)
     return redirect(url_for('get_employeetransactions'))
 
 #APP ROUTES FOR CUSTOMER TRANSACTION TABLE
-@app.route('/customer_transactions', methods=['GET'])
+@app.route('/get_customer_transactions', methods=['GET'])
 def get_customer_transactions():
     customer_transactions = customertransaction.get_customer_transactions()
     return render_template('customer_transactions.html', customer_transactions=customer_transactions)
 
-@app.route('/customer_transactions/add', methods=['GET'])
+@app.route('/add_customer_transactions', methods=['GET'])
 def add_customer_transaction_form():
     return render_template('add_customer_transaction.html')
 
-@app.route('/customer_transactions', methods=['POST'])
+@app.route('/add_customer_transactions', methods=['POST'])
 def add_customer_transaction():
     customer_id = request.form.get("customer_id")
     transaction_id = request.form.get("transaction_id")
@@ -346,24 +346,24 @@ def add_customer_transaction():
     
     return redirect(url_for('get_customer_transactions'))
 
-@app.route('/customer_transactions/<int:id>/delete', methods=['GET'])
+@app.route('/delete_customer_transactions/<int:id>/delete', methods=['GET'])
 def delete_customer_transaction(id):
     customertransaction.delete_customer_transaction(id)
     return redirect(url_for('get_customer_transactions'))
 
 # APP ROUTES FOR EMPLOYEE TABLE
-@app.route('/employees', methods=['GET'])
+@app.route('/get_employees', methods=['GET'])
 def get_employees():
 	employees = employee.get_employees()
 	return render_template('employee.html', employees=employees)
 
 
-@app.route('/employees/add', methods=['GET'])
+@app.route('/add_employees', methods=['GET'])
 def add_employee_form():
 	return render_template('add_employee.html')
 
 
-@app.route('/employees', methods=['POST'])
+@app.route('/add_employees', methods=['POST'])
 def create_employee():
 	first_name = (request.form.get("first_name") or "").strip()
 	last_name = (request.form.get("last_name") or "").strip()
@@ -415,7 +415,7 @@ def create_employee():
 	return redirect(url_for('get_employees'))
 
 
-@app.route('/employees/<int:employee_id>/delete', methods=['GET'])
+@app.route('/delete_employee/<int:employee_id>/delete', methods=['GET'])
 def delete_employee(employee_id):
 	employee.delete_employee(employee_id)
 	return redirect(url_for('get_employees'))
@@ -431,22 +431,22 @@ def get_all_DietaryInformation_by_Catalog(Product_id):
 	catalogs = catalog.get_catalog(Product_id)
 	return render_template('catalogs_select.html', catalogs = catalogs , DietaryInformations = DietaryInformation)  
 
-@app.route('/get_DietaryInformation_without_Catalog/add_DietaryInformation_to_Catalog', methods=['POST']) 
+@app.route('/add_DietaryInformation_to_Catalog', methods=['POST']) 
 def add_DietaryInformation_without_Catalog(): 
 	product_id = request.form.get("product_id")
 	catalog.add_catalog_to_dept(product_id)
 	return redirect (url_for('get_DietaryInformation_Catalog', id=product_id))  
 
 # APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
-@app.route('/add_DietaryInformations')
+@app.route('/add_DietaryInformations' , methods=['GET'] )
 def add_DietaryInformations():
 	return render_template('add_DietaryInformation.html')
 
 # APP ROUTE TO CALL FUNCTION TO ADD CATALOG
-@app.route('/add', methods=["POST"])
-def add_catalog():
-	
-	# In this function we will input data from the 
+@app.route('/add_DietaryInformation', methods=["POST"])
+def add_DietaryInformation():
+
+	# In this function we will input data from the
 	# form page and store it in our database.
 	# Remember that inside the get the name should
 	# exactly be the same as that in the html
@@ -471,15 +471,15 @@ def delete_DietaryInformation(Product_id):
 	return redirect('/')
 
 
-@app.route('/get_Transac', methods=['GET']) 
+@app.route('/get_Transaction', methods=['GET']) 
 def get_results(): 
-	transaction = Transac.get_Transac()
+	transaction = Transaction.get_Transaction()
 	return render_template('transaction.html', transactions=transactions) 
 
 @app.route('/get_all_Transaction_by_Employee/<int:id>', methods=['GET']) 
 def get_all_Transaction_by_Employee(CashierEmployee_id): 
-	transactions = Transaction.get_all_Transaction_by_Employee(CashierEmployee_id)
-	return render_template('transactions_select.html', transactions=transactions, Employee=employee)  
+	Transaction_transactions = Transaction.get_all_Transaction_by_Employee(CashierEmployee_id)
+	return render_template('transactions_select.html', transactions=Transaction_transactions, Employee=employee)  
 
 @app.route('/get_Transaction_without_Employee/add_Transaction_to_Employee', methods=['POST']) 
 def add_Transaction_without_Employee(): 
@@ -490,12 +490,12 @@ def add_Transaction_without_Employee():
 
 # APP ROUTE TO RENDER FORM TO ADD CATALOG DATA
 @app.route('/add_Transaction')
-def add_Transac():
+def add_Transaction():
 	return render_template('add_Transaction.html')
 
 # APP ROUTE TO CALL FUNCTION TO ADD CATALOG
-@app.route('/add', methods=["POST"])
-def add_Transac():
+@app.route('/add_Transaction', methods=["POST"])
+def add_Transaction():
 	
 	# In this function we will input data from the 
 	# form page and store it in our database.
