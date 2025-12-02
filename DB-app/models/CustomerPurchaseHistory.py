@@ -2,6 +2,7 @@ from models.schemas import CustomerPurchaseHistory, Customer, Transac
 from sqlalchemy import func
 from core import ma, db
 
+
 def get_customer_purchase_history():
     records = CustomerPurchaseHistory.query.all()
     return customer_purchase_histories_schema.dump(records)
