@@ -3,7 +3,7 @@ from decimal import Decimal, InvalidOperation
 from datetime import datetime
 from flask import redirect, request, url_for 
 from flask.templating import render_template
-from models import catalog, customer, customerpurchasehistory, customertransaction, department, DietaryInformation, employee, employeetransaction, ItemSupplied	, store, supplier, Transaction
+from models import catalog, customer, CustomerPurchaseHistory, CustomerTransaction, department, DietaryInformation, employee, EmployeeTransaction, ItemSupplied	, store, supplier, Transaction
 
 # A decorator used to tell the application 
 # which URL is associated with which function 
@@ -248,6 +248,108 @@ def add_customer():
 def delete_customer(customer_id):
 	customer.delete_customer(customer_id)
 	return redirect(url_for('get_customers'))
+
+# APP ROUTES FOR CUSTOMER PURCHASE HISTORY TABLE
+@app.route('/customerpurchasehistory', methods=['GET'])
+def get_customerpurchasehistory():
+    customerpurchasehistory = customerpurchasehistory.get_customerpurchasehistory()
+    return render_template('customerpurchasehistory.html', customerpurchasehistory=customerpurchasehistory)
+
+@app.route('/customerpurchasehistory/add', methods=['GET'])
+def add_customerpurchasehistory_form():
+    return render_template('add_customerpurchasehistory.html')
+
+@app.route('/customerpurchasehistory', methods=['POST'])
+def add_customerpurchasehistory():
+    customer_id = request.form.get("customer_id")
+    transaction_id = request.form.get("transaction_id")
+    amount_spent = request.form.get("amount_spent")
+    date_purchased = request.form.get("date_purchased")
+    time_purchased = request.form.get("time_purchased")
+
+    if customer_id and transaction_id and amount_spent:
+        customerpurchasehistory.add_customerpurchasehistory(
+            customer_id,
+            transaction_id,
+            amount_spent,
+            date_purchased,
+            time_purchased
+        )
+
+    return redirect(url_for('get_customerpurchasehistory'))
+
+@app.route('/customerpurchasehistory/<int:history_id>/delete', methods=['GET'])
+def delete_customerpurchasehistory(history_id):
+    customerpurchasehistory.delete_customerpurchasehistory(history_id)
+    return redirect(url_for('get_customerpurchasehistory'))
+
+# APP ROUTES FOR EMPLOYEETRANSACTION TABLE
+@app.route('/employeetransactions', methods=['GET'])
+def get_employeetransactions():
+    employeetransactions = employeetransaction.get_employeetransactions()
+    return render_template('employeetransactions.html', employeetransactions=employeetransactions)
+
+@app.route('/employeetransactions/add', methods=['GET'])
+def add_employeetransaction_form():
+    return render_template('add_employeetransaction.html')
+
+@app.route('/employeetransactions', methods=['POST'])
+def add_employeetransaction():
+    employee_id = request.form.get("employee_id")
+    transaction_id = request.form.get("transaction_id")
+    store_id = request.form.get("store_id")
+
+    if employee_id and transaction_id and store_id:
+        employeetransaction.add_employeetransaction(employee_id, transaction_id, store_id)
+
+    return redirect(url_for('get_employeetransactions'))
+
+@app.route('/employeetransactions/<int:employee_id>/<int:transaction_id>/delete', methods=['GET'])
+def delete_employeetransaction(employee_id, transaction_id):
+    employeetransaction.delete_employeetransaction(employee_id, transaction_id)
+    return redirect(url_for('get_employeetransactions'))
+
+#APP ROUTES FOR CUSTOMER TRANSACTION TABLE
+@app.route('/customer_transactions', methods=['GET'])
+def get_customer_transactions():
+    customer_transactions = customertransaction.get_customer_transactions()
+    return render_template('customer_transactions.html', customer_transactions=customer_transactions)
+
+@app.route('/customer_transactions/add', methods=['GET'])
+def add_customer_transaction_form():
+    return render_template('add_customer_transaction.html')
+
+@app.route('/customer_transactions', methods=['POST'])
+def add_customer_transaction():
+    customer_id = request.form.get("customer_id")
+    transaction_id = request.form.get("transaction_id")
+    shipping_street = request.form.get("shipping_street")
+    shipping_city = request.form.get("shipping_city")
+    shipping_state = request.form.get("shipping_state")
+    shipping_zip = request.form.get("shipping_zip")
+    card_info = request.form.get("card_info")
+    email_address = request.form.get("email_address")
+    items_purchased = request.form.get("items_purchased")
+
+    if customer_id and transaction_id:
+        customertransaction.add_customer_transaction(
+            customer_id,
+            transaction_id,
+            shipping_street,
+            shipping_city,
+            shipping_state,
+            shipping_zip,
+            card_info,
+            email_address,
+            items_purchased
+        )
+    
+    return redirect(url_for('get_customer_transactions'))
+
+@app.route('/customer_transactions/<int:id>/delete', methods=['GET'])
+def delete_customer_transaction(id):
+    customertransaction.delete_customer_transaction(id)
+    return redirect(url_for('get_customer_transactions'))
 
 # APP ROUTES FOR EMPLOYEE TABLE
 @app.route('/employees', methods=['GET'])
