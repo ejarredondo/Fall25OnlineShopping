@@ -249,8 +249,33 @@ def delete_customer(customer_id):
 	customer.delete_customer(customer_id)
 	return redirect(url_for('get_customers'))
 
-#APP ROUTES FOR CUSTOMER TRANSACTION TABLE
+# APP ROUTES FOR EMPLOYEETRANSACTION TABLE
+@app.route('/employeetransactions', methods=['GET'])
+def get_employeetransactions():
+    employeetransactions = employeetransaction.get_employeetransactions()
+    return render_template('employeetransactions.html', employeetransactions=employeetransactions)
 
+@app.route('/employeetransactions/add', methods=['GET'])
+def add_employeetransaction_form():
+    return render_template('add_employeetransaction.html')
+
+@app.route('/employeetransactions', methods=['POST'])
+def add_employeetransaction():
+    employee_id = request.form.get("employee_id")
+    transaction_id = request.form.get("transaction_id")
+    store_id = request.form.get("store_id")
+
+    if employee_id and transaction_id and store_id:
+        employeetransaction.add_employeetransaction(employee_id, transaction_id, store_id)
+
+    return redirect(url_for('get_employeetransactions'))
+
+@app.route('/employeetransactions/<int:employee_id>/<int:transaction_id>/delete', methods=['GET'])
+def delete_employeetransaction(employee_id, transaction_id):
+    employeetransaction.delete_employeetransaction(employee_id, transaction_id)
+    return redirect(url_for('get_employeetransactions'))
+
+#APP ROUTES FOR CUSTOMER TRANSACTION TABLE
 @app.route('/customer_transactions', methods=['GET'])
 def get_customer_transactions():
     customer_transactions = customertransaction.get_customer_transactions()
