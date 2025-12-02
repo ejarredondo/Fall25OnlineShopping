@@ -180,7 +180,7 @@ def get_department():
 	return render_template('departments.html', department=department)  
 
 # APP ROUTE TO CALL FUNCTION TO DELETE A department
-@app.route('/delete_film/<int:id>')
+@app.route('/delete_department/<int:id>') 
 def delete_department(id):
 	# Deletes the data on the basis of unique id and 
 	# redirects to home page
@@ -190,36 +190,6 @@ def delete_department(id):
 @app.route('/department/add', methods=['GET'])
 def add_department_form():
 	return render_template('add_department.html')
-
-
-# APP ROUTE TO GET RESULTS FOR FILM QUERY 
-@app.route('/get_films', methods=['GET','POST']) 
-def get_films(): 
-	films = Film.get_films()
-	return render_template('films.html', films=films)  
-
-# APP ROUTE TO GET RESULTS FOR FILM AND ACTORS QUERY 
-@app.route('/get_film_actors/<int:id>', methods=['GET','POST']) 
-def get_film_actors(id): 
-	film = Film.get_film(id)
-	film_actors = FilmActor.get_film_actors(id)
-	return render_template('film_actor.html', film=film, film_actors=film_actors)  
-
-# APP ROUTE TO ADD AN ACTOR TO A FILM 
-#@app.route('/add_actor_to_film/<int:film_id>/<int:actor_id>', methods=['GET','POST']) 
-#def add_actor_to_film(film_id,actor_id): 
-#	FilmActor.add_actor_to_film(film_id,actor_id)
-#	film = Film.get_films(id)
-#	film_actors = FilmActor.get_film_actors(id)
-#	return render_template('film_actor.html', film=film, film_actors=film_actors)  
-
-# APP ROUTE TO CALL FUNCTION TO DELETE A FILM
-@app.route('/delete_film/<int:id>')
-def delete_film(id):
-	# Deletes the data on the basis of unique id and 
-	# redirects to home page
-	Film.delete_film(id)
-	return redirect('/')
 
 # APP ROUTES FOR CUSTOMER TABLE
 @app.route('/customers', methods=['GET'])
