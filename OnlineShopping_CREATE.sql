@@ -41,6 +41,8 @@ CREATE TABLE Catalog(
 	DepartmentID 		INT NOT NULL,
 	ExpirationDate		DATE,
 	FOREIGN KEY (DepartmentID) REFERENCES Department (DepartmentID)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE Store (
