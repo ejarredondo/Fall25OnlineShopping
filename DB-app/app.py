@@ -3,7 +3,7 @@ from decimal import Decimal, InvalidOperation
 from datetime import datetime
 from flask import redirect, request, url_for 
 from flask.templating import render_template
-from models import catalog, customer, CustomerPurchaseHistory, CustomerTransaction, department, DietaryInformation, employee, EmployeeTransaction, ItemSupplied	, store, supplier, Transaction
+from models import catalog, customer, CustomerPurchaseHistory, CustomerTransaction, department, DietaryInformation, employee, EmployeeTransaction, ItemSupplied	, store, supplier, Transaction,Queries
 
 # A decorator used to tell the application 
 # which URL is associated with which function 
@@ -268,7 +268,7 @@ def add_customerpurchasehistory():
     time_purchased = request.form.get("time_purchased")
 
     if customer_id and transaction_id and amount_spent:
-        customerpurchasehistory.add_customerpurchasehistory(
+        CustomerPurchaseHistory.add_customerpurchasehistory(
             customer_id,
             transaction_id,
             amount_spent,
@@ -280,13 +280,13 @@ def add_customerpurchasehistory():
 
 @app.route('/delete_customerpurchasehistory/<int:history_id>/delete', methods=['GET'])
 def delete_customerpurchasehistory(history_id):
-    customerpurchasehistory.delete_customerpurchasehistory(history_id)
+    CustomerPurchaseHistory.delete_customerpurchasehistory(history_id)
     return redirect(url_for('get_customerpurchasehistory'))
 
 # APP ROUTES FOR EMPLOYEETRANSACTION TABLE
 @app.route('/get_employeetransactions', methods=['GET'])
 def get_employeetransactions():
-    employeetransactions = employeetransaction.get_employeetransactions()
+    employeetransactions = EmployeeTransaction.get_employeetransactions()
     return render_template('employeetransactions.html', employeetransactions=employeetransactions)
 
 @app.route('/add_employeetransactions', methods=['GET'])
@@ -300,19 +300,19 @@ def add_employeetransaction():
     store_id = request.form.get("store_id")
 
     if employee_id and transaction_id and store_id:
-        employeetransaction.add_employeetransaction(employee_id, transaction_id, store_id)
+        EmployeeTransaction.add_employeetransaction(employee_id, transaction_id, store_id)
 
     return redirect(url_for('get_employeetransactions'))
 
 @app.route('/delete_employeetransactions/<int:employee_id>/<int:transaction_id>/delete', methods=['GET'])
 def delete_employeetransaction(employee_id, transaction_id):
-    employeetransaction.delete_employeetransaction(employee_id, transaction_id)
+    EmployeeTransaction.delete_employeetransaction(employee_id, transaction_id)
     return redirect(url_for('get_employeetransactions'))
 
 #APP ROUTES FOR CUSTOMER TRANSACTION TABLE
 @app.route('/get_customer_transactions', methods=['GET'])
 def get_customer_transactions():
-    customer_transactions = customertransaction.get_customer_transactions()
+    customer_transactions = CustomerTransaction.get_customer_transactions()
     return render_template('customer_transactions.html', customer_transactions=customer_transactions)
 
 @app.route('/add_customer_transactions', methods=['GET'])
@@ -332,7 +332,7 @@ def add_customer_transaction():
     items_purchased = request.form.get("items_purchased")
 
     if customer_id and transaction_id:
-        customertransaction.add_customer_transaction(
+        CustomerTransaction.add_customer_transaction(
             customer_id,
             transaction_id,
             shipping_street,
@@ -348,7 +348,7 @@ def add_customer_transaction():
 
 @app.route('/delete_customer_transactions/<int:id>/delete', methods=['GET'])
 def delete_customer_transaction(id):
-    customertransaction.delete_customer_transaction(id)
+    CustomerTransaction.delete_customer_transaction(id)
     return redirect(url_for('get_customer_transactions'))
 
 # APP ROUTES FOR EMPLOYEE TABLE
@@ -473,8 +473,8 @@ def delete_DietaryInformation(Product_id):
 
 @app.route('/get_Transaction', methods=['GET']) 
 def get_Transaction(): 
-	transaction = Transaction.get_Transaction()
-	return render_template('transaction.html', transactions=transactions) 
+	Transactions = Transaction.get_Transaction()
+	return render_template('transaction.html', transactions=Transactions) 
 
 @app.route('/get_all_Transaction_by_Employee/<int:id>', methods=['GET']) 
 def get_all_Transaction_by_Employee(CashierEmployee_id): 
@@ -609,22 +609,46 @@ def delete_ItemSupplied(id):
 	ItemSupplied.delete_ItemSupplied(id)
 	return redirect('/')
 
-# APP ROUTE TO GET RESULTS FOR FILM QUERY 
-@app.route('/get_queries', methods=['GET']) 
-def get_queries(): 
-	return render_template('queries.html')  
+# APP ROUTE TO GET RESULTS FOR PRODUCT SOLD LEAST QUERY 
+@app.route('/get_Product_Sold_Least', methods=['GET']) 
+def get_Product_Sold_Least(): 
+	return render_template('get_Product_Sold_Least.html')  
 
-# APP ROUTE TO GET TOP 5 CUSTOMERS QUERY 
-@app.route('/get_top5custs', methods=['GET']) 
-def get_top5custs(): 
-	top5custs = Queries.get_top5custs()
-	return render_template('top5custs.html', top5custs=top5custs) 
+@app.route('/get_Product_Sold_Least_results', methods=['GET'])
+def get_Product_Sold_Least_results():
+	ProductSoldLeast = Queries.get_Product_Sold_Least()
+	return render_template('get_Product_Sold_Least_results.html', ProductSoldLeast=ProductSoldLeast)
 
-# APP ROUTE TO GET AVERAGE RENTAL QUERY 
-@app.route('/get_avg_rental', methods=['GET']) 
-def get_avg_rental(): 
-	avg_rental = Queries.get_avg_rental()
-	return render_template('avg_rental.html', avg_rental=avg_rental) 
+# APP ROUTE TO GET AVERAGE SPEND AND ITEM QUANTITY QUERY
+@app.route('/get_avg_Spend_And_Item_Quantity', methods=['GET'])
+def get_avg_Spend_And_Item_Quantity():
+	return render_template('avg_Spend_And_Item_Quantity.html')
+
+@app.route('/get_avg_Spend_And_Item_Quantity_results', methods=['GET'])
+def get_avg_Spend_And_Item_Quantity_results():
+	avg_Spend_And_Item_Quantity = Queries.get_avg_Spend_And_Item_Quantity()
+	return render_template('avg_Spend_And_Item_Quantity_results.html', avg_Spend_And_Item_Quantity=avg_Spend_And_Item_Quantity)
+
+# APP ROUTE TO GET AVERAGE ITEMS SUPPLIED PER YEAR QUERY
+@app.route('/get_products_by_seasonality', methods=['GET'])
+def get_products_by_seasonality():
+	return render_template('products_by_seasonality.html')
+
+@app.route('/get_products_by_seasonality_results', methods=['GET'])
+def get_products_by_seasonality_results():
+	products_by_seasonality = Queries.get_products_by_seasonality()
+	return render_template('products_by_seasonality_results.html', products_by_seasonality=products_by_seasonality)
+
+
+# APP ROUTE TO GET AVERAGE ITEMS SUPPLIED PER YEAR QUERY
+@app.route('/get_avg_items_supplied_per_year', methods=['GET'])
+def get_avg_items_supplied_per_year():
+	return render_template('avg_items_supplied_per_year.html')
+
+@app.route('/get_avg_items_supplied_per_year_results', methods=['GET'])
+def get_avg_items_supplied_per_year_results():
+	avg_items_supplied_per_year = Queries.get_avg_items_supplied_per_year()
+	return render_template('avg_items_supplied_per_year_results.html', avg_items_supplied_per_year=avg_items_supplied_per_year)
 
 if __name__=='__main__': 
     app.run(port=8001, debug=True) 

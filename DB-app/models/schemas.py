@@ -64,7 +64,7 @@ class Supplier(db.Model):
     supplier_address_zip = db.Column(db.String(5))
     store_id = db.Column(db.Integer, db.ForeignKey('store.store_id', ondelete='RESTRICT', onupdate='CASCADE'))
 
-class Transac(db.Model):
+class Transaction(db.Model):
 
     transaction_id = db.Column(db.SmallInteger, primary_key=True, autoincrement=True, nullable=False)
     cashier_employee_id = db.Column(db.Integer, db.ForeignKey('employee.employee_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)

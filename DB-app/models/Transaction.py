@@ -1,5 +1,5 @@
 from sqlalchemy import func
-from models.schemas import Transac, Employee
+from models.schemas import Transaction, Employee
 from core import ma, db
 
 
