@@ -6,5 +6,9 @@ lib/
 **/.DS_Store
 **/__pycache__/
 ../venv
+<<<<<<< HEAD
 venv
 .venv/
+=======
+.vscode
+>>>>>>> b05fd937ed4df4c674306a9eead2e3657d3fa8a8
