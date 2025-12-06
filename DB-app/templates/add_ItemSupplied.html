@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Add ItemSupplied - GreenGrocer Online</title>
-    <link rel = "stylesheet" href = "styles.css">
+    <link rel = "stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div id = "nav">
@@ -10,19 +10,19 @@
             <h1>Tables - GreenGrocer Online</h1>
         </header>
         <div class = "nav-links">
-            <a href = "home.html">Home</a>
-            <a href = "tables.html">Tables List</a>
-            <a href = "add_tables.html">Edit Tables</a>
+            <a href = "/">Home</a>
         </div>
     </div>
     <h4>* = Required</h4>
-    <form action = "/add" method = "POST">
-        <label>TransactionID*:</label> <!--<foreign key> -->
-            <input type = "text" name = "transaction_id" placeholder = "transaction id..." required><br>
-        <label>SupplierID*:</label> <!--<foreign key> -->
-            <input type = "text" name = "supplier_id" placeholder = "supplier id..." required><br>
-        <label>StoreID*:</label> <!--<foreign key> -->
-            <input type = "text" name = "store_id" placeholder = "store id..." required><br>
+    <form action = "/ItemSupplied/add" method = "POST">
+        <label>ProductID*:</label>
+            <input type = "number" name = "product_id" placeholder = "product id..." required><br>
+        <label>TransactionID*:</label>
+            <input type = "number" name = "transaction_id" placeholder = "transaction id..." required><br>
+        <label>SupplierID*:</label>
+            <input type = "number" name = "supplier_id" placeholder = "supplier id..." required><br>
+        <label>StoreID*:</label>
+            <input type = "number" name = "store_id" placeholder = "store id..." required><br>
         <label>ItemQuantity*:</label>
             <input type = "number" name = "item_quantity" placeholder = "item quantity..." required><br>
         <button class = reset type = "reset">Reset</button>

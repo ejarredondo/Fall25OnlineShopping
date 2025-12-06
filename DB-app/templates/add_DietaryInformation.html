@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Add Restriction - GreenGrocer Online</title>
-    <link rel = "stylesheet" href = "styles.css">
+    <link rel = "stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div id = "nav">
@@ -10,9 +10,7 @@
             <h1>Tables - GreenGrocer Online</h1>
         </header>
         <div class = "nav-links">
-            <a href = "home.html">Home</a>
-            <a href = "tables.html">Tables List</a>
-            <a href = "add_tables.html">Edit Tables</a>
+            <a href = "/">Home</a>
         </div>
     </div>
     <h4>* = Required</h4>

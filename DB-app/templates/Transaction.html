@@ -2,41 +2,49 @@
 <html>
 <head>
     <title>Transaction - GreenGrocer Online</title>
-    <link rel = "stylesheet" href = "styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div id = "nav">
+    <div id="nav">
         <header>
-            <h1>Tables - GreenGrocer Online</h1>
+            <h1>GreenGrocer Online - Transactions</h1>
         </header>
-        <div class = "nav-links">
-            <a href = "home.html">Home</a>
-            <a href = "tables.html">Tables List</a>
-            <a href = "add_tables.html">Edit Tables</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
         </div>
     </div> 
-<a href = "/add_Transaction">ADD</a>
-        <br>
-        <table>
+
+    <div class="table-actions">
+        <a class="add" href="/add_Transaction">Add Transaction</a>
+    </div>
+
+    <table>
         <thead>
-            <th>TransactionID</th>
-            <th>CashierEmployeeID</th>
-            <th>IncomingOrOutgoing</th>
-            <th>TransactionAmount</th>
-            <th>TransactionDate</th>
-            <th>Last Update</th>
+            <tr>
+                <th>Transaction ID</th>
+                <th>Cashier Employee ID</th>
+                <th>Incoming/Outgoing</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
         </thead>
-        {% for data in stores %}
         <tbody>
-            <td>{{data.Transaction_ID}}</td>
-            <td>{{data.Transaction_CashierEmployeeID}}</td>
-            <td>{{data.Transaction_IncomingOrOutgoing}}</td>
-            <td>{{data.Transaction_Amount}}</td>
-            <td>{{data.Transaction_Date}}</td>
-            <td>{{data.Transaction_Last_Update}}</td>
-            <td><a href = "/delete_Transaction/{{data.Transaction_ID}}" type = "button">Delete</a></td>
+        {% for data in transactions %}
+            <tr>
+                <td>{{ data.transaction_id }}</td>
+                <td>{{ data.cashier_employee_id }}</td>
+                <td>{{ data.incoming_or_outgoing }}</td>
+                <td>{{ data.transaction_amount }}</td>
+                <td>{{ data.transaction_date }}</td>
+                <td><a href="/delete_transaction/{{ data.transaction_id }}" class="delete">Delete</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">No transactions available.</td>
+            </tr>
+        {% endfor %}
         </tbody>
-        {% endfor%}
     </table>
 </body>
 </html>

@@ -2,38 +2,53 @@
 <html>
 <head>
     <title>Suppliers - GreenGrocer Online</title>
-    <link rel = "stylesheet" href = "styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Suppliers - GreenGrocer Online</h1>
-    </header>
-<a href = "/add_suppliers">ADD</a>
-        <br>
-        <table>
+    <div id="nav">
+        <header>
+            <h1>GreenGrocer Online - Suppliers</h1>
+        </header>
+        <div class="nav-links">
+            <a href="/">Home</a>
+        </div>
+    </div>
+
+    <div class="table-actions">
+        <a class="add" href="/add_suppliers">Add Supplier</a>
+    </div>
+
+    <table>
         <thead>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Street Address</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
-            <th>Store ID</th>
-            <th>Last Update</th>
+            <tr>
+                <th>Supplier ID</th>
+                <th>Name</th>
+                <th>Street Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Store ID</th>
+                <th>Action</th>
+            </tr>
         </thead>
-        {% for data in stores %}
         <tbody>
-            <td>{{data.supplier_id}}</td>
-            <td>{{data.supplier_name}}</td>
-            <td>{{data.supplier_address_street}}</td>
-            <td>{{data.supplier_address_city}}</td>
-            <td>{{data.supplier_address_statestate}}</td>
-            <td>{{data.supplier_address_zip}}</td>
-            <td>{{data.supplier_store_id}}</td>
-            <td>{{data.last_update}}</td>
-            <td><a href = "/delete_supplier/{{data.supplier_id}}" type = "button">Delete</a></td>
+        {% for data in suppliers %}
+            <tr>
+                <td>{{ data.supplier_id }}</td>
+                <td>{{ data.supplier_name }}</td>
+                <td>{{ data.supplier_address_street }}</td>
+                <td>{{ data.supplier_address_city }}</td>
+                <td>{{ data.supplier_address_state }}</td>
+                <td>{{ data.supplier_address_zip }}</td>
+                <td>{{ data.store_id }}</td>
+                <td><a href="/delete_supplier/{{ data.supplier_id }}" class="delete">Delete</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">No suppliers available.</td>
+            </tr>
+        {% endfor %}
         </tbody>
-        {% endfor%}
     </table>
 </body>
 </html>

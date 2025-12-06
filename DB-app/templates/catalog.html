@@ -2,48 +2,63 @@
 <html>
 <head>
     <title>Catalog - GreenGrocer Online</title>
-    <link rel = "stylesheet" href = "styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Catalog - GreenGrocer Online</h1>
-    </header> 
-    <a href = "/add_catalogs">ADD</a>
-    <br>
+    <div id="nav">
+        <header>
+            <h1>GreenGrocer Online - Catalog</h1>
+        </header> 
+        <div class="nav-links">
+            <a href="/">Home</a>
+        </div>
+    </div>
+
+    <div class="table-actions">
+        <a class="add" href="/add_catalogs">Add Catalog Item</a>
+    </div>
+
     <table>
         <thead>
-            <th>ID</th>
-            <th>Product Name</th>
-            <th>Category</th>
-            <th>SKU</th>
-            <th>Weight</th>
-            <th>Base Price</th>
-            <th>Sale Price</th>
-            <th>Sold by Weight or Unit</th>
-            <th>Brand</th>
-            <th>Quantity of Item</th>
-            <th>Department ID</th>
-            <th>Expiration Date</th>
-            <th>Last Update</th>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>SKU</th>
+                <th>Weight</th>
+                <th>Base Price</th>
+                <th>Sale Price</th>
+                <th>Sold by</th>
+                <th>Brand</th>
+                <th>Quantity</th>
+                <th>Department ID</th>
+                <th>Expiration Date</th>
+                <th>Action</th>
+            </tr>
         </thead>
-        {% for data in catalogs %}
         <tbody>
-            <td>{{data.catalog_id}}</td>
-            <td>{{data.product_name}}</td>
-            <td>{{data.category}}</td>
-            <td>{{data.sku}}</td>
-            <td>{{data.weight}}</td>
-            <td>{{data.base_price}}</td>
-            <td>{{data.sale_price}}</td>
-            <td>{{data.sold_by_weight_or_unit}}</td>
-            <td>{{data.brand}}</td>
-            <td>{{data.quanity_of_item}}</td>
-            <td>{{data.department_id}}</td>
-            <td>{{data.expiration_date}}</td>
-            <td>{{data.last_update}}</td>
-            <td><a href = "/delete_catalog/{{data.catalog_id}}" type = "button">Delete</a></td>
+        {% for data in catalogs %}
+            <tr>
+                <td>{{ data.product_id }}</td>
+                <td>{{ data.product_name }}</td>
+                <td>{{ data.category }}</td>
+                <td>{{ data.sku }}</td>
+                <td>{{ data.weight }}</td>
+                <td>{{ data.base_price }}</td>
+                <td>{{ data.sale_price }}</td>
+                <td>{{ data.sold_by_weight_or_unit }}</td>
+                <td>{{ data.brand }}</td>
+                <td>{{ data.quantity_of_item }}</td>
+                <td>{{ data.department_id }}</td>
+                <td>{{ data.expiration_date }}</td>
+                <td><a href="/delete_catalog/{{ data.product_id }}" class="delete">Delete</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">No catalog items available.</td>
+            </tr>
+        {% endfor %}
         </tbody>
-        {% endfor%}
     </table>
 </body>
 </html>

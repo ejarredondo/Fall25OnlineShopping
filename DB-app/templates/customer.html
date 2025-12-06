@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Customers - GreenGrocer Online</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div id="nav">
@@ -10,14 +10,12 @@
             <h1>GreenGrocer Online - Customers</h1>
         </header>
         <div class="nav-links">
-            <a href="home.html">Home</a>
-            <a href="tables.html">Tables List</a>
-            <a href="add_tables.html">Add to Tables</a>
+            <a href="/">Home</a>
         </div>
     </div>
 
     <div class="table-actions">
-        <a class="add" href="/add_customer">Add Customer</a>
+        <a class="add" href="/add_customers">Add Customer</a>
     </div>
 
     <table>

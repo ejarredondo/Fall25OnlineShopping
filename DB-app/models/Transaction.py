@@ -1,43 +1,54 @@
-from sqlalchemy import func
-from models.schemas import Transaction, Employee
+from models.schemas import Transaction, employee as Employee
 from core import ma, db
 
 
-def get_Transaction(ID):
-    Transaction = Transaction.query.get(ID)
-    return Transaction
+def get_Transaction(id):
+    return Transaction.query.get(id)
 
-def get_all_Transaction_by_Employee(CashierEmployee_id):
-     Transaction = db.session.query(Transaction
-            ).join(Employee, Transaction.CashierEmployee_id == Employee.Employee_id
-            ).filter(Employee.Employee_id == CashierEmployee_id
-            ).all()
 
-     return Transaction
+def get_transactions():
+    return Transaction.query.all()
+
+
+def get_all_Transaction_by_Employee(cashier_employee_id):
+    transactions = (
+        db.session.query(Transaction)
+        .join(Employee, Transaction.cashier_employee_id == Employee.employee_id)
+        .filter(Employee.employee_id == cashier_employee_id)
+        .all()
+    )
+    return transactions
+
 
 def get_Transaction_without_Employee():
-    Transaction = db.session.query(Transaction).filter(
-         Transaction.Employee_id.is_(None)
-    ).all()
-
-    return Transaction
+    transactions = db.session.query(Transaction).filter(Transaction.cashier_employee_id.is_(None)).all()
+    return transactions
 
 
-def add_Transaction(CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate):
-    T = Transaction(CashierEmployeeID=CashierEmployeeID, IncomingOrOutgoing=IncomingOrOutgoing, TransactionAmount=TransactionAmount, TransactionDate=TransactionDate, last_update=func.now())
-    db.session.add(T)
+def add_Transaction(transaction_id, cashier_employee_id, incoming_or_outgoing, transaction_amount, transaction_date):
+    t = Transaction(
+        transaction_id=transaction_id,
+        cashier_employee_id=cashier_employee_id,
+        incoming_or_outgoing=incoming_or_outgoing,
+        transaction_amount=transaction_amount,
+        transaction_date=transaction_date,
+    )
+    db.session.add(t)
     db.session.commit()
 
-def delete_Transaction(Transaction_ID):
-	# Deletes the data on the basis of unique id and 
-	# redirects to home page
-	data = Transaction.query.get(Transaction_ID)
-	db.session.delete(data)
-	db.session.commit()
+
+def delete_Transaction(transaction_id):
+    data = Transaction.query.get(transaction_id)
+    if data is None:
+        return
+    db.session.delete(data)
+    db.session.commit()
+
 
 class TransacSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Transaction
+
 
 transaction_schema = TransacSchema()
 transactions_schema = TransacSchema(many=True)

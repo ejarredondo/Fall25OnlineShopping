@@ -1,4 +1,4 @@
-from models.schemas import Customer
+from models.schemas import customer as Customer
 from core import ma, db
 
 

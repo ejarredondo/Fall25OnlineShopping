@@ -2,35 +2,43 @@
 <html>
 <head>
     <title>Dietary Information - GreenGrocer Online</title>
-    <link rel = "stylesheet" href = "styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div id = "nav">
+    <div id="nav">
         <header>
-            <h1>Tables - GreenGrocer Online</h1>
+            <h1>GreenGrocer Online - Dietary Information</h1>
         </header>
-        <div class = "nav-links">
-            <a href = "home.html">Home</a>
-            <a href = "tables.html">Tables List</a>
-            <a href = "add_tables.html">Edit Tables</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
         </div>
     </div> 
-<a href = "/add_DietaryInformation">ADD</a>
-        <br>
-        <table>
+
+    <div class="table-actions">
+        <a class="add" href="/add_DietaryInformation">Add Dietary Information</a>
+    </div>
+
+    <table>
         <thead>
-            <th>ProductID</th>
-            <th>Restriction</th>
-            <th>Last Update</th>
+            <tr>
+                <th>Product ID</th>
+                <th>Restriction</th>
+                <th>Action</th>
+            </tr>
         </thead>
-        {% for data in stores %}
         <tbody>
-            <td>{{data.DietaryInformation_ProductID}}</td>
-            <td>{{data.DietaryInformation_Restriction}}</td>
-            <td>{{data.DietaryInformation_LastUpdate}}</td>
-            <td><a href = "/delete_DietaryInformation/{{data.DietaryInformation_ProductID}}" type = "button">Delete</a></td>
+        {% for data in dietary_informations %}
+            <tr>
+                <td>{{ data.product_id }}</td>
+                <td>{{ data.restriction }}</td>
+                <td><a href="/delete_DietaryInformation/{{ data.product_id }}" class="delete">Delete</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No dietary information available.</td>
+            </tr>
+        {% endfor %}
         </tbody>
-        {% endfor%}
     </table>
 </body>
 </html>

@@ -2,41 +2,49 @@
 <html>
 <head>
     <title>ItemSupplied - GreenGrocer Online</title>
-    <link rel = "stylesheet" href = "styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div id = "nav">
+    <div id="nav">
         <header>
-            <h1>Tables - GreenGrocer Online</h1>
+            <h1>GreenGrocer Online - Items Supplied</h1>
         </header>
-        <div class = "nav-links">
-            <a href = "home.html">Home</a>
-            <a href = "tables.html">Tables List</a>
-            <a href = "add_tables.html">Edit Tables</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
         </div>
     </div> 
-<a href = "/add_ItemsSupplied">ADD</a>
-        <br>
-        <table>
+
+    <div class="table-actions">
+        <a class="add" href="/add_ItemSupplied">Add ItemSupplied</a>
+    </div>
+
+    <table>
         <thead>
-            <th>ProductID</th>
-            <th>TransactionID</th>
-            <th>SupplierID</th>
-            <th>StoreID</th>
-            <th>ItemQuantity</th>
-            <th>Last Update</th>
+            <tr>
+                <th>Product ID</th>
+                <th>Transaction ID</th>
+                <th>Supplier ID</th>
+                <th>Store ID</th>
+                <th>Item Quantity</th>
+                <th>Action</th>
+            </tr>
         </thead>
-        {% for data in stores %}
         <tbody>
-            <td>{{data.ItemSupplied_ProductID}}</td>
-            <td>{{data.ItemSupplied_TransactionID}}</td>
-            <td>{{data.ItemSupplied_SupplierID}}</td>
-            <td>{{data.ItemSupplied_StoreID}}</td>
-            <td>{{data.ItemSupplied_ItemQuantity}}</td>
-            <td>{{data.ItemSupplied_LastUpdate}}</td>
-            <td><a href = "/delete_ItemsSupplied/{{data.ItemSupplied_ProductID}}" type = "button">Delete</a></td>
+        {% for data in ItemSupplied %}
+            <tr>
+                <td>{{ data.product_id }}</td>
+                <td>{{ data.transaction_id }}</td>
+                <td>{{ data.supplier_id }}</td>
+                <td>{{ data.store_id }}</td>
+                <td>{{ data.item_quantity }}</td>
+                <td><a href="/delete_ItemSupplied/{{ data.product_id }}/{{ data.transaction_id }}" class="delete">Delete</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">No items supplied available.</td>
+            </tr>
+        {% endfor %}
         </tbody>
-        {% endfor%}
     </table>
 </body>
 </html>

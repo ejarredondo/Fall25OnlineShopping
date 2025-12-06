@@ -1,28 +1,36 @@
 
-from sqlalchemy import func
-from models.schemas import Department #change table names
+from models.schemas import department as Department
 from core import ma, db
 
-def get_department(): 
-    all_departments = Department.query.all()
-    return department_schema.dump(all_departments)
 
-def add_department(DepartmentName, EmployeeTotal):
-    d = Department(DepartmentName=DepartmentName, EmployeeTotal=EmployeeTotal, last_update=func.now())
+def get_department(id=None):
+    if id is None:
+        all_departments = Department.query.all()
+        return departments_schema.dump(all_departments)
+    return Department.query.get(id)
+
+
+def add_department(department_name, employee_total):
+    d = Department(
+        department_name=department_name,
+        employee_total=employee_total,
+    )
     db.session.add(d)
     db.session.commit()
 
+
 def delete_department(id):
-	# Deletes the data on the basis of unique id and 
-	# redirects to home page
-	data = Department.query.get(id)
-	db.session.delete(data)
-	db.session.commit()
-     
-class departmentSchema(ma.SQLAlchemyAutoSchema):
+    data = Department.query.get(id)
+    if data is None:
+        return
+    db.session.delete(data)
+    db.session.commit()
+
+
+class DepartmentSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Department
 
-actor_schema = departmentSchema()
-actors_schema = departmentSchema(many=True)
 
+department_schema = DepartmentSchema()
+departments_schema = DepartmentSchema(many=True)

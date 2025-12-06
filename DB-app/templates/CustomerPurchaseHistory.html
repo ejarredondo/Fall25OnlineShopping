@@ -2,40 +2,51 @@
 <html>
 <head>
     <title>CustomerPurchaseHistory - GreenGrocer Online</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div id="nav">
         <header>
-            <h1>GreenGrocer Online - CustomerPurchaseHistory</h1>
+            <h1>GreenGrocer Online - Customer Purchase History</h1>
         </header>
         <div class="nav-links">
-            <a href="home.html">Home</a>
-            <a href="tables.html">Tables List</a>
-            <a href="add_tables.html">Edit Tables</a>
+            <a href="/">Home</a>
         </div>
     </div>
 
-    <h4>* = Required</h4>
-    <form action="/CustomerPurchaseHistory" method="POST">
+    <div class="table-actions">
+        <a class="add" href="/add_customerpurchasehistory/0">Add Customer Purchase History</a>
+    </div>
 
-        <label for="customer_id">Customer ID*:</label>
-        <input id="customer_id" type="number" min="1" name="customer_id" placeholder="customer id..." required><br>
-
-        <label for="transaction_id">Transaction ID*:</label>
-        <input id="transaction_id" type="number" min="1" name="transaction_id" placeholder="transaction id..." required><br>
-
-        <label for="amount_spent">Amount Spent*:</label>
-        <input id="amount_spent" type="number" step="0.01" min="0" name="amount_spent" placeholder="amount spent..." required><br>
-
-        <label for="date_purchased">Date Purchased:</label>
-        <input id="date_purchased" type="date" name="date_purchased"><br>
-
-        <label for="time_purchased">Time Purchased:</label>
-        <input id="time_purchased" type="time" name="time_purchased"><br>
-
-        <button class="reset" type="reset">Reset</button>
-        <button class="add" type="submit">Add</button>
-    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>History ID</th>
+                <th>Customer ID</th>
+                <th>Transaction ID</th>
+                <th>Amount Spent</th>
+                <th>Date Purchased</th>
+                <th>Time Purchased</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for data in customerpurchasehistory %}
+            <tr>
+                <td>{{ data.customer_purchase_history_id }}</td>
+                <td>{{ data.customer_id }}</td>
+                <td>{{ data.transaction_id }}</td>
+                <td>{{ data.amount_spent }}</td>
+                <td>{{ data.date_purchased }}</td>
+                <td>{{ data.time_purchased }}</td>
+                <td><a href="/delete_customerpurchasehistory/{{ data.customer_purchase_history_id }}/delete" class="delete">Delete</a></td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">No customer purchase history available.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

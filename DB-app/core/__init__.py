@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 my_password = str(os.environ.get('PASSWORD'))
 
-app = Flask(__name__, template_folder="../templates") # Flask constructor 
+app = Flask(__name__, template_folder="../templates", static_folder="../static") # Flask constructor 
 db_cred = { 
     'user': 'root',         # DATABASE USER 
     'pass': my_password,    # DATABASE PASSWORD 
@@ -22,3 +22,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Creating an SQLAlchemy instance
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+
+from models.schemas import (
+    catalog, customer, CustomerPurchaseHistory, CustomerTransaction, 
+    department, DietaryInformation, employee, EmployeeTransaction,
+    ItemSupplied, store, supplier, Transaction
+)

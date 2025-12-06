@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Add Customer Transaction</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div id="nav">
@@ -10,14 +10,12 @@
             <h1> GreenGrocer Online - Add Customer Transaction</h1>
         </header>
         <div class="nav-links">
-            <a href="home.html">Home</a>
-            <a href="tables.html">Tables List</a>
-            <a href="add_tables.html">Add to Tables</a>
+            <a href="/">Home</a>
         </div>
     </div>
 
     <h4>* = Required</h4>
-    <form action="/customer_transactions" method="POST">
+    <form action="/add_customer_transactions" method="POST">
 
         <label for="customer_id">Customer ID*:</label>
         <input id="customer_id" type="number" min="1" name="customer_id" placeholder="customer id..." required><br>
