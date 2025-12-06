@@ -14,7 +14,7 @@ def hello():
 # APP ROUTE TO RENDER HOME PAGE WITH LINKS
 	# check this with home.html; might need to delete home.html??
 @app.route('/')
-def index()
+def index():
 	return render_template('index.html')
 
 # APP ROUTE TO GET RESULTS FOR CATALOG SELECT QUERY 
