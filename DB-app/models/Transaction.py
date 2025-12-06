@@ -37,7 +37,7 @@ def delete_Transaction(Transaction_ID):
 
 class TransacSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
-        model = Transac
+        model = Transaction
 
 transaction_schema = TransacSchema()
 transactions_schema = TransacSchema(many=True)

@@ -4,7 +4,7 @@ from core import ma, db
 
 def get_ItemSupplied(): 
     all_ItemSupplied = ItemSupplied.query.all()
-    return ItemSupplied_schema.dump(all_ItemSupplied)
+    return ItemSuppliedSchema.dump(all_ItemSupplied)
 
 
 
