@@ -1,4 +1,4 @@
-from models.schemas import Supplier, store as Store
+from models.schemas import Supplier, Store
 from core import ma, db
 
 
@@ -7,30 +7,30 @@ def get_suppliers():
     return suppliers_schema.dump(all_suppliers)
 
 
-def get_supplier(supplier_id):
-    return Supplier.query.get(supplier_id)
+def get_supplier(SupplierID):
+    return Supplier.query.get(SupplierID)
 
 
-def get_all_suppliers_by_store(store_id):
+def get_all_suppliers_by_store(StoreID):
     suppliers = (
         db.session.query(Supplier)
-        .join(Store, Supplier.store_id == Store.store_id)
-        .filter(Store.store_id == store_id)
+        .join(Store, Supplier.StoreID == Store.StoreID)
+        .filter(Store.StoreID == StoreID)
         .all()
     )
     return suppliers
 
 
 def get_suppliers_without_store():
-    suppliers = db.session.query(Supplier).filter(Supplier.store_id.is_(None)).all()
+    suppliers = db.session.query(Supplier).filter(Supplier.StoreID.is_(None)).all()
     return suppliers
 
 
-def add_supplier_to_store(supplier_id, store_id):
-    supplier = Supplier.query.get(supplier_id)
+def add_supplier_to_store(SupplierID, StoreID):
+    supplier = Supplier.query.get(SupplierID)
     if supplier is None:
         return
-    supplier.store_id = store_id
+    supplier.StoreID = StoreID
     db.session.commit()
 
 
@@ -55,8 +55,8 @@ def add_supplier(
     db.session.commit()
 
 
-def delete_supplier(supplier_id):
-    supplier = Supplier.query.get(supplier_id)
+def delete_supplier(SupplierID):
+    supplier = Supplier.query.get(SupplierID)
     if supplier is None:
         return
     db.session.delete(supplier)

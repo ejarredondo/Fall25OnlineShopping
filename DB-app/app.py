@@ -83,7 +83,7 @@ def delete_catalog(id):
 
 
 
-## 🤝 Supplier Routes
+##  Supplier Routes
 
 @app.route('/get_suppliers', methods=['GET'])
 def get_suppliers_route():
@@ -136,34 +136,42 @@ def delete_supplier_route(SupplierID):
 
 
 
-## 🏬 Store Routes
+# Store Routes
 
 @app.route('/get_stores', methods=['GET'])
 def get_stores():
     stores_list = store.get_stores()
     return render_template('store.html', stores=stores_list)
 
-# CORRECTED: Specified GET method for form rendering
+# CORRECTED: Specified GET method 
 @app.route('/add_stores', methods=['GET'])
 def add_stores_form():
     return render_template('add_store.html')
 
 # CORRECTED: Changed route path to avoid clash with GET route
-@app.route('/stores/add', methods=["POST"])
+@app.route('/add_stores', methods=["POST"])
 def add_store():
-    street_address = request.form.get("street_address")
-    city = request.form.get("city")
-    state = request.form.get("state")
-    zip_code = request.form.get("zip") # Renamed 'zip' to 'zip_code' to avoid shadowing built-in function
+    StreetAddress = request.form.get("street_address")
+    City = request.form.get("city")
+    State = request.form.get("state")
+    Zip = request.form.get("zip")
+    EmployeeNumber = request.form.get("employee_number")
 
-    # Corrected: Called store.add_store (your original code called supplier.add_supplier)
-    if street_address and city and state and zip_code:
-        store.add_store(street_address, city, state, zip_code)
+    # Corrected: Called store.add_store
+    if EmployeeNumber:
+        try: 
+            EmployeeNumber = int(EmployeeNumber)
+        except ValueError:
+            EmployeeNumber = None
+    else:
+            EmployeeNumber = None
+    if StreetAddress and City and State and Zip:
+        store.add_store(StreetAddress, City, State, Zip, EmployeeNumber=EmployeeNumber)
         return redirect(url_for('get_stores'))
     else:
         return redirect(url_for('add_stores_form'))
 
-@app.route('/delete_store/<int:id>')
+@app.route('/delete_store/<int:id>', methods =['GET'])
 def delete_store(id):
     store.delete_store(id)
     return redirect(url_for('get_stores'))

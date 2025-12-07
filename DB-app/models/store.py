@@ -1,5 +1,5 @@
 
-from models.schemas import store as Store
+from models.schemas import Store
 from core import ma, db
 
 
@@ -8,26 +8,27 @@ def get_stores():
     return stores_schema.dump(all_stores)
 
 
-def get_store(id):
-    return Store.query.get(id)
+def get_store(StoreID):
+    return Store.query.get(StoreID)
 
 
-def add_store(street_address, city, state, zip_code):
+def add_store(StreetAddress, City, State, Zip, EmployeeNumber=None):
     a = Store(
-        street_address=street_address,
-        city=city,
-        state=state,
-        zip=zip_code,
+        StreetAddress=StreetAddress,
+        City=City,
+        State=State,
+        Zip=Zip,
+        EmployeeNumber=EmployeeNumber
     )
     db.session.add(a)
     db.session.commit()
 
 
-def delete_store(id):
-    data = Store.query.get(id)
-    if data is None:
+def delete_store(StoreID):
+    store_to_delete = Store.query.get(StoreID)
+    if store_to_delete is None:
         return
-    db.session.delete(data)
+    db.session.delete(store_to_delete)
     db.session.commit()
 
 

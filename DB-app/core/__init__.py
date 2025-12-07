@@ -26,5 +26,5 @@ ma = Marshmallow(app)
 from models.schemas import (
     catalog, customer, CustomerPurchaseHistory, CustomerTransaction, 
     department, DietaryInformation, employee, EmployeeTransaction,
-    ItemSupplied, store, Supplier, Transaction
+    ItemSupplied, Store, Supplier, Transaction
 )

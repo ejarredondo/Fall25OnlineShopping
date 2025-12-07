@@ -46,13 +46,14 @@ class catalog(db.Model):
     expiration_date = db.Column(db.Date)
 
 
-class store(db.Model):
-
-    store_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    street_address = db.Column(db.String(30), nullable=False)
-    city = db.Column(db.String(30), nullable=False)
-    state = db.Column(db.String(2), nullable=False)
-    zip = db.Column(db.String(5), nullable=False)
+class Store(db.Model):
+    __tablename__ = "Store"
+    StoreID = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    StreetAddress = db.Column(db.String(30), nullable=False)
+    City = db.Column(db.String(30), nullable=False)
+    State = db.Column(db.String(2), nullable=False)
+    Zip = db.Column(db.String(5), nullable=False)
+    EmployeeNumber = db.Column(db.Integer, nullable=True)
 
 class Supplier(db.Model):
     __tabelename__ = "supplier"
@@ -77,9 +78,9 @@ class Transaction(db.Model):
 class ItemSupplied(db.Model):
 
     product_id = db.Column(db.Integer, db.ForeignKey('catalog.product_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
-    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.transaction_id', ondelete='RESTRICT', onupdate='CASCADE'),  primary_key=True, nullable=False)
-    supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.supplier_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
-    store_id = db.Column(db.Integer, db.ForeignKey('store.store_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'),  primary_key=True, nullable=False)
+    supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.SupplierID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    store_id = db.Column(db.Integer, db.ForeignKey('store.StoreID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
     item_quantity = db.Column(db.SmallInteger, nullable=False)
 
 class DietaryInformation(db.Model):
@@ -91,7 +92,7 @@ class CustomerPurchaseHistory(db.Model):
 
     customer_purchase_history_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.customer_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
-    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.transaction_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
     amount_spent = db.Column(db.Numeric(5, 2), nullable=False)
     date_purchased = db.Column(db.Date)
     time_purchased = db.Column(db.Time)
@@ -100,7 +101,7 @@ class CustomerTransaction(db.Model):
     
     customer_transaction_id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.customer_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
-    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.transaction_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
     shipping_address_street = db.Column(db.String(30))
     shipping_address_city = db.Column(db.String(30))
     shipping_address_state = db.Column(db.String(2))
@@ -112,8 +113,8 @@ class CustomerTransaction(db.Model):
 class EmployeeTransaction(db.Model):
 
     employee_id = db.Column(db.Integer, db.ForeignKey('employee.employee_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
-    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.transaction_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
-    store_id = db.Column(db.Integer, db.ForeignKey('store.store_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
+    store_id = db.Column(db.Integer, db.ForeignKey('store.StoreID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
 
 
 # Aliases to match the helper modules' expected class names
@@ -121,7 +122,7 @@ Department = department
 Customer = customer
 Employee = employee
 Catalog = catalog
-Store = store
+Store = Store
 Supplier = Supplier
 
 
