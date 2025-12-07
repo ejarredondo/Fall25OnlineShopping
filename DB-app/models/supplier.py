@@ -1,4 +1,4 @@
-from models.schemas import supplier as Supplier, store as Store
+from models.schemas import Supplier, store as Store
 from core import ma, db
 
 
@@ -7,8 +7,8 @@ def get_suppliers():
     return suppliers_schema.dump(all_suppliers)
 
 
-def get_supplier(id):
-    return Supplier.query.get(id)
+def get_supplier(supplier_id):
+    return Supplier.query.get(supplier_id)
 
 
 def get_all_suppliers_by_store(store_id):
@@ -35,31 +35,31 @@ def add_supplier_to_store(supplier_id, store_id):
 
 
 def add_supplier(
-    supplier_name,
-    supplier_address_street,
-    supplier_address_city,
-    supplier_address_state,
-    supplier_address_zip,
-    store_id,
+    SupplierName,
+    SupplierAddressStreet,
+    SupplierAddressCity,
+    SupplierAddressState,
+    SupplierAddressZip,
+    StoreID,
 ):
     a = Supplier(
-        supplier_name=supplier_name,
-        supplier_address_street=supplier_address_street,
-        supplier_address_city=supplier_address_city,
-        supplier_address_state=supplier_address_state,
-        supplier_address_zip=supplier_address_zip,
-        store_id=store_id,
+        SupplierName=SupplierName,
+        SupplierAddressStreet=SupplierAddressStreet,
+        SupplierAddressCity=SupplierAddressCity,
+        SupplierAddressState=SupplierAddressState,
+        SupplierAddressZip=SupplierAddressZip,
+        StoreID=StoreID,
     )
 
     db.session.add(a)
     db.session.commit()
 
 
-def delete_supplier(id):
-    data = Supplier.query.get(id)
-    if data is None:
+def delete_supplier(supplier_id):
+    supplier = Supplier.query.get(supplier_id)
+    if supplier is None:
         return
-    db.session.delete(data)
+    db.session.delete(supplier)
     db.session.commit()
 
 

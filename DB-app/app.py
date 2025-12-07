@@ -86,54 +86,53 @@ def delete_catalog(id):
 ## 🤝 Supplier Routes
 
 @app.route('/get_suppliers', methods=['GET'])
-def get_suppliers():
+def get_suppliers_route():
     suppliers_list = supplier.get_suppliers()
     return render_template('supplier.html', suppliers=suppliers_list)
 
 # CORRECTED: Fixed variable mismatch in route parameter
-@app.route('/get_all_suppliers_by_store/<int:store_id>', methods=['GET']) 
-def get_all_suppliers_by_store(store_id): 
-    suppliers_list = supplier.get_all_suppliers_by_store(store_id)
-    # 'store' variable shadowed the imported module; renamed to 'store_info'
-    store_info = store.get_store(store_id)
+@app.route('/get_all_suppliers_by_store/<int:StoreID>', methods=['GET'])
+def get_all_suppliers_by_store_route(StoreID):
+    suppliers_list = supplier.get_all_suppliers_by_store(StoreID)
+    store_info = store.get_store(StoreID)
     return render_template('suppliers_select.html', suppliers=suppliers_list, store=store_info)
 
 # CORRECTED: Redirect to the correctly named function 'get_all_suppliers_by_store'
 @app.route('/suppliers_without_store/add_suppliers_to_store', methods=['POST'])
-def add_suppliers_to_store():
-    supplier_id = request.form.get("supplier_id")
-    store_id = request.form.get("store_id")
-    supplier.add_supplier_to_store(supplier_id, store_id)
+def add_suppliers_to_store_route():
+    SupplierID = request.form.get("SupplierID")
+    StoreID = request.form.get("StoreID")
+    supplier.add_supplier_to_store(SupplierID, StoreID)
     # Target function must be 'get_all_suppliers_by_store'
-    return redirect(url_for('get_all_suppliers_by_store', store_id=store_id))
+    return redirect(url_for('get_all_suppliers_by_store', StoreID=StoreID))
 
 # CORRECTED: Specified GET method for form rendering
 @app.route('/add_suppliers', methods=['GET'])
-def add_suppliers_form():
+def add_suppliers_form_route():
     return render_template('add_supplier.html')
 
 # CORRECTED: Changed route path to avoid clash with GET route
-@app.route('/suppliers/add', methods=["POST"])
-def add_supplier():
+@app.route('/add_suppliers', methods=["POST"])
+def add_supplier_route():
     # ... (form data parsing code remains the same)
-    supplier_name = request.form.get("supplier_name")
-    supplier_address_street = request.form.get("supplier_address_street")
-    supplier_address_city = request.form.get("supplier_address_city")
-    supplier_address_state = request.form.get("supplier_address_state")
-    supplier_address_zip = request.form.get("supplier_address_zip")
-    store_id = request.form.get("store_id")
+    SupplierName = request.form.get("SupplierName")
+    SupplierAddressStreet = request.form.get("SupplierAddressStreet")
+    SupplierAddressCity = request.form.get("SupplierAddressCity")
+    SupplierAddressState = request.form.get("SupplierAddressState")
+    SupplierAddressZip = request.form.get("SupplierAddressZip")
+    StoreID = request.form.get("StoreID")
 
-    if supplier_name != '':
-        supplier.add_supplier(supplier_name, supplier_address_street, supplier_address_city,
-                      supplier_address_state, supplier_address_zip, store_id)
-        return redirect(url_for('get_suppliers'))
+    if SupplierName != '':
+        supplier.add_supplier(SupplierName, SupplierAddressStreet, SupplierAddressCity,
+                      SupplierAddressState, SupplierAddressZip, StoreID)
+        return redirect(url_for('get_suppliers_route'))
     else:
-        return redirect(url_for('add_suppliers_form'))
+        return redirect(url_for('add_suppliers_form_route'))
 
-@app.route('/delete_supplier/<int:id>')
-def delete_supplier(id):
-    supplier.delete_supplier(id)
-    return redirect(url_for('get_suppliers'))
+@app.route('/delete_supplier/<int:SupplierID>')
+def delete_supplier_route(SupplierID):
+    supplier.delete_supplier(SupplierID)
+    return redirect(url_for('get_suppliers_route'))
 
 
 
@@ -479,8 +478,8 @@ def get_transactions():
     return render_template('Transaction.html', transactions=transactions_list)
 
 @app.route('/get_all_Transaction_by_Employee/<int:cashier_employee_id>', methods=['GET']) # Variable consistency
-def get_all_Transaction_by_Employee(cashier_employee_id): # Variable consistency
-    transaction_list = Transaction.get_all_Transaction_by_Employee(cashier_employee_id)
+def get_all_Transaction_by_Employee(CashierEmployeeID): # Variable consistency
+    transaction_list = Transaction.get_all_Transaction_by_Employee(CashierEmployeeID)
     employee_info = None
     # employee.get_employees() returns a list of dicts; pick the matching record
     try:
@@ -492,10 +491,10 @@ def get_all_Transaction_by_Employee(cashier_employee_id): # Variable consistency
 
 @app.route('/add_Transaction_to_Employee', methods=['POST'])
 def add_Transaction_to_Employee():
-    transaction_id = request.form.get("Transaction_id")
-    cashier_employee_id = request.form.get("CashierEmployee_id")
-    Transaction.add_Transaction_to_Employee(transaction_id, cashier_employee_id)
-    return redirect(url_for('get_all_Transaction_by_Employee', cashier_employee_id=cashier_employee_id))
+    TransactionID = request.form.get("TransactionID")
+    CashierEmployeeID = request.form.get("CashierEmployeeID")
+    Transaction.add_Transaction_to_Employee(TransactionID, CashierEmployeeID)
+    return redirect(url_for('get_all_Transaction_by_Employee', CashierEmployeeID=CashierEmployeeID))
 
 # CORRECTED: Specified GET method
 @app.route('/add_Transaction', methods=['GET'])
@@ -518,9 +517,9 @@ def add_Transaction_post(): # Renamed function to avoid conflict with the GET fu
     else:
         return redirect(url_for('add_Transaction_form'))
 
-@app.route('/delete_transaction/<int:id>') # Renamed route path
-def delete_Transaction(id):
-    Transaction.delete_Transaction(id)
+@app.route('/delete_transaction/<int:TransactionID>') # Renamed route path
+def delete_Transaction(TransactionID):
+    Transaction.delete_Transaction(TransactionID)
     return redirect(url_for('get_transactions'))
 
 

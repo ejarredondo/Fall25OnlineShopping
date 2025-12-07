@@ -9,15 +9,15 @@
         <h1>Add Supplier - GreenGrocer Online</h1>
     </header>
 <h4>* = Required</h4>
-    <form action = "/add" method = "POST">
+    <form action = "/add_suppliers" method = "POST">
         <label>Supplier Name*:</label>
-            <input type = "text" name = "supplier_name" placeholder = "supplier name..." required><br>
+            <input type = "text" name = "SupplierName" placeholder = "supplier name..." required><br>
         <label>Street Address*:</label>
-            <input type = "text" name = "supplier_street_address" placeholder = "street address..." required><br>
+            <input type = "text" name = "SupplierAddressStreet" placeholder = "street address..." required><br>
         <label>City:</label>
-            <input type = "text" name = "supplier_address_city" place holder = "city..."><br>
+            <input type = "text" name = "SupplierAddressCity" place holder = "city..."><br>
         <label for = "state">State:</label>
-                <select id = "state" name="state">
+                <select id = "state" name="SupplierAddressState">
                     <option value = "AL">AL</option>
                     <option value = "AK">AK</option>
                     <option value = "AZ">AZ</option>
@@ -70,9 +70,9 @@
                     <option value = "WY">WY</option>
                 </select><br>
             <label>Zip:</label>
-                <input type = "text" name = "supplier_address_zip" placeholder = "zipcode..."><br>
+                <input type = "text" name = "SupplierAddressZip" placeholder = "zipcode..."><br>
             <label>StoreID:</label>
-                <input type = "text" name = "STOREID" placeholder = "storeid..."><br>
+                <input type = "text" name = "StoreID" placeholder = "storeid..."><br>
                 <!--figure out how to add foreign key thing here-->
             <button class = reset type = "reset">Reset</button>
             <button class = "add" type = "submit">Add</button>

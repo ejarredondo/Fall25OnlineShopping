@@ -1,4 +1,4 @@
-from models.schemas import ItemSupplied, catalog as Catalog, Transaction, supplier as Supplier, store as Store
+from models.schemas import ItemSupplied, catalog as Catalog, Transaction, Supplier as Supplier, store as Store
 from core import ma, db
 
 

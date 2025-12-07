@@ -25,20 +25,20 @@ def get_Transaction_without_Employee():
     return transactions
 
 
-def add_Transaction(transaction_id, cashier_employee_id, incoming_or_outgoing, transaction_amount, transaction_date):
+def add_Transaction(TransactionID, CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate):
     t = Transaction(
-        transaction_id=transaction_id,
-        cashier_employee_id=cashier_employee_id,
-        incoming_or_outgoing=incoming_or_outgoing,
-        transaction_amount=transaction_amount,
-        transaction_date=transaction_date,
+        TransactionID=TransactionID,
+        CashierEmployeeID=CashierEmployeeID,
+        IncomingOrOutgoing=IncomingOrOutgoing,
+        TransactionAmount=TransactionAmount,
+        TransactionDate=TransactionDate,
     )
     db.session.add(t)
     db.session.commit()
 
 
-def delete_Transaction(transaction_id):
-    data = Transaction.query.get(transaction_id)
+def delete_Transaction(TransactionID):
+    data = Transaction.query.get(TransactionID)
     if data is None:
         return
     db.session.delete(data)

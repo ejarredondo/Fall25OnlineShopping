@@ -54,23 +54,25 @@ class store(db.Model):
     state = db.Column(db.String(2), nullable=False)
     zip = db.Column(db.String(5), nullable=False)
 
-class supplier(db.Model):
-
-    supplier_name = db.Column(db.String(255), unique=True, nullable=False)
-    supplier_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-    supplier_address_street = db.Column(db.String(255))
-    supplier_address_city = db.Column(db.String(20))
-    supplier_address_state = db.Column(db.String(2))
-    supplier_address_zip = db.Column(db.String(5))
-    store_id = db.Column(db.Integer, db.ForeignKey('store.store_id', ondelete='RESTRICT', onupdate='CASCADE'))
+class Supplier(db.Model):
+    __tabelename__ = "supplier"
+    SupplierName = db.Column(db.String(255), unique=True, nullable=False)
+    SupplierID = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    SupplierAddressStreet = db.Column(db.String(255))
+    SupplierAddressCity = db.Column(db.String(20))
+    SupplierAddressState = db.Column(db.String(2))
+    SupplierAddressZip = db.Column(db.String(5))
+    StoreID = db.Column(db.Integer, db.ForeignKey('store.StoreID', ondelete='RESTRICT', onupdate='CASCADE'))
 
 class Transaction(db.Model):
 
-    transaction_id = db.Column(db.SmallInteger, primary_key=True, autoincrement=True, nullable=False)
-    cashier_employee_id = db.Column(db.Integer, db.ForeignKey('employee.employee_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
-    incoming_or_outgoing = db.Column(db.Enum('I', 'O'))
-    transaction_amount = db.Column(db.Numeric(5, 2), CheckConstraint('transaction_amount >= 0'), nullable=False)
-    transaction_date = db.Column(db.DateTime)
+    __tablename__ = 'transaction'
+
+    TransactionID = db.Column(db.SmallInteger, primary_key=True, autoincrement=True, nullable=False)
+    CashierEmployeeID = db.Column(db.Integer, db.ForeignKey('employee.EmployeeID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    IncomingOrOutgoing = db.Column(db.Enum('I', 'O'))
+    TransactionAmount = db.Column(db.Numeric(5, 2), CheckConstraint('TransactionAmount >= 0'), nullable=False)
+    TransactionDate = db.Column(db.DateTime)
 
 class ItemSupplied(db.Model):
 
@@ -120,7 +122,7 @@ Customer = customer
 Employee = employee
 Catalog = catalog
 Store = store
-Supplier = supplier
+Supplier = Supplier
 
 
 
