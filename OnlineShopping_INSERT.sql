@@ -36,14 +36,14 @@ VALUES ('Stock', 25);
 INSERT INTO department (department_name, employee_total) 
 VALUES ('Accounting', 30);
 
-INSERT INTO supplier (supplier_name, supplier_address_street, supplier_address_city, supplier_address_state, supplier_address_zip, store_id) 
-VALUES ('Global Fresh Produce', '450 Produce Way', 'Seattle', 'WA', '98115', 1);
+INSERT INTO supplier (SupplierName, SupplierAddressStreet, SupplierAddressCity, SupplierAddressState, SupplierAddressZip, StoreID) 
+VALUES ('Global Fresh Produce', '450 Produce Way', 'Seattle', 'WA', '98115', 3);
 
-INSERT INTO supplier (supplier_name, supplier_address_street, supplier_address_city, supplier_address_state, supplier_address_zip, store_id) 
-VALUES ('Tri-State Bakery', '230 Dough Street', 'Seattle', 'WA', '98115', 2);
+INSERT INTO supplier (SupplierName, SupplierAddressStreet, SupplierAddressCity, SupplierAddressState, SupplierAddressZip, StoreID) 
+VALUES ('Tri-State Bakery', '230 Dough Street', 'Seattle', 'WA', '98115', 4);
 
-INSERT INTO supplier (supplier_name, supplier_address_street, supplier_address_city, supplier_address_state, supplier_address_zip, store_id) 
-VALUES ('Meats & Co', '124 Oinkmoo Road', 'Seattle', 'WA', '98115', 3);
+INSERT INTO supplier (SupplierName, SupplierAddressStreet, SupplierAddressCity, SupplierAddressState, SupplierAddressZip, StoreID) 
+VALUES ('Meats & Co', '124 Oinkmoo Road', 'Seattle', 'WA', '98115', 5);
 
 INSERT INTO catalog (product_name, category, sku, base_price, sale_price, sold_by_weight_or_unit, brand, quantity_of_item, department_id, expiration_date)
 VALUES ('Organic Coffee', 'Beverages', 4001, 1.00, 15.99, 'Unit', 'Beanery Best', 500, 1, '2027-12-15');

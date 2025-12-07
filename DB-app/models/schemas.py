@@ -56,18 +56,19 @@ class Store(db.Model):
     EmployeeNumber = db.Column(db.Integer, nullable=True)
 
 class Supplier(db.Model):
-    __tabelename__ = "supplier"
+    __tablename__ = "Supplier"
     SupplierName = db.Column(db.String(255), unique=True, nullable=False)
     SupplierID = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     SupplierAddressStreet = db.Column(db.String(255))
     SupplierAddressCity = db.Column(db.String(20))
     SupplierAddressState = db.Column(db.String(2))
     SupplierAddressZip = db.Column(db.String(5))
-    StoreID = db.Column(db.Integer, db.ForeignKey('store.StoreID', ondelete='RESTRICT', onupdate='CASCADE'))
+    StoreID = db.Column(db.Integer, db.ForeignKey('Store.StoreID', ondelete='RESTRICT', onupdate='CASCADE'))
+    store = db.relationship("Store", backref="suppliers")
 
 class Transaction(db.Model):
 
-    __tablename__ = 'transaction'
+    __tablename__ = 'Transaction'
 
     TransactionID = db.Column(db.SmallInteger, primary_key=True, autoincrement=True, nullable=False)
     CashierEmployeeID = db.Column(db.Integer, db.ForeignKey('employee.EmployeeID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
