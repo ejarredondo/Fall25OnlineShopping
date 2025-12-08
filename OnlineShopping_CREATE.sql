@@ -2,102 +2,103 @@ DROP DATABASE IF EXISTS OnlineShopping;
 CREATE DATABASE OnlineShopping;
 USE OnlineShopping;
 
-CREATE TABLE Department (
-	DepartmentID			INT PRIMARY KEY AUTO_INCREMENT,
-	DepartmentName			VARCHAR(20) NOT NULL,
-	EmployeeTotal			INT NOT NULL
+CREATE TABLE department (
+	department_id			INT PRIMARY KEY AUTO_INCREMENT,
+	department_name			VARCHAR(20) NOT NULL,
+	employee_total			INT NOT NULL
 );
 
-CREATE TABLE Customer (
-	CustomerID				INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	FirstName				VARCHAR(30),
-	LastName				VARCHAR(30)
+CREATE TABLE customer (
+	customer_id				INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	first_name				VARCHAR(30),
+	last_name				VARCHAR(30)
 );
 
-CREATE TABLE Employee (
-	EmployeeID 				INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	FirstName 				VARCHAR(100) NOT NULL,
-	LastName				VARCHAR(100) NOT NULL,
-	StartDate 				DATE,
-	PayRate 				DECIMAL(8, 2) NOT NULL CHECK (PayRate >= 0),
-	Position 				VARCHAR(50),
-	Availability 			BOOLEAN,
-	BankRoutingInformation 	VARCHAR(9) NOT NULL,
-	CheckingAccountNumber 	VARCHAR(17) NOT NULL,
-	EmailAddress 			VARCHAR(250)
+CREATE TABLE employee (
+    employee_id              INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    first_name               VARCHAR(100) NOT NULL,
+    last_name                VARCHAR(100) NOT NULL,
+    start_date               DATE,
+    pay_rate                 DECIMAL(8, 2) NOT NULL CHECK (pay_rate >= 0),
+    position                 VARCHAR(50),
+    availability             BOOLEAN,
+    bank_routing_information VARCHAR(9) NOT NULL,
+    checking_account_number  VARCHAR(17) NOT NULL,
+    email_address            VARCHAR(250)
 );
 
-CREATE TABLE Catalog(
-	ProductID 		INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	ProductName		VARCHAR(255) NOT NULL,
-	Category 		VARCHAR(255)NOT NULL,	
-	SKU 			INT NOT NULL UNIQUE,
-	Weight 			DECIMAL(5,2),
-	BasePrice 		DECIMAL(7,2) NOT NULL CHECK (BasePrice >= 0),
-	SalePrice 		DECIMAL(7,2) NOT NULL CHECK (SalePrice >= 0),
-	SoldByWeightorUnit 	ENUM('Weight', 'Unit') NOT NULL,
-	Brand 			VARCHAR(255),
-	QuantityofItem 		SMALLINT,
-	DepartmentID 		INT NOT NULL,
-	ExpirationDate		DATE,
-	FOREIGN KEY (DepartmentID) REFERENCES Department (DepartmentID)
-		ON DELETE RESTRICT
+CREATE TABLE catalog (
+    product_id               INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    product_name             VARCHAR(255) NOT NULL,
+    category                 VARCHAR(255) NOT NULL,
+    sku                      INT NOT NULL UNIQUE,
+    weight                   DECIMAL(5,2),
+    base_price               DECIMAL(7,2) NOT NULL CHECK (base_price >= 0),
+    sale_price               DECIMAL(7,2) NOT NULL CHECK (sale_price >= 0),
+    sold_by_weight_or_unit   ENUM('weight', 'unit') NOT NULL,
+    brand                    VARCHAR(255),
+    quantity_of_item         SMALLINT,
+    department_id            INT NOT NULL,
+    expiration_date          DATE,
+    FOREIGN KEY (department_id) REFERENCES department(department_id)
+        ON DELETE RESTRICT
         ON UPDATE CASCADE
 );
 
-CREATE TABLE Store (
-	StoreID 			INT PRIMARY KEY AUTO_INCREMENT,
-	StreetAddress 		VARCHAR(30) NOT NULL,
-	City 				VARCHAR(30) NOT NULL,
-	State 				VARCHAR(2) NOT NULL,
-	Zip 				VARCHAR(5) NOT NULL
+CREATE TABLE store (
+    store_id        INT PRIMARY KEY AUTO_INCREMENT,
+    street_address  VARCHAR(30) NOT NULL,
+    city            VARCHAR(30) NOT NULL,
+    state           VARCHAR(2) NOT NULL,
+    zip             VARCHAR(5) NOT NULL
 );
 
-CREATE TABLE Supplier(
-	SupplierName 			VARCHAR(255) UNIQUE NOT NULL,
-	SupplierID 				INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    SupplierAddressStreet	VARCHAR(255),
-	SupplierAddressCity		VARCHAR(20),
-	SupplierAddressState	VARCHAR(2),
-	SupplierAddressZip		VARCHAR(5),
-	STOREID 				INT,
-	FOREIGN KEY (STOREID) REFERENCES Store (StoreID) 
-		ON DELETE RESTRICT
-		ON UPDATE CASCADE
+CREATE TABLE supplier (
+    supplier_id             INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    supplier_name           VARCHAR(255) UNIQUE NOT NULL,
+    supplier_address_street VARCHAR(255),
+    supplier_address_city   VARCHAR(20),
+    supplier_address_state  VARCHAR(2),
+    supplier_address_zip    VARCHAR(5),
+    store_id                INT,
+    FOREIGN KEY (store_id) REFERENCES store(store_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
 
-CREATE TABLE Transac (
-	TransactionID		SMALLINT NOT NULL AUTO_INCREMENT,
-	CashierEmployeeID	INT NOT NULL,
-	IncomingOrOutgoing	ENUM('I', 'O'),
-	TransactionAmount	DECIMAL(5,2) NOT NULL CHECK (TransactionAmount >= 0),
-	TransactionDate		DATETIME,
-	PRIMARY KEY (TransactionID),
-	FOREIGN KEY (CashierEmployeeID) REFERENCES Employee(EmployeeID)
-		ON DELETE RESTRICT
-		ON UPDATE CASCADE
+CREATE TABLE transaction (
+    transaction_id      SMALLINT NOT NULL AUTO_INCREMENT,
+    cashier_employee_id INT NOT NULL,
+    incoming_or_outgoing ENUM('I', 'O'),
+    transaction_amount  DECIMAL(5,2) NOT NULL CHECK (transaction_amount >= 0),
+    transaction_date    DATETIME,
+    PRIMARY KEY (transaction_id),
+    FOREIGN KEY (cashier_employee_id) REFERENCES employee(employee_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE ItemSupplied (
-	ProductID			INT NOT NULL,
-	TransactionID		SMALLINT NOT NULL,	
-	SupplierID			INT NOT NULL,
-	StoreID				INT NOT NULL,
-	ItemQuantity		SMALLINT NOT NULL,
-	PRIMARY KEY( ProductID, TransactionID),
-	FOREIGN KEY (ProductID) REFERENCES Catalog (ProductID)
-		ON DELETE RESTRICT
-		ON UPDATE CASCADE,
-	FOREIGN KEY (TransactionID) REFERENCES Transac (TransactionID)
-		ON DELETE RESTRICT
-		ON UPDATE CASCADE,
-	FOREIGN KEY (SupplierID) REFERENCES Supplier (SupplierID)
-		ON DELETE RESTRICT
-		ON UPDATE CASCADE,
-	FOREIGN KEY (StoreID) REFERENCES Store (StoreID)
-		ON DELETE RESTRICT
-		ON UPDATE CASCADE
+    product_id      INT NOT NULL,
+    transaction_id  SMALLINT NOT NULL,
+    supplier_id     INT NOT NULL,
+    store_id        INT NOT NULL,
+    item_quantity   SMALLINT NOT NULL,
+    PRIMARY KEY (product_id, transaction_id),
+    FOREIGN KEY (product_id) REFERENCES catalog(product_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY (transaction_id) REFERENCES transac(transaction_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY (store_id) REFERENCES store(store_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
+
 
 CREATE TABLE DietaryInformation(
 	ProductID 	INT NOT NULL PRIMARY KEY NOT NULL,
