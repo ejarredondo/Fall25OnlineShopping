@@ -426,7 +426,7 @@ def delete_customer_transaction(id):
     return redirect(url_for('get_customer_transactions'))
 
 
-## 🥗 Dietary Information Routes
+## Dietary Information Routes
 
 @app.route('/get_DietaryInformation', methods=['GET']) # Renamed route
 def get_DietaryInformation():
@@ -605,7 +605,7 @@ def get_least_stocked_products():
 @app.route('/get_products_sold_most', methods=['GET'])
 def get_products_sold_most():
     products_sold_most = Queries.get_product_sold_most()
-    return render_template('Products_sold_most.html', products_sold_most=products_sold_most)
+    return render_template('Product_sold_most.html', products_sold_most=products_sold_most)
 
 @app.route('/get_products_expiring_soon', methods=['GET'])
 def get_products_expiring_soon():

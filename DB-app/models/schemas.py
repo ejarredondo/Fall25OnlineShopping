@@ -42,7 +42,7 @@ class Catalog(db.Model):
     weight = db.Column(db.Numeric(5, 2))
     base_price = db.Column(db.Numeric(7, 2), CheckConstraint('base_price >= 0'), nullable=False)
     sale_price = db.Column(db.Numeric(7, 2), CheckConstraint('sale_price >= 0'), nullable=False)
-    sold_by_weight_or_unit = db.Column(Enum('Weight', 'Unit'), nullable=False)
+    sold_by_weight_or_unit = db.Column(Enum('weight', 'unit'), nullable=False)
     brand = db.Column(db.String(255))
     quantity_of_item = db.Column(db.SmallInteger)
     department_id = db.Column(db.Integer, db.ForeignKey('department.department_id'), nullable=False)

@@ -1,27 +1,34 @@
 1.What products do we have the least of (per department and overall)?
 
-SELECT department_id, product_id, product_name, MIN(quantity_of_item)
-FROM Catalog
-GROUP BY department_id, product_id, product_name;
+SELECT C.department_id AS DepartmentID,
+        C.product_id AS ProductID,
+        C.product_name AS ProductName,
+        MIN(C.quantity_of_item) AS QuantityofItem
+        FROM catalog C
+        GROUP BY C.department_id, C.product_id, C.product_name
+        ORDER BY C.department_id, C.product_name;
 
 2.What products are expiring soonest?
 
-SELECT ProductID, ProductName, ExpirationDate
-FROM Catalog
-WHERE ExpirationDate IS NOT NULL
-ORDER BY ExpirationDate ASC;
+SELECT C.product_id AS ProductID,
+        C.product_name AS ProductName,
+        C.expirataion_date AS ExpirationDate
+        FROM catalog C
+        WHERE C.expiration_date IS NOT NULL
+        ORDER BY C.expiration_date ASC;
 
 3.What product was sold the most during a given year? 
 
-SELECT C.ProductName, SUM(ItemQuantity) AS TotalQuantitySold
-FROM ItemSupplied AS ISD
-JOIN Transac T On ISD.TransactionID = T.TransactionID
-JOIN Catalog C ON ISD.ProductID = C.ProductID
-WHERE T.INCOMINGOROUTGOING = 'O'
-	AND EXTRACT(Year FROM T.TransactionDate) = 2024 # DEFAULT can't be used in this context so had to change it; pls change if this isn't correct tho
-GROUP BY C.ProductName
-Order BY TotalQuantitySold DESC
-LIMIT 1; 
+SELECT C.product_name AS ProductName,
+        SUM(ISD.item_quantity) AS TotalQuantitySold
+        FROM item_supplied AS ISD
+        JOIN transaction T ON ISD.transaction_id = T.transaction_id
+        JOIN catalog C ON ISD.product_id = C.product_id
+        WHERE T.incoming_or_outgoing = 'O'
+            AND EXTRACT(YEAR FROM T.transaction_date) = :year
+        GROUP BY C.product_name
+        ORDER BY totalQ_quantity_sold DESC
+        LIMIT 1;
 
 4.What product was sold the least during a given year? 
 
@@ -80,3 +87,4 @@ WHERE T.incoming_or_outgoing = 'I'
 GROUP BY transaction_id, supplier_id, supplier_name
 ORDER BY year_of_transaction;
 
+SELECT * FROM transaction;

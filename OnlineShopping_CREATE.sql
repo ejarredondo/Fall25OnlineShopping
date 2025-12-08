@@ -78,7 +78,7 @@ CREATE TABLE transaction (
         ON UPDATE CASCADE
 );
 
-CREATE TABLE ItemSupplied (
+CREATE TABLE item_supplied (
     product_id      INT NOT NULL,
     transaction_id  SMALLINT NOT NULL,
     supplier_id     INT NOT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE ItemSupplied (
         ON UPDATE CASCADE
 );
 
-CREATE TABLE DietaryInformation(
+CREATE TABLE dietary_information (
 	product_id INT NOT NULL,
     restriction VARCHAR(255) NOT NULL,
     PRIMARY KEY (product_id),
@@ -108,7 +108,7 @@ CREATE TABLE DietaryInformation(
         ON UPDATE CASCADE
 );
 
-CREATE TABLE CustomerPurchaseHistory (
+CREATE TABLE customer_purchase_history (
 	customer_purchase_history_id	INT AUTO_INCREMENT PRIMARY KEY,
     customer_id		INT NOT NULL,
 	transaction_id		SMALLINT NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE CustomerPurchaseHistory (
 		ON UPDATE CASCADE
 );	
 
-CREATE TABLE CustomerTransaction (
+CREATE TABLE customer_transaction (
 	customer_transaction_id INT NOT NULL AUTO_INCREMENT,
     customer_id INT NOT NULL,
     transaction_id SMALLINT NOT NULL,
@@ -143,7 +143,7 @@ CREATE TABLE CustomerTransaction (
         ON UPDATE CASCADE
 );
 
-CREATE TABLE EmployeeTransaction (
+CREATE TABLE employee_transaction (
 	employee_id			INT NOT NULL,
 	transaction_id		SMALLINT NOT NULL,
 	store_id			INT NOT NULL,

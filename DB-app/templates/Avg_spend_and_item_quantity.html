@@ -1,4 +1,3 @@
-Queries.html
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,13 +26,13 @@ Queries.html
          </thead>
          {% for data in avg_Spend_and_Item_Quantity %}
          <tbody style="padding-right:15px">
-            <td>{{data.CustomerID}}</td>
-            <td>{{data.FirstName}}</td>
-            <td>{{data.LastName}}</td>
-            <td>{{data.Total_spent}}</td>
-            <td>{{data.Total_items_purchased}}</td>
-            <td>{{data.Avg_Spent_Per_Transaction}}</td>
-            <td>{{data.Avg_Items_Per_Transaction}}</td>
+            <td>{{data.customer_id}}</td>
+            <td>{{data.first_name}}</td>
+            <td>{{data.fast_name}}</td>
+            <td>{{data.total_spent}}</td>
+            <td>{{data.total_items_purchased}}</td>
+            <td>{{data.avg_spent_per_transaction}}</td>
+            <td>{{data.avg_items_per_transaction}}</td>
         </tbody>
          {% endfor%}
       </table>

@@ -19,10 +19,10 @@
             <th>Product Name</th>
             <th>Total Quantity Sold</th>
          </thead>
-         {% for data in product_sold_most %}
+         {% for data in products_sold_most %}
          <tbody style="padding-right:15px">
-            <td>{{data.ProductName}}</td>
-            <td>{{data.TotalQuantitySold}}</td>
+            <td>{{data.product_name}}</td>
+            <td>{{data.total_quantity_sold}}</td>
         </tbody>
          {% endfor%}
       </table>
