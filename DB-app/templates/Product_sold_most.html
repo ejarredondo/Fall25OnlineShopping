@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Sold Most - GreenGrocer Online</title>
+    <link rel =  "stylesheet" href = "{{ url_for('static', filename = 'styles.css')}}">
+</head>
+<body>
+    <div id = 'nav'>
+        <header>
+        <h1>Product Sold Most in a Given Year</h1>
+        </header>
+        <div class = "nav-links">
+            <a href = '/'>Home</a>
+        </div>
+    </div>
+      <br>
+      <table style="border-spacing: 30px;">
+         <thead style="padding:15px">
+            <th>Product Name</th>
+            <th>Total Quantity Sold</th>
+         </thead>
+         {% for data in product_sold_most %}
+         <tbody style="padding-right:15px">
+            <td>{{data.ProductName}}</td>
+            <td>{{data.TotalQuantitySold}}</td>
+        </tbody>
+         {% endfor%}
+      </table>
+</body>
+</html>
