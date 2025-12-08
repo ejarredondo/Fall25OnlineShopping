@@ -1,12 +1,12 @@
 USE OnlineShopping;
 
-INSERT INTO store (street_address, city, state, zip) 
+INSERT INTO store (StreetAdress, City, State, Zip) 
 VALUES ('120 Publix Avenue', 'Seattle', 'WA', '98115');
 
-INSERT INTO store (street_address, city, state, zip) 
+INSERT INTO store (StreetAdress, City, State, Zip) 
 VALUES ('350 Kroger Street', 'Seattle', 'WA', '98115');
 
-INSERT INTO store (street_address, city, state, zip) 
+INSERT INTO store (StreetAdress, City, State, Zip) 
 VALUES ('894 Aldi Circle', 'Seattle', 'WA', '98115');
 
 INSERT INTO customer (first_name, last_name)
@@ -18,13 +18,13 @@ VALUES ('Peter', 'Stuart');
 INSERT INTO customer (first_name, last_name)
 VALUES ('Marco', 'Anthony');
 
-INSERT INTO employee (first_name, last_name, start_date, pay_rate, position, availability, bank_routing_information, checking_account_number, email_address)
+INSERT INTO Employee (FirstName, LastName, StartDate, PayRate, `Position`, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
 VALUES ('Jane', 'Doe', '2023-08-15', 35.50, 'Manager', TRUE, '123456789', '98765432101234567', 'jane.doe@company.com');
 
-INSERT INTO employee (first_name, last_name, start_date, pay_rate, position, availability, bank_routing_information, checking_account_number, email_address)
+INSERT INTO Employee (FirstName, LastName, StartDate, PayRate, `Position`, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
 VALUES ('John', 'Smith', '2024-01-20', 18.00, 'Associate', FALSE, '987654321', '111222333444555', 'john.smith@company.com');
 
-INSERT INTO employee (first_name, last_name, start_date, pay_rate, position, availability, bank_routing_information, checking_account_number, email_address)
+INSERT INTO Employee (FirstName, LastName, StartDate, PayRate, `Position`, Availability, BankRoutingInformation, CheckingAccountNumber, EmailAddress)
 VALUES ('Clive', 'Staples', '2024-03-30', 18.50, 'Associate', TRUE, '582084442', '322202939490293', 'clive.staples@company.com');
 
 INSERT INTO department (department_name, employee_total) 
@@ -54,13 +54,13 @@ VALUES ('Premium Steak', 'Meats', 4002, 5.62, 7.00, 5.00, 'Weight', 'Cattle Co.'
 INSERT INTO catalog (product_name, category, sku, base_price, sale_price, sold_by_weight_or_unit, brand, quantity_of_item, department_id, expiration_date)
 VALUES ('Sourdough Bread', 'Bakery', 4003, 5.00, 5.00, 'Unit', 'The French Baker', 30, 3, '2026-01-18');
 
-INSERT INTO transaction (cashier_employee_id, incoming_or_outgoing, transaction_amount, transaction_date) 
+INSERT INTO `Transaction` (CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate) 
 VALUES (1, 'I', 26.87, '2023-12-04 15:45:36');
 
-INSERT INTO transaction (cashier_employee_id, incoming_or_outgoing, transaction_amount, transaction_date)
+INSERT INTO `Transaction` (CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate)
 VALUES (2, 'O', 257.50, '2024-05-16 08:36:57');
 
-INSERT INTO transaction (cashier_employee_id, incoming_or_outgoing, transaction_amount, transaction_date) 
+INSERT INTO `Transaction` (CashierEmployeeID, IncomingOrOutgoing,TransactionAmount , TransactionDate) 
 VALUES (3, 'I', 21.67, '2025-10-15 10:32:26');
 
 INSERT INTO itemsupplied (product_id, transaction_id, supplier_id, store_id, item_quantity)

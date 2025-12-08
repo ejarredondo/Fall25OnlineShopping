@@ -269,7 +269,7 @@ def delete_employee(employee_id):
 
 
 
-## 🎬 Film Routes (COMMENTED OUT - MISSING IMPORTS)
+##  Film Routes (COMMENTED OUT - MISSING IMPORTS)
 
 # @app.route('/get_films', methods=['GET','POST']) 
 # def get_films(): 
@@ -289,7 +289,7 @@ def delete_employee(employee_id):
 
 
 
-## 🧑 Customer Routes
+## Customer Routes
 
 @app.route('/get_customers', methods=['GET'])
 def get_customers():
@@ -319,7 +319,7 @@ def delete_customer(customer_id):
 
 
 
-## 🛒 Customer Purchase History Routes
+##  Customer Purchase History Routes
 
 @app.route('/get_customerpurchasehistory', methods=['GET'])
 def get_customerpurchasehistory():
@@ -478,24 +478,24 @@ def delete_DietaryInformation(product_id):
 
 
 
-## 💰 Transaction Routes
+## Transaction Routes
 
-@app.route('/get_transactions', methods=['GET']) # Renamed route
-def get_transactions():
-    transactions_list = Transaction.get_transactions()
+@app.route('/get_Transactions', methods=['GET']) # Renamed route
+def get_Transactions():
+    transactions_list = Transaction.get_Transactions()
     return render_template('Transaction.html', transactions=transactions_list)
 
-@app.route('/get_all_Transaction_by_Employee/<int:cashier_employee_id>', methods=['GET']) # Variable consistency
+@app.route('/get_all_Transaction_by_Employee/<int:CashierEmployeeID>', methods=['GET']) # Variable consistency
 def get_all_Transaction_by_Employee(CashierEmployeeID): # Variable consistency
     transaction_list = Transaction.get_all_Transaction_by_Employee(CashierEmployeeID)
     employee_info = None
     # employee.get_employees() returns a list of dicts; pick the matching record
     try:
         all_employees = employee.get_employees()
-        employee_info = next((e for e in all_employees if e.get("employee_id") == cashier_employee_id), None)
+        employee_info = next((e for e in all_employees if e.get("EmployeeID") == CashierEmployeeID), None)
     except Exception:
         employee_info = None
-    return render_template('transactions_select.html', transactions=transaction_list, Employee=employee_info)
+    return render_template('Transactions_select.html', transactions=transaction_list, Employee=employee_info)
 
 @app.route('/add_Transaction_to_Employee', methods=['POST'])
 def add_Transaction_to_Employee():
@@ -510,29 +510,34 @@ def add_Transaction_form():
     return render_template('add_Transaction.html')
 
 # CORRECTED: Changed route path to avoid clash with GET route
-@app.route('/transactions/add', methods=["POST"])
+@app.route('/add_Transactions', methods=["POST"])
 def add_Transaction_post(): # Renamed function to avoid conflict with the GET function
-    # ... (form data parsing code remains the same)
-    Transaction_ID = request.form.get("Transaction_ID")
-    CashierEmployee_id = request.form.get("CashierEmployee_id")
+    CashierEmployeeID = request.form.get("CashierEmployeeID")
     IncomingOrOutgoing = request.form.get("IncomingOrOutgoing")
-    Transaction_amount = request.form.get("Transaction_amount")
-    Transaction_Date = request.form.get("Transaction_Date")
+    TransactionAmount = request.form.get("TransactionAmount")
+    TransactionDate = request.form.get("TransactionDate")
+    
+    if IncomingOrOutgoing:
+      if IncomingOrOutgoing.lower() == "incoming" : 
+            IncomingOrOutgoing = 'I'
+      elif IncomingOrOutgoing.lower() == "outgoing" :
+          IncomingOrOutgoing = 'O'
 
-    if Transaction_ID and CashierEmployee_id and IncomingOrOutgoing and Transaction_amount and Transaction_Date:
-        Transaction.add_Transaction(Transaction_ID, CashierEmployee_id, IncomingOrOutgoing, Transaction_amount, Transaction_Date)
-        return redirect(url_for('get_transactions'))
+        
+    if CashierEmployeeID and IncomingOrOutgoing and TransactionAmount and TransactionDate:
+        Transaction.add_Transaction(CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate)
+        return redirect(url_for('get_Transactions'))
     else:
         return redirect(url_for('add_Transaction_form'))
 
-@app.route('/delete_transaction/<int:TransactionID>') # Renamed route path
+@app.route('/delete_Transaction/<int:TransactionID>', methods=["GET"]) # Renamed route path
 def delete_Transaction(TransactionID):
     Transaction.delete_Transaction(TransactionID)
-    return redirect(url_for('get_transactions'))
+    return redirect(url_for('get_Transactions'))
 
 
 
-## 📦 Item Supplied Routes
+##  Item Supplied Routes
 
 @app.route('/get_items_supplied', methods=['GET']) # Renamed route
 def get_items_supplied():

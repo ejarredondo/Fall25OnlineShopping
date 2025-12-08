@@ -14,17 +14,19 @@
         </div>
     </div>
     <h4>* = Required</h4>
-    <form action = "/add" method = "POST">
+    <form action = "/add_Transactions" method = "POST">
         <label>CashierEmployeeID*:</label> <!-- foreign key -->
-            <input type = "text" name = "cashier_employee_id" placeholder = "cashier employee id..." required><br>
+            <input type = "text" name = "CashierEmployeeID" placeholder = "Cashier Employee ID..." required><br>
         <label>TransactionAmount*:</label>
-            <input type = "number" name = "transaction_amount" placeholder = "transaction amount..." required><br>
+            <input type = "number" name = "TransactionAmount" placeholder = "Transaction Amount..." required><br>
         <label>TransactionDate*:</label>
-            <input type = "date" name = "transaction_date" placeholder = "transaction date..." required><br>
-        <label for = "incoming_or_outgoing">tracked by incoming or outgoing*:</label>
-            <select id = "incoming_or_outgoing" name = "incoming_or_outgoing">
-                <option value = "incoming">incoming</option>
-                <option value = "outgoing">outgoing</option>
+            <input type = "date" name = "TransactionDate" placeholder = "Transaction Date..." required><br>
+
+        <label>Incoming or Outgoing*:</label>
+            <select name = "IncomingOrOutgoing">
+                <option value = "I">Incoming</option>
+                <option value = "O">Outgoing</option>
+            </select><br>
         <button class = reset type = "reset">Reset</button>
         <button class = "add" type = "submit">Add</button>
     </form>

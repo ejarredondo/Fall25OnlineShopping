@@ -6,7 +6,7 @@ def get_Transaction(id):
     return Transaction.query.get(id)
 
 
-def get_transactions():
+def get_Transactions():
     return Transaction.query.all()
 
 
@@ -25,9 +25,8 @@ def get_Transaction_without_Employee():
     return transactions
 
 
-def add_Transaction(TransactionID, CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate):
+def add_Transaction(CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate):
     t = Transaction(
-        TransactionID=TransactionID,
         CashierEmployeeID=CashierEmployeeID,
         IncomingOrOutgoing=IncomingOrOutgoing,
         TransactionAmount=TransactionAmount,

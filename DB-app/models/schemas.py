@@ -4,46 +4,46 @@ from sqlalchemy.sql import func
 
 class department(db.Model):
 
-    department_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    department_name = db.Column(db.String(20), nullable=False)
-    employee_total = db.Column(db.Integer, nullable=False)
+    DepartmentID = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    DepartmentName = db.Column(db.String(20), nullable=False)
+    EmployeeTotal = db.Column(db.Integer, nullable=False)
 
 
 class customer(db.Model):
 
-    customer_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-    first_name = db.Column(db.String(30))
-    last_name = db.Column(db.String(30))
+    CustomerID = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    FirstName = db.Column(db.String(30))
+    LastName = db.Column(db.String(30))
 
 
 class employee(db.Model):
 
-    employee_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-    first_name = db.Column(db.String(100), nullable=False)
-    last_name = db.Column(db.String(100), nullable=False)
-    start_date = db.Column(db.Date)
-    pay_rate = db.Column(db.Numeric(8, 2), nullable=False)
-    position = db.Column(db.String(50))
-    availability = db.Column(db.Boolean)
-    bank_routing_information = db.Column(db.String(9), nullable=False)
-    checking_account_number = db.Column(db.String(17), nullable=False)
-    email_address = db.Column(db.String(250))
+    EmployeeID = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    FirstName = db.Column(db.String(100), nullable=False)
+    LastName = db.Column(db.String(100), nullable=False)
+    StartDate = db.Column(db.Date)
+    PayRate = db.Column(db.Numeric(8, 2), nullable=False)
+    Position = db.Column(db.String(50))
+    Availability = db.Column(db.Boolean)
+    BankRoutingInformation = db.Column(db.String(9), nullable=False)
+    CheckingAccountNumber = db.Column(db.String(17), nullable=False)
+    EmailAddress = db.Column(db.String(250))
 
 
 class catalog(db.Model):
 
-    product_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-    product_name = db.Column(db.String(255), nullable=False)
-    category = db.Column(db.String(255), nullable=False)
-    sku = db.Column(db.Integer, unique=True, nullable=False)
-    weight = db.Column(db.Numeric(5, 2))
-    base_price = db.Column(db.Numeric(7, 2), CheckConstraint('base_price >= 0'), nullable=False)
-    sale_price = db.Column(db.Numeric(7, 2), CheckConstraint('sale_price >= 0'), nullable=False)
-    sold_by_weight_or_unit = db.Column(db.Enum('Weight', 'Unit'), nullable=False)
-    brand = db.Column(db.String(255))
-    quantity_of_item = db.Column(db.SmallInteger)
-    department_id = db.Column(db.Integer, db.ForeignKey('department.department_id'), nullable=False)
-    expiration_date = db.Column(db.Date)
+    ProductID = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    ProductName = db.Column(db.String(255), nullable=False)
+    Category = db.Column(db.String(255), nullable=False)
+    SKU = db.Column(db.Integer, unique=True, nullable=False)
+    Weight = db.Column(db.Numeric(5, 2))
+    BasePrice = db.Column(db.Numeric(7, 2), CheckConstraint('BasePrice >= 0'), nullable=False)
+    SalePrice = db.Column(db.Numeric(7, 2), CheckConstraint('SalePrice >= 0'), nullable=False)
+    SoldByWeightOrUnit = db.Column(db.Enum('Weight', 'Unit'), nullable=False)
+    Brand = db.Column(db.String(255))
+    QuantityOfItem = db.Column(db.SmallInteger)
+    DepartmentID = db.Column(db.Integer, db.ForeignKey('department.department_id'), nullable=False)
+    ExpirationDate = db.Column(db.Date)
 
 
 class Store(db.Model):
@@ -78,44 +78,44 @@ class Transaction(db.Model):
 
 class ItemSupplied(db.Model):
 
-    product_id = db.Column(db.Integer, db.ForeignKey('catalog.product_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
-    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'),  primary_key=True, nullable=False)
-    supplier_id = db.Column(db.Integer, db.ForeignKey('supplier.SupplierID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
-    store_id = db.Column(db.Integer, db.ForeignKey('store.StoreID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
-    item_quantity = db.Column(db.SmallInteger, nullable=False)
+    ProductID = db.Column(db.Integer, db.ForeignKey('catalog.product_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
+    TransactionID = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'),  primary_key=True, nullable=False)
+    SupplierID = db.Column(db.Integer, db.ForeignKey('supplier.SupplierID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    StoreID = db.Column(db.Integer, db.ForeignKey('store.StoreID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    ItemQuantity = db.Column(db.SmallInteger, nullable=False)
 
 class DietaryInformation(db.Model):
 
-    product_id = db.Column(db.Integer, db.ForeignKey('catalog.product_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
-    restriction = db.Column(db.Enum('DairyFree', 'GlutenFree', 'vegetarian', 'vegan', 'kosher', 'keto', 'SugarFree', 'LowCarb', 'PorkFree', 'NutFree', 'ShellfishFree', 'SoyFree'))
+    ProductID = db.Column(db.Integer, db.ForeignKey('catalog.product_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
+    Restriction = db.Column(db.Enum('DairyFree', 'GlutenFree', 'vegetarian', 'vegan', 'kosher', 'keto', 'SugarFree', 'LowCarb', 'PorkFree', 'NutFree', 'ShellfishFree', 'SoyFree'))
 
 class CustomerPurchaseHistory(db.Model):
 
-    customer_purchase_history_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customer.customer_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
-    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
-    amount_spent = db.Column(db.Numeric(5, 2), nullable=False)
-    date_purchased = db.Column(db.Date)
-    time_purchased = db.Column(db.Time)
+    CustomerPurchaseHistoryID = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    CustomerID = db.Column(db.Integer, db.ForeignKey('customer.customer_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    TransactionID = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    AmountSpent = db.Column(db.Numeric(5, 2), nullable=False)
+    DatePurchased = db.Column(db.Date)
+    TimePurchased = db.Column(db.Time)
 
 class CustomerTransaction(db.Model):
-    
-    customer_transaction_id = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customer.customer_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
-    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
-    shipping_address_street = db.Column(db.String(30))
-    shipping_address_city = db.Column(db.String(30))
-    shipping_address_state = db.Column(db.String(2))
-    shipping_address_zip = db.Column(db.String(5))
-    card_info = db.Column(db.String(30), unique=True)
-    email_address = db.Column(db.String(30), unique=True)
-    items_purchased = db.Column(db.SmallInteger)
+
+    CustomerTransactionID = db.Column(db.Integer, nullable=False, primary_key=True, autoincrement=True)
+    CustomerID = db.Column(db.Integer, db.ForeignKey('customer.customer_id', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    TransactionID = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    ShippingAddressStreet = db.Column(db.String(30))
+    ShippingAddressCity = db.Column(db.String(30))
+    ShippingAddressState = db.Column(db.String(2))
+    ShippingAddressZip = db.Column(db.String(5))
+    CardInfo = db.Column(db.String(30), unique=True)
+    EmailAddress = db.Column(db.String(30), unique=True)
+    ItemsPurchased = db.Column(db.SmallInteger)
 
 class EmployeeTransaction(db.Model):
 
-    employee_id = db.Column(db.Integer, db.ForeignKey('employee.employee_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
-    transaction_id = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
-    store_id = db.Column(db.Integer, db.ForeignKey('store.StoreID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
+    EmployeeID = db.Column(db.Integer, db.ForeignKey('employee.employee_id', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
+    TransactionID = db.Column(db.SmallInteger, db.ForeignKey('transaction.TransactionID', ondelete='RESTRICT', onupdate='CASCADE'), primary_key=True, nullable=False)
+    StoreID = db.Column(db.Integer, db.ForeignKey('store.StoreID', ondelete='RESTRICT', onupdate='CASCADE'), nullable=False)
 
 
 # Aliases to match the helper modules' expected class names
@@ -125,7 +125,7 @@ Employee = employee
 Catalog = catalog
 Store = Store
 Supplier = Supplier
-
+Transaction = Transaction
 
 
 
