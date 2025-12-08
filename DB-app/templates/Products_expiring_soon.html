@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products Expiring Soon - GreenGrocer Online</title>
+    <link rel =  "stylesheet" href = "{{ url_for('static', filename = 'styles.css')}}">
+</head>
+<body>
+    <div id = 'nav'>
+        <header>
+        <h1>Products Expiring Soon</h1>
+        </header>
+        <div class = "nav-links">
+            <a href = '/'>Home</a>
+        </div>
+    </div>
+      <br>
+      <table style="border-spacing: 30px;">
+         <thead style="padding:15px">
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Expiration Date</th>
+         </thead>
+         {% for data in products_expiring_soon %}
+         <tbody style="padding-right:15px">
+            <td>{{data.ProductID}}</td>
+            <td>{{data.ProductName}}</td>
+            <td>{{data.ExpirationDate}}</td>
+        </tbody>
+         {% endfor%}
+      </table>
+</body>
+</html>
