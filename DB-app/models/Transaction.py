@@ -35,8 +35,8 @@ def add_Transaction(cashier_employee_id, incoming_or_outgoing, transaction_amoun
     db.session.commit()
 
 
-def delete_Transaction(TransactionID):
-    data = Transaction.query.get(TransactionID)
+def delete_Transaction(transaction_id):
+    data = Transaction.query.get(transaction_id)
     if data is None:
         return
     db.session.delete(data)

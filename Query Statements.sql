@@ -1,8 +1,8 @@
 1.What products do we have the least of (per department and overall)?
 
-SELECT DepartmentID, ProductID, ProductName, MIN(QuantityofItem)
+SELECT department_id, product_id, product_name, MIN(quantity_of_item)
 FROM Catalog
-GROUP BY DepartmentID, ProductID, ProductName;
+GROUP BY department_id, product_id, product_name;
 
 2.What products are expiring soonest?
 
@@ -25,37 +25,36 @@ LIMIT 1;
 
 4.What product was sold the least during a given year? 
 
-SELECT C.ProductName,
-	SUM( ISD.ItemQuantity) AS TotalQuantitySold
+SELECT C.product_name,
+	SUM( ISD.item_quantity) AS total_quantity_sold
 FROM ItemSupplied ISD
-JOIN Transac T On ISD.TransactionID = T.TransactionID
-JOIN Catalog C ON ISD.ProductID = C.ProductID
-WHERE T.INCOMINGOROUTGOING = 'O'
-	AND EXTRACT(Year FROM T.TransactionDate) = 2024 # see above comment
-GROUP BY C.ProductName
-Order BY TotalQuantitySold ASC
+JOIN Transaction T On ISD.transaction_id = T.transaction_id
+JOIN Catalog C ON ISD.product_id = C.product_id
+WHERE T.incoming_or_outgoing = 'O'
+	AND EXTRACT(Year FROM T.transaction_date) = 2024 # see above comment
+GROUP BY C.product_name
+Order BY total_quantity_sold ASC
 LIMIT 1;
 
 
 5.Average customer spend and item quantity?
 
-SELECT C.CustomerID, C.FirstName, C.LastName, 
-SUM(CPH.AmountSpent) AS Totalspent,
-SUM(ISD.ItemQuantity) AS TotalItemsPurchased, 
-AVG(CPH.AmountSpent) AS AvgSpentPerTransaction,
-AVG(ISD.ItemQuantity) AS AvgItemsPerTransaction
+SELECT C.customer_id, C.first_name, C.last_name, 
+SUM(CPH.amount_spent) AS total_spent,
+SUM(ISD.ItemQuantity) AS total_items_purchased, 
+AVG(CPH.AmountSpent) AS avg_spent_per_transaction,
+AVG(ISD.ItemQuantity) AS avg_items_per_transaction
 FROM Customer C
-JOIN CustomerPurchaseHistory CPH ON C.CustomerID = CPH.CustomerID
-JOIN Transac T ON CPH.TransactionID = T.TransactionID
-JOIN ItemSupplied ISD ON T.TransactionID = ISD.TransactionID
-WHERE T.IncomingOrOutgoing = 'O'
-GROUP BY C.CustomerID, C.FirstName, C.LastName
-ORDER BY AvgSpentPerTransaction DESC;
+JOIN customer_purchase_history CPH ON C.customer_id = CPH.customer_id
+JOIN Transaction T ON CPH.transaction_id = T.transaction_id
+JOIN ItemSupplied ISD ON T.transaction_id = ISD.transaction_id
+WHERE T.incoming_or_outgoing = 'O'
+GROUP BY C.customer_id, C.first_name, C.last_name
+ORDER BY avg_spent_per_transaction DESC;
 
-<<<<<<< HEAD
 6.Products by Category,Restrictions, or Seasonality
 
-SELECT C.Productname, C.Category, DI.Restriction AS DietaryRestriction
+SELECT C.product_name, C.category, DI.restriction AS dietary_restriction
 CASE
 	WHEN Month(CurDate()) IN (12, 1, 2) Then 'Winter'
 	WHEN Month(CurDate()) IN (3, 4, 5) Then 'Spring'
@@ -64,20 +63,20 @@ CASE
 	ELSE 'Unkown'
   End AS CurrentSeason
 FROM Catalog C
-LEFT JOIN DietaryInformation DI ON C.ProductID = DI.ProductID
-ORDER BY C.Category, CurrentSeason, C.ProductName;
-=======
+LEFT JOIN DietaryInformation DI ON C.product_id = DI.product_id
+ORDER BY C.category, CurrentSeason, C.product_name;
+
 # average amount of items being supplied in each shipment per year
 
-SELECT T.TransactionID as TransactionID, 
-	S.SupplierID as SupplierID, 
-    S.SupplierName as SupplierName, 
-    YEAR(T.TransactionDate) as YearOfTransaction,
-    AVG(ISD.ItemQuantity) as AvgItemsSupplied
-FROM Transac T
-JOIN ItemSupplied ISD ON T.TransactionID = ISD.TransactionID
-JOIN Supplier S ON ISD.SupplierID = S.SupplierID
-WHERE T.IncomingOrOutgoing = 'I'
-GROUP BY TransactionID, SupplierID, SupplierName
-ORDER BY YearOfTransaction;
->>>>>>> 3b6abcd2149b75db34f39078fd8c41bcfbda64f9
+SELECT T.transaction_id as transaction_id, 
+	S.supplier_id as supplier_id, 
+    S.supplier_name as supplier_name, 
+    YEAR(T.transaction_date) as year_of_transaction,
+    AVG(ISD.item_quantity) as avg_items_supplied
+FROM Transaction T
+JOIN ItemSupplied ISD ON T.transaction_id = ISD.transaction_id
+JOIN Supplier S ON ISD.supplier_id = S.supplier_id
+WHERE T.incoming_or_outgoing = 'I'
+GROUP BY transaction_id, supplier_id, supplier_name
+ORDER BY year_of_transaction;
+
