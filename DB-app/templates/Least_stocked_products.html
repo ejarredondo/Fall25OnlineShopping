@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Least Stocked Products - GreenGrocer Online</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div id='nav'>
+        <header>
+            <h1>Products with Least Stock</h1>
+        </header>
+        <div class="nav-links">
+            <a href='/'>Home</a>
+        </div>
+    </div>
+    <br>
+    <table style="border-spacing: 30px;">
+        <thead style="padding:15px">
+            <th>Department ID</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+        </thead>
+        {% for data in least_stocked_products %}
+        <tbody style="padding-right:15px">
+            <td>{{ data.DepartmentID }}</td>
+            <td>{{ data.ProductID }}</td>
+            <td>{{ data.ProductName }}</td>
+            <td>{{ data.QuantityofItem }}</td>
+        </tbody>
+        {% endfor %}
+    </table>
+</body>
+</html>
