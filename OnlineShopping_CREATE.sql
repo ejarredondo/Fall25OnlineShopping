@@ -88,7 +88,7 @@ CREATE TABLE ItemSupplied (
     FOREIGN KEY (product_id) REFERENCES catalog(product_id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE,
-    FOREIGN KEY (transaction_id) REFERENCES transac(transaction_id)
+    FOREIGN KEY (transaction_id) REFERENCES transaction(transaction_id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE,
     FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id)
@@ -138,7 +138,7 @@ CREATE TABLE CustomerTransaction (
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE,
-    FOREIGN KEY (transaction_id) REFERENCES transac(transaction_id)
+    FOREIGN KEY (transaction_id) REFERENCES transaction(transaction_id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE
 );
@@ -151,7 +151,7 @@ CREATE TABLE EmployeeTransaction (
 	FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
-	FOREIGN KEY (transaction_id) REFERENCES transac(transaction_id)
+	FOREIGN KEY (transaction_id) REFERENCES transaction(transaction_id)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
 	FOREIGN KEY (store_id) REFERENCES store(store_id)
