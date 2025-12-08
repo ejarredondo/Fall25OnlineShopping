@@ -66,7 +66,7 @@ CREATE TABLE Supplier(
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE Transaction (
+CREATE TABLE Transac (
 	TransactionID		SMALLINT NOT NULL AUTO_INCREMENT,
 	CashierEmployeeID	INT NOT NULL,
 	IncomingOrOutgoing	ENUM('I', 'O'),
