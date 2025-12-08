@@ -598,23 +598,26 @@ def delete_ItemSupplied(product_id, transaction_id):
 
 
 ##  Queries Routes (Remain Correct)
+@app.route('/get_queries', methods=['GET']) 
+def get_queries(): 
+	return render_template('queries.html')
 
 @app.route('/get_Product_Sold_Least', methods=["POST"])
 def get_product_sold_least():
     product_sold_least = Queries.get_Product_Sold_Least()
     return render_template('product_sold_least.html', product_sold_least = product_sold_least)
 
-@app.route('/get_avg_Spend_And_Item_Quantity', method = ['GET'])
+@app.route('/get_avg_Spend_And_Item_Quantity', methods = ['GET'])
 def get_avg_Spend_And_Item_Quantity():
     avg_spend_and_item_quantity = Queries.get_avg_Spend_And_Item_Quantity()
     return render_template('avg_spend_and_item_quantity.html', avg_spend_and_item_quantity = avg_spend_and_item_quantity)
 
-@app.route('/get_products_by_seasonality', method = ['GET'])
+@app.route('/get_products_by_seasonality', methods = ['GET'])
 def get_products_by_seasonality():
     products_by_seasonality = Queries.get_products_by_seasonality()
     return render_template('products_by_seasonality.html', products_by_seasonality = products_by_seasonality)
 
-@app.route('/get_avg_items_supplied_per_year', method = ['GET'])
+@app.route('/get_avg_items_supplied_per_year', methods = ['GET'])
 def get_avg_items_supplied_per_year():
     avg_items_supplied_per_year = Queries.get_avg_items_supplied_per_year()
     return render_template('avg_items_supplied_per_year.html', avg_items_supplied_per_year = avg_items_supplied_per_year)
