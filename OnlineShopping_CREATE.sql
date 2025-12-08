@@ -99,62 +99,62 @@ CREATE TABLE ItemSupplied (
         ON UPDATE CASCADE
 );
 
-
 CREATE TABLE DietaryInformation(
-	ProductID 	INT NOT NULL PRIMARY KEY NOT NULL,
-	Restriction 	enum('DairyFree', 'GlutenFree', 'vegetarian', 'vegan', 'kosher', 'keto', 'SugarFree', 'LowCarb', 'PorkFree', 'NutFree', 'ShellfishFree', 'SoyFree'),
-	FOREIGN KEY (ProductID) REFERENCES Catalog (ProductID)
-    		ON DELETE Restrict
-    		ON UPDATE Cascade
+	product_id INT NOT NULL,
+    restriction VARCHAR(255) NOT NULL,
+    PRIMARY KEY (product_id),
+    FOREIGN KEY (product_id) REFERENCES catalog(product_id)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE CustomerPurchaseHistory (
-	CustomerPurchaseHistoryID	INT AUTO_INCREMENT PRIMARY KEY,
-    CustomerID		INT NOT NULL,
-	TransactionID		SMALLINT NOT NULL,
-	AmountSpent		DECIMAL(5, 2) NOT NULL,
-	DatePurchased		DATE,
-	TimePurchased		TIME,
-	FOREIGN KEY (CustomerID) REFERENCES Customer (CustomerID)
+	customer_purchase_history_id	INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id		INT NOT NULL,
+	transaction_id		SMALLINT NOT NULL,
+	amount_spent		DECIMAL(5, 2) NOT NULL,
+	date_purchased		DATE,
+	time_purchased		TIME,
+	FOREIGN KEY (customer_id) REFERENCES customer (customer_id)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
-	FOREIGN KEY (TransactionID) REFERENCES Transac (TransactionID)
+	FOREIGN KEY (transaction_id) REFERENCES transaction (transaction_id)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
 );	
 
 CREATE TABLE CustomerTransaction (
-	CustomerTransactionID	INT NOT NULL AUTO_INCREMENT,
-	CustomerID				INT NOT NULL,
-	TransactionID			SMALLINT NOT NULL,
-	ShippingAddressStreet	VARCHAR(30),
-	ShippingAddressCity		VARCHAR(30),
-	ShippingAddressState	VARCHAR(2),
-	ShippingAddressZip		VARCHAR(5),
-	CardInfo				VARCHAR(30) UNIQUE,
-	EmailAddress			VARCHAR(30) UNIQUE,
-	ItemsPurchased			SMALLINT,
-	PRIMARY KEY(CustomerTransactionID),
-	FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
-		ON DELETE RESTRICT
-		ON UPDATE CASCADE,
-	FOREIGN KEY (TransactionID) REFERENCES Transac(TransactionID)
-		ON DELETE RESTRICT
-		ON UPDATE CASCADE
+	customer_transaction_id INT NOT NULL AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    transaction_id SMALLINT NOT NULL,
+    shipping_address_street VARCHAR(30),
+    shipping_address_city VARCHAR(30),
+    shipping_address_state VARCHAR(2),
+    shipping_address_zip VARCHAR(5),
+    card_info VARCHAR(30) UNIQUE,
+    email_address VARCHAR(30) UNIQUE,
+    items_purchased SMALLINT,
+    PRIMARY KEY(customer_transaction_id),
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+    FOREIGN KEY (transaction_id) REFERENCES transac(transaction_id)
+        ON DELETE RESTRICT
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE EmployeeTransaction (
-	EmployeeID			INT NOT NULL,
-	TransactionID		SMALLINT NOT NULL,
-	StoreID				INT NOT NULL,
-	PRIMARY KEY( EmployeeID, TransactionID),
-	FOREIGN KEY (EmployeeID) REFERENCES Employee(EmployeeID)
+employee_id			INT NOT NULL,
+	transaction_id		SMALLINT NOT NULL,
+	store_id			INT NOT NULL,
+	PRIMARY KEY( employee_id, transaction_id),
+	FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
-	FOREIGN KEY (TransactionID) REFERENCES Transac(TransactionID)
+	FOREIGN KEY (transaction_id) REFERENCES transac(transaction_id)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE,
-	FOREIGN KEY (StoreID) REFERENCES Store(StoreID)
+	FOREIGN KEY (store_id) REFERENCES store(store_id)
 		ON DELETE RESTRICT
 		ON UPDATE CASCADE
 );
