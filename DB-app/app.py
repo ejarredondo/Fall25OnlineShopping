@@ -602,6 +602,21 @@ def delete_ItemSupplied(product_id, transaction_id):
 def get_queries(): 
 	return render_template('queries.html')
 
+@app.route('/get_least_stocked_products', methods=['GET'])
+def get_least_stocked_products():
+    least_stocked_products = Queries.get_least_stocked_products()
+    return render_template('Least_stocked_products.html', least_stocked_products=least_stocked_products)
+
+@app.route('/get_products_sold_most', methods=['GET'])
+def get_products_sold_most():
+    products_sold_most = Queries.get_products_sold_most()
+    return render_template('Products_sold_most.html', products_sold_most=products_sold_most)
+
+@app.route('/get_products_expiring_soon', methods=['GET'])
+def get_products_expiring_soon():
+    products_expiring_soon = Queries.get_products_expiring_soon()
+    return render_template('Products_expiring_soon.html', products_expiring_soon=products_expiring_soon)
+
 @app.route('/get_Product_Sold_Least', methods=["POST"])
 def get_product_sold_least():
     product_sold_least = Queries.get_Product_Sold_Least()
