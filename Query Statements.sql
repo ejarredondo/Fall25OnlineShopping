@@ -61,7 +61,7 @@ ORDER BY avg_spent_per_transaction DESC;
 
 6.Products by Category,Restrictions, or Seasonality
 
-SELECT C.product_name, C.category, DI.restriction AS dietary_restriction
+SELECT C.product_name, C.category, DI.restriction AS dietary_restriction,
 CASE
 	WHEN Month(CurDate()) IN (12, 1, 2) Then 'Winter'
 	WHEN Month(CurDate()) IN (3, 4, 5) Then 'Spring'
