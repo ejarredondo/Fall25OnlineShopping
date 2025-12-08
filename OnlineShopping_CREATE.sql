@@ -144,7 +144,7 @@ CREATE TABLE CustomerTransaction (
 );
 
 CREATE TABLE EmployeeTransaction (
-employee_id			INT NOT NULL,
+	employee_id			INT NOT NULL,
 	transaction_id		SMALLINT NOT NULL,
 	store_id			INT NOT NULL,
 	PRIMARY KEY( employee_id, transaction_id),
