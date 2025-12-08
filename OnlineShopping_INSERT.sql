@@ -1,12 +1,12 @@
 USE OnlineShopping;
 
-INSERT INTO store (StreetAdress, City, State, Zip) 
+INSERT INTO store (StreetAddress, City, State, Zip) 
 VALUES ('120 Publix Avenue', 'Seattle', 'WA', '98115');
 
-INSERT INTO store (StreetAdress, City, State, Zip) 
+INSERT INTO store (StreetAddress, City, State, Zip) 
 VALUES ('350 Kroger Street', 'Seattle', 'WA', '98115');
 
-INSERT INTO store (StreetAdress, City, State, Zip) 
+INSERT INTO store (StreetAddress, City, State, Zip) 
 VALUES ('894 Aldi Circle', 'Seattle', 'WA', '98115');
 
 INSERT INTO customer (first_name, last_name)
