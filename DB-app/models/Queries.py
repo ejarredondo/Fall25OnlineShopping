@@ -1,6 +1,41 @@
 from sqlalchemy import text
 from core import ma, db
 
+def get_least_stocked_products():
+    least_stocked_products = db.session.execute(text("""SELECT
+        C.DepartmentID AS DepartmentID,
+        C.ProductID AS ProductID,
+        C.ProductName AS ProductName,
+        MIN(C.QuantityofItem) AS QuantityofItem
+        FROM Catalog C
+        GROUP BY C.DepartmentID, C.ProductID, C.ProductName
+        ORDER BY C.DepartmentID, C.ProductName;"""))
+    return least_stocked_products.all()
+
+def get_products_expiring_soon():
+    products_expiring_soon = db.session.execute(text("""SELECT
+        C.ProductID AS ProductID,
+        C.ProductName AS ProductName,
+        C.ExpirationDate AS ExpirationDate
+        FROM Catalog C
+        WHERE C.ExpirationDate IS NOT NULL
+        ORDER BY C.ExpirationDate ASC;"""))
+    return products_expiring_soon.all()
+
+def get_product_sold_most(year=2024):
+    product_sold_most = db.session.execute(text("""SELECT
+        C.ProductName AS ProductName,
+        SUM(ISD.ItemQuantity) AS TotalQuantitySold
+        FROM ItemSupplied AS ISD
+        JOIN Transac T ON ISD.TransactionID = T.TransactionID
+        JOIN Catalog C ON ISD.ProductID = C.ProductID
+        WHERE T.IncomingOrOutgoing = 'O'
+            AND EXTRACT(YEAR FROM T.TransactionDate) = :year
+        GROUP BY C.ProductName
+        ORDER BY TotalQuantitySold DESC
+        LIMIT 1;"""), {'year': year})
+    return product_sold_most
+
 def get_Product_Sold_Least(): 
     ProductSoldLeast = db.session.execute(text("""SELECT 
         C.ProductName, 
