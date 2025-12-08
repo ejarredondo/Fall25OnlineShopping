@@ -1,7 +1,6 @@
 from models.schemas import Transaction, employee as Employee
 from core import ma, db
 
-
 def get_Transaction(transaction_id):
     return Transaction.query.get(transaction_id)
 

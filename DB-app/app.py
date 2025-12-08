@@ -5,7 +5,7 @@ from flask import redirect, request, url_for
 from flask.templating import render_template
 from models import catalog, customer, CustomerPurchaseHistory, CustomerTransaction
 from models import department, DietaryInformation, employee, EmployeeTransaction
-from models import ItemSupplied, store, supplier, Transaction
+from models import ItemSupplied, store, supplier, Transaction, Queries
 
 # NOTE ON MISSING IMPORTS:
 # The models 'Film' and 'FilmActor' are not imported, so the routes related
@@ -597,7 +597,27 @@ def delete_ItemSupplied(product_id, transaction_id):
 
 
 
-## 📊 Queries Routes (Remain Correct)
+##  Queries Routes (Remain Correct)
+
+@app.route('/get_Product_Sold_Least', methods=["POST"])
+def get_product_sold_least():
+    product_sold_least = Queries.get_Product_Sold_Least()
+    return render_template('product_sold_least.html', product_sold_least = product_sold_least)
+
+@app.route('/get_avg_Spend_And_Item_Quantity', method = ['GET'])
+def get_avg_Spend_And_Item_Quantity():
+    avg_spend_and_item_quantity = Queries.get_avg_Spend_And_Item_Quantity()
+    return render_template('avg_spend_and_item_quantity.html', avg_spend_and_item_quantity = avg_spend_and_item_quantity)
+
+@app.route('/get_products_by_seasonality', method = ['GET'])
+def get_products_by_seasonality():
+    products_by_seasonality = Queries.get_products_by_seasonality()
+    return render_template('products_by_seasonality.html', products_by_seasonality = products_by_seasonality)
+
+@app.route('/get_avg_items_supplied_per_year', method = ['GET'])
+def get_avg_items_supplied_per_year():
+    avg_items_supplied_per_year = Queries.get_avg_items_supplied_per_year()
+    return render_template('avg_items_supplied_per_year.html', avg_items_supplied_per_year = avg_items_supplied_per_year)
 
 # ... (All queries routes are kept as-is, assuming `Queries` model methods are correct)
 

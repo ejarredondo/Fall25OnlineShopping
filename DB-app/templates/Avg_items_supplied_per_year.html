@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Average Spent and Item Quantity - GreenGrocer Online</title>
+    <link rel =  "stylesheet" href = "{{ url_fro('static', filename = 'styles.css')}}">
+</head>
+<body>
+    <div id = 'nav'>
+        <header>
+        <h1>Average Spent and Item Quantity</h1>
+        </header>
+        <div class = "nav-links">
+            <a href = '/'>Home</a>
+        </div>
+    </div>
+      <br>
+      <table style="border-spacing: 30px;">
+         <thead style="padding:15px">
+            <th>Customer ID</th>
+            <th>Customer First Name</th>
+            <th>Customer Last Name</th>
+            <th>Total Spent</th>
+            <th>Total Items Purchased</th>
+            <th>Average Spent per Transaction</th>
+            <th>Average Items per Transaction</th>
+         </thead>
+         {% for data in avg_Spend_and_Item_Quantity %}
+         <tbody style="padding-right:15px">
+            <td>{{data.CustomerID}}</td>
+            <td>{{data.FirstName}}</td>
+            <td>{{data.LastName}}</td>
+            <td>{{data.Total_spent}}</td>
+            <td>{{data.Total_items_purchased}}</td>
+            <td>{{data.Avg_Spent_Per_Transaction}}</td>
+            <td>{{data.Avg_Items_Per_Transaction}}</td>
+        </tbody>
+         {% endfor%}
+      </table>
+</body>
+</html>
