@@ -32,12 +32,12 @@
         <tbody>
         {% for data in stores %}
             <tr>
-                <td>{{ data.StoreID }}</td>
-                <td>{{ data.StreetAddress }}</td>
-                <td>{{ data.City }}</td>
-                <td>{{ data.State }}</td>
-                <td>{{ data.Zip}}</td>
-                <td><a href="/delete_store/{{ data.StoreID }}" class="delete">Delete</a></td>
+                <td>{{ data.store_id }}</td>
+                <td>{{ data.street_address }}</td>
+                <td>{{ data.city }}</td>
+                <td>{{ data.state }}</td>
+                <td>{{ data.zip }}</td>
+                <td><a href="/delete_store/{{ data.store_id }}" class="delete">Delete</a></td>
             </tr>
         {% else %}
             <tr>

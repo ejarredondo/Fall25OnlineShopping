@@ -32,13 +32,13 @@
         <tbody>
         {% for data in transactions %}
             <tr>
-                <td>{{ data.TransactionID }}</td>
-                <td>{{ data.CashierEmployeeID }}</td>
-                <td>{{ data.IncomingOrOutgoing }}</td>
-                <td>{{ data.TransactionAmount }}</td>
-               <td>{{ data.TransactionDate.strftime('%Y-%m-%d %H:%M') if data.TransactionDate else '' }}</td>
+                <td>{{ data.transaction_id }}</td>
+                <td>{{ data.cashier_employee_id }}</td>
+                <td>{{ data.incoming_or_outgoing }}</td>
+                <td>{{ data.transaction_amount }}</td>
+               <td>{{ data.transaction_date.strftime('%Y-%m-%d %H:%M') if data.transaction_date else '' }}</td>
                 <td>
-                    <a href="/delete_Transaction/{{ data.TransactionID }}" class="delete">Delete</a>
+                    <a href="/delete_Transaction/{{ data.transaction_id }}" class="delete">Delete</a>
                 </td>
             </tr>
         {% else %}

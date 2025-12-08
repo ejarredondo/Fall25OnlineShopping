@@ -8,24 +8,24 @@ def get_stores():
     return stores_schema.dump(all_stores)
 
 
-def get_store(StoreID):
-    return Store.query.get(StoreID)
+def get_store(store_id):
+    return Store.query.get(store_id)
 
 
-def add_store(StreetAddress, City, State, Zip, EmployeeNumber=None):
+def add_store(street_address, city, state, zip_code, employee_number=None):
     a = Store(
-        StreetAddress=StreetAddress,
-        City=City,
-        State=State,
-        Zip=Zip,
-        EmployeeNumber=EmployeeNumber
+        street_address=street_address,
+        city=city,
+        state=state,
+        zip=zip_code,
+        employee_number=employee_number,
     )
     db.session.add(a)
     db.session.commit()
 
 
-def delete_store(StoreID):
-    store_to_delete = Store.query.get(StoreID)
+def delete_store(store_id):
+    store_to_delete = Store.query.get(store_id)
     if store_to_delete is None:
         return
     db.session.delete(store_to_delete)
@@ -35,6 +35,7 @@ def delete_store(StoreID):
 class StoreSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Store
+        include_fk = True
 
 
 store_schema = StoreSchema()

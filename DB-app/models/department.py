@@ -30,6 +30,7 @@ def delete_department(id):
 class DepartmentSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Department
+        include_fk = True
 
 
 department_schema = DepartmentSchema()

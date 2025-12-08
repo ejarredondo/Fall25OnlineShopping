@@ -104,7 +104,7 @@ def add_suppliers_to_store_route():
     StoreID = request.form.get("StoreID")
     supplier.add_supplier_to_store(SupplierID, StoreID)
     # Target function must be 'get_all_suppliers_by_store'
-    return redirect(url_for('get_all_suppliers_by_store', StoreID=StoreID))
+    return redirect(url_for('get_all_suppliers_by_store_route', StoreID=StoreID))
 
 # CORRECTED: Specified GET method for form rendering
 @app.route('/add_suppliers', methods=['GET'])

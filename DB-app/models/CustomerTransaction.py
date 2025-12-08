@@ -8,26 +8,26 @@ def get_customer_transactions():
 
 
 def add_customer_transaction(
-    CustomerID,
-    TransactionID,
-    ShippingAddressStreet=None,
-    ShippingAddressCity=None,
-    ShippingAddressState=None,
-    ShippingAddressZip=None,
-    CardInfo=None,
-    EmailAddress=None,
-    ItemsPurchased=None,
+    customer_id,
+    transaction_id,
+    shipping_address_street=None,
+    shipping_address_city=None,
+    shipping_address_state=None,
+    shipping_address_zip=None,
+    card_info=None,
+    email_address=None,
+    items_purchased=None,
 ):
     transaction = CustomerTransaction(
-        CustomerID=CustomerID,
-        TransactionID=TransactionID,
-        ShippingAddressStreet=ShippingAddressStreet,
-        ShippingAddressCity=ShippingAddressCity,
-        ShippingAddressState=ShippingAddressState,
-        ShippingAddressZip=ShippingAddressZip,
-        CardInfo=CardInfo,
-        EmailAddress=EmailAddress,
-        ItemsPurchased=ItemsPurchased,
+        customer_id=customer_id,
+        transaction_id=transaction_id,
+        shipping_address_street=shipping_address_street,
+        shipping_address_city=shipping_address_city,
+        shipping_address_state=shipping_address_state,
+        shipping_address_zip=shipping_address_zip,
+        card_info=card_info,
+        email_address=email_address,
+        items_purchased=items_purchased,
     )
     db.session.add(transaction)
     db.session.commit()
@@ -44,6 +44,7 @@ def delete_customer_transaction(customer_transaction_id):
 class CustomerTransactionSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = CustomerTransaction
+        include_fk = True
 
 
 customer_transaction_schema = CustomerTransactionSchema()

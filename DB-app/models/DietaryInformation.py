@@ -33,6 +33,7 @@ def delete_DietaryInformation(product_id):
 class DietaryInformationSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = DietaryInformation
+        include_fk = True
 
 
 dietary_information_schema = DietaryInformationSchema()

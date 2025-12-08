@@ -7,18 +7,18 @@ def get_employee_transactions():
     return employee_transactions_schema.dump(records)
 
 
-def add_employee_transaction(EmployeeID, TransactionID, StoreID):
+def add_employee_transaction(employee_id, transaction_id, store_id):
     record = EmployeeTransaction(
-        EmployeeID=EmployeeID,
-        TransactionID=TransactionID,
-        StoreID=StoreID,
+        employee_id=employee_id,
+        transaction_id=transaction_id,
+        store_id=store_id,
     )
     db.session.add(record)
     db.session.commit()
 
 
-def delete_employee_transaction(EmployeeID, TransactionID):
-    record = EmployeeTransaction.query.get((EmployeeID, TransactionID))
+def delete_employee_transaction(employee_id, transaction_id):
+    record = EmployeeTransaction.query.get((employee_id, transaction_id))
     if record is None:
         return
     db.session.delete(record)
@@ -28,6 +28,7 @@ def delete_employee_transaction(EmployeeID, TransactionID):
 class EmployeeTransactionSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = EmployeeTransaction
+        include_fk = True
 
 
 employee_transaction_schema = EmployeeTransactionSchema()

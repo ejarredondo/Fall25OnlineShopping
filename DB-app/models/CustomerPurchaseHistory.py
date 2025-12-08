@@ -56,6 +56,7 @@ def delete_customerpurchasehistory(history_id: int):
 class CustomerPurchaseHistorySchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = CustomerPurchaseHistory
+        include_fk = True
 
 
 customer_purchase_history_schema = CustomerPurchaseHistorySchema()

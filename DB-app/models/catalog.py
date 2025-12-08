@@ -78,6 +78,7 @@ def delete_catalog(product_id):
 class CatalogSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Catalog
+        include_fk = True
 
 
 catalog_schema = CatalogSchema()

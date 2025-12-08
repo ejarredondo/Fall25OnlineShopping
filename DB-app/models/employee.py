@@ -47,6 +47,7 @@ def delete_employee(employee_id: int):
 class EmployeeSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Employee
+        include_fk = True
 
 
 employee_schema = EmployeeSchema()

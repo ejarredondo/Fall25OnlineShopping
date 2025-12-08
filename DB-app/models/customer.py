@@ -24,6 +24,7 @@ def delete_customer(customer_id):
 class CustomerSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Customer
+        include_fk = True
 
 
 customer_schema = CustomerSchema()

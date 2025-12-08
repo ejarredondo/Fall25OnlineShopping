@@ -34,14 +34,14 @@
         <tbody>
         {% for data in suppliers %}
             <tr>
-                <td>{{ data.SupplierID }}</td>
-                <td>{{ data.SupplierName }}</td>
-                <td>{{ data.SupplierAddressStreet }}</td>
-                <td>{{ data.SupplierAddressCity }}</td>
-                <td>{{ data.SupplierAddressState }}</td>
-                <td>{{ data.SupplierAddressZip }}</td>
-                <td>{{ data.StoreID }}</td>
-                <td><a href="/delete_supplier/{{ data.SupplierID }}" class="delete">Delete</a></td>
+                <td>{{ data.supplier_id }}</td>
+                <td>{{ data.supplier_name }}</td>
+                <td>{{ data.supplier_address_street }}</td>
+                <td>{{ data.supplier_address_city }}</td>
+                <td>{{ data.supplier_address_state }}</td>
+                <td>{{ data.supplier_address_zip }}</td>
+                <td>{{ data.store_id }}</td>
+                <td><a href="/delete_supplier/{{ data.supplier_id }}" class="delete">Delete</a></td>
             </tr>
         {% else %}
             <tr>

@@ -7,56 +7,56 @@ def get_suppliers():
     return suppliers_schema.dump(all_suppliers)
 
 
-def get_supplier(SupplierID):
-    return Supplier.query.get(SupplierID)
+def get_supplier(supplier_id):
+    return Supplier.query.get(supplier_id)
 
 
-def get_all_suppliers_by_store(StoreID):
+def get_all_suppliers_by_store(store_id):
     suppliers = (
         db.session.query(Supplier)
-        .join(Store, Supplier.StoreID == Store.StoreID)
-        .filter(Store.StoreID == StoreID)
+        .join(Store, Supplier.store_id == Store.store_id)
+        .filter(Store.store_id == store_id)
         .all()
     )
     return suppliers
 
 
 def get_suppliers_without_store():
-    suppliers = db.session.query(Supplier).filter(Supplier.StoreID.is_(None)).all()
+    suppliers = db.session.query(Supplier).filter(Supplier.store_id.is_(None)).all()
     return suppliers
 
 
-def add_supplier_to_store(SupplierID, StoreID):
-    supplier = Supplier.query.get(SupplierID)
+def add_supplier_to_store(supplier_id, store_id):
+    supplier = Supplier.query.get(supplier_id)
     if supplier is None:
         return
-    supplier.StoreID = StoreID
+    supplier.store_id = store_id
     db.session.commit()
 
 
 def add_supplier(
-    SupplierName,
-    SupplierAddressStreet,
-    SupplierAddressCity,
-    SupplierAddressState,
-    SupplierAddressZip,
-    StoreID,
+    supplier_name,
+    supplier_address_street,
+    supplier_address_city,
+    supplier_address_state,
+    supplier_address_zip,
+    store_id,
 ):
     a = Supplier(
-        SupplierName=SupplierName,
-        SupplierAddressStreet=SupplierAddressStreet,
-        SupplierAddressCity=SupplierAddressCity,
-        SupplierAddressState=SupplierAddressState,
-        SupplierAddressZip=SupplierAddressZip,
-        StoreID=StoreID,
+        supplier_name=supplier_name,
+        supplier_address_street=supplier_address_street,
+        supplier_address_city=supplier_address_city,
+        supplier_address_state=supplier_address_state,
+        supplier_address_zip=supplier_address_zip,
+        store_id=store_id,
     )
 
     db.session.add(a)
     db.session.commit()
 
 
-def delete_supplier(SupplierID):
-    supplier = Supplier.query.get(SupplierID)
+def delete_supplier(supplier_id):
+    supplier = Supplier.query.get(supplier_id)
     if supplier is None:
         return
     db.session.delete(supplier)
@@ -66,6 +66,7 @@ def delete_supplier(SupplierID):
 class SupplierSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Supplier
+        include_fk = True
 
 
 supplier_schema = SupplierSchema()

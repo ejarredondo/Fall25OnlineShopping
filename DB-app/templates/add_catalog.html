@@ -9,7 +9,7 @@
         <h1>Add Product - GreenGrocer Online</h1>
     </header>
     <h4>* = Required</h4>
-    <form action = "/add" method = "POST">
+    <form action = "/add_catalogs" method = "POST">
         <label>Product Name*:</label>
             <input type = "text" name = "product_name" placeholder = "product name..." required><br>
         <label>Category*:</label>
@@ -21,11 +21,11 @@
         <label>Base Price*:</label>
             <input type = "number" min = 0 name = "base_price" placeholder = "base price..." required><br>
         <label>Sale Price*:</label>
-            <input type = "number" min = 0 name = "sale_price" placeholder = "sale price..." required><br>
-        <label for = "weight_or_unit">Sold by Weight or Unit*:</label>
-            <select id = "weight_or_unit" name = "weight_or_unit">
-                <option value = "weight">weight</option>
-                <option value = "unit">unit</option>
+            <input type = "number" min = 0 name = "sale_price" placeholder = "sale price..."><br>
+        <label for = "sold_by_weight_or_unit">Sold by Weight or Unit*:</label>
+            <select id = "sold_by_weight_or_unit" name = "sold_by_weight_or_unit">
+                <option value = "Weight">Weight</option>
+                <option value = "Unit">Unit</option>
             </select><br>
         <label>Brand:</label>
             <input type = "text" name = "brand" placeholder = "brand..."><br>

@@ -2,8 +2,8 @@ from models.schemas import Transaction, employee as Employee
 from core import ma, db
 
 
-def get_Transaction(id):
-    return Transaction.query.get(id)
+def get_Transaction(transaction_id):
+    return Transaction.query.get(transaction_id)
 
 
 def get_Transactions():
@@ -25,12 +25,12 @@ def get_Transaction_without_Employee():
     return transactions
 
 
-def add_Transaction(CashierEmployeeID, IncomingOrOutgoing, TransactionAmount, TransactionDate):
+def add_Transaction(cashier_employee_id, incoming_or_outgoing, transaction_amount, transaction_date):
     t = Transaction(
-        CashierEmployeeID=CashierEmployeeID,
-        IncomingOrOutgoing=IncomingOrOutgoing,
-        TransactionAmount=TransactionAmount,
-        TransactionDate=TransactionDate,
+        cashier_employee_id=cashier_employee_id,
+        incoming_or_outgoing=incoming_or_outgoing,
+        transaction_amount=transaction_amount,
+        transaction_date=transaction_date,
     )
     db.session.add(t)
     db.session.commit()
@@ -47,6 +47,7 @@ def delete_Transaction(TransactionID):
 class TransacSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Transaction
+        include_fk = True
 
 
 transaction_schema = TransacSchema()
